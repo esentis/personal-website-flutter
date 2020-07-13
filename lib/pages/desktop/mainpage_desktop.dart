@@ -1,4 +1,5 @@
 import 'package:esentispws/components/states.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:esentispws/constants.dart';
@@ -22,33 +23,28 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
 
     return Scaffold(
       backgroundColor: themeToggler.themeStatus == kTheme.light
-          ? Color(0xFFdfd3c3)
-          : Color(0xFF596e79),
+          ? Color(0xFFe0dede)
+          : Color(0xFF092532),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  FlatButton(
-                      onPressed: () {
-                        themeToggler.toggleTheme();
-                        setState(() {});
-                      },
-                      child: Icon(
-                        Icons.wb_sunny,
-                        size: 50,
-                        color: themeToggler.themeStatus == kTheme.light
-                            ? Colors.black
-                            : Colors.yellow,
-                      )),
-                  SizedBox(
-                    width: 20,
-                  ),
-                ],
+              GestureDetector(
+                onTap: () {
+                  themeToggler.toggleTheme();
+                  setState(() {});
+                },
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  child: FlareActor("dark_light.flr",
+                      alignment: Alignment.center,
+                      animation: themeToggler.themeStatus == kTheme.light
+                          ? "A2"
+                          : "A1"),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -84,13 +80,13 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                   localToggler.localeStatus == kLocale.english
                       ? "George Leonidis"
                       : "Γιώργος Λεωνίδης",
-                  style: GoogleFonts.muli(fontSize: 50),
+                  style: GoogleFonts.gfsNeohellenic(fontSize: 50),
                 ),
                 Text(
                   localToggler.localeStatus == kLocale.english
                       ? "Software Developer"
                       : "Προγραμματιστής Λογισμικού",
-                  style: GoogleFonts.muli(fontSize: 25),
+                  style: GoogleFonts.gfsNeohellenic(fontSize: 25),
                 ),
               ],
             ),
@@ -111,7 +107,7 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                   localToggler.localeStatus == kLocale.english
                       ? kMenuHomeEn
                       : kMenuHomeGr,
-                  style: GoogleFonts.muli(fontSize: 30),
+                  style: GoogleFonts.gfsNeohellenic(fontSize: 30),
                 ),
               ),
               FlatButton(
@@ -124,7 +120,7 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                   localToggler.localeStatus == kLocale.english
                       ? kMenuPortfolioEn
                       : kMenuPortfolioGr,
-                  style: GoogleFonts.muli(fontSize: 30),
+                  style: GoogleFonts.gfsNeohellenic(fontSize: 30),
                 ),
               ),
               FlatButton(
@@ -137,18 +133,20 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                   localToggler.localeStatus == kLocale.english
                       ? kMenuSkillsEn
                       : kMenuSkillsGr,
-                  style: GoogleFonts.muli(fontSize: 30),
+                  style: GoogleFonts.gfsNeohellenic(fontSize: 30),
                 ),
               ),
               FlatButton(
-                onPressed: () {mainPageController.animateToPage(3,
-                    duration: Duration(seconds: 1),
-                    curve: Curves.easeInOutCubic);},
+                onPressed: () {
+                  mainPageController.animateToPage(3,
+                      duration: Duration(seconds: 1),
+                      curve: Curves.easeInOutCubic);
+                },
                 child: Text(
                   localToggler.localeStatus == kLocale.english
                       ? kMenuContactEn
                       : kMenuContactGr,
-                  style: GoogleFonts.muli(fontSize: 30),
+                  style: GoogleFonts.gfsNeohellenic(fontSize: 30),
                 ),
               ),
             ],
@@ -161,7 +159,9 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
               controller: mainPageController,
               children: [
                 ///SKILLS PAGEVIEW index 0
-                Center(child: Text("HOME PAGE")),
+                Center(
+                  child: Text("Home"),
+                ),
 
                 ///SKILLS PAGEVIEW index 1
                 Center(child: Text("PORTFOLIO")),
@@ -177,7 +177,7 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                             padding: EdgeInsets.only(left: 85.0),
                             child: Text(
                               "Front End Skills",
-                              style: GoogleFonts.b612(fontSize: 30),
+                              style: GoogleFonts.gfsNeohellenic(fontSize: 30),
                             ),
                           ),
                           ListTile(
@@ -185,11 +185,11 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                               localToggler.localeStatus == kLocale.english
                                   ? kCssTextEn
                                   : kCssTextGR,
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             subtitle: Text(
                               "CSS3",
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             leading: Image.asset('css3.png'),
                           ),
@@ -199,13 +199,13 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                           ListTile(
                             subtitle: Text(
                               "HTML5",
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             title: Text(
                               localToggler.localeStatus == kLocale.english
                                   ? kHtmlTextEn
                                   : kHtmlTextGr,
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             leading: Image.asset('html5.png'),
                           ),
@@ -217,11 +217,11 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                               localToggler.localeStatus == kLocale.english
                                   ? kJavascriptTextEn
                                   : kJavascriptTextGr,
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             subtitle: Text(
                               "javaScript",
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             leading: Image.asset('javascript.png'),
                           ),
@@ -230,11 +230,11 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                               localToggler.localeStatus == kLocale.english
                                   ? kjQueryTextEn
                                   : kjQueryTextGr,
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             subtitle: Text(
                               "jQuery",
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             leading: Image.asset('jquery.png'),
                           ),
@@ -243,11 +243,11 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                               localToggler.localeStatus == kLocale.english
                                   ? kReactTextEn
                                   : kReactTextGr,
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             subtitle: Text(
                               "React",
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             leading: Image.asset('react.png'),
                           )
@@ -261,7 +261,7 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                             padding: EdgeInsets.only(left: 85.0),
                             child: Text(
                               "Back End Skills",
-                              style: GoogleFonts.b612(fontSize: 30),
+                              style: GoogleFonts.gfsNeohellenic(fontSize: 30),
                             ),
                           ),
                           ListTile(
@@ -269,11 +269,11 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                               localToggler.localeStatus == kLocale.english
                                   ? kMongoDbTextEn
                                   : kMongoDbTextGr,
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             subtitle: Text(
                               "Mongodb",
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             leading: Image.asset('mongodb.png'),
                           ),
@@ -283,13 +283,13 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                           ListTile(
                             subtitle: Text(
                               "Node.js",
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             title: Text(
                               localToggler.localeStatus == kLocale.english
                                   ? kNodeJsTextEn
                                   : kNodeJsTextGr,
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             leading: Image.asset('nodejs.png'),
                           ),
@@ -301,11 +301,11 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                               localToggler.localeStatus == kLocale.english
                                   ? kExpressJsEn
                                   : kExpressJsGr,
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             subtitle: Text(
                               "Express",
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             leading: Image.asset('express.png'),
                           ),
@@ -314,7 +314,7 @@ class _MainPageDesktopState extends State<MainPageDesktop> {
                               localToggler.localeStatus == kLocale.english
                                   ? kPostgresSqlTextEn
                                   : kPostgresSqlTextGr,
-                              style: GoogleFonts.b612(),
+                              style: GoogleFonts.gfsNeohellenic(),
                             ),
                             subtitle: Text(
                               "PostgreSQL",
