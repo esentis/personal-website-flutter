@@ -1,3 +1,5 @@
+import 'package:esentispws/components/menu_item.dart';
+import 'package:esentispws/components/skill.dart';
 import 'package:esentispws/components/states.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -17,18 +19,19 @@ class MainPageDesktop extends StatefulWidget {
 
 class _MainPageDesktopState extends State<MainPageDesktop>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  AnimationController _scaffoldBgColorController;
+
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    _scaffoldBgColorController = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
       value: 0,
     );
   }
 
-  Animatable<Color> background = TweenSequence<Color>([
+  Animatable<Color> bgColorSwiches = TweenSequence<Color>([
     TweenSequenceItem(
       weight: 1.0,
       tween: ColorTween(
@@ -37,18 +40,27 @@ class _MainPageDesktopState extends State<MainPageDesktop>
       ),
     ),
   ]);
+  Animatable<Color> textColorSwitches = TweenSequence<Color>([
+    TweenSequenceItem(
+      weight: 1.0,
+      tween: ColorTween(
+        begin: Colors.black,
+        end: Colors.white,
+      ),
+    ),
+  ]);
+
   @override
   Widget build(BuildContext context) {
     final themeToggler = context.watch<ThemeStyle>();
     final localToggler = context.watch<Language>();
 
     return AnimatedBuilder(
-
-        animation: _controller,
+        animation: _scaffoldBgColorController,
         builder: (context, child) {
           return Scaffold(
-            backgroundColor:
-                background.evaluate(AlwaysStoppedAnimation(_controller.value)),
+            backgroundColor: bgColorSwiches.evaluate(
+                AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -59,8 +71,10 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                       onTap: () {
                         themeToggler.toggleTheme();
                         themeToggler.themeStatus == kTheme.light
-                            ? _controller.animateTo(0,curve: Curves.easeInOut)
-                            : _controller.animateTo(1,curve: Curves.easeInOut);
+                            ? _scaffoldBgColorController.animateTo(0,
+                                curve: Curves.easeInOut)
+                            : _scaffoldBgColorController.animateTo(1,
+                                curve: Curves.easeInOut);
                         setState(() {});
                       },
                       child: Container(
@@ -107,13 +121,23 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                         localToggler.localeStatus == kLocale.english
                             ? "George Leonidis"
                             : "Γιώργος Λεωνίδης",
-                        style: GoogleFonts.gfsNeohellenic(fontSize: 50),
+                        style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 50,
+                          color: textColorSwitches.evaluate(
+                              AlwaysStoppedAnimation(
+                                  _scaffoldBgColorController.value)),
+                        ),
                       ),
                       Text(
                         localToggler.localeStatus == kLocale.english
                             ? "Software Developer"
                             : "Προγραμματιστής Λογισμικού",
-                        style: GoogleFonts.gfsNeohellenic(fontSize: 25),
+                        style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 25,
+                          color: textColorSwitches.evaluate(
+                              AlwaysStoppedAnimation(
+                                  _scaffoldBgColorController.value)),
+                        ),
                       ),
                     ],
                   ),
@@ -121,59 +145,68 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                 SizedBox(
                   height: 20,
                 ),
+                // MAIN MENU
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FlatButton(
-                      onPressed: () {
+                    //HOME
+                    MenuItem(
+                      onPress: () {
                         mainPageController.animateToPage(0,
                             duration: Duration(seconds: 1),
                             curve: Curves.easeInOutCubic);
                       },
-                      child: Text(
-                        localToggler.localeStatus == kLocale.english
-                            ? kMenuHomeEn
-                            : kMenuHomeGr,
-                        style: GoogleFonts.gfsNeohellenic(fontSize: 30),
+                      text: localToggler.localeStatus == kLocale.english
+                          ? kMenuHomeEn
+                          : kMenuHomeGr,
+                      color: textColorSwitches.evaluate(
+                        AlwaysStoppedAnimation(
+                            _scaffoldBgColorController.value),
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {
+                    //PORTFOLIO
+                    MenuItem(
+                      onPress: () {
                         mainPageController.animateToPage(1,
                             duration: Duration(seconds: 1),
                             curve: Curves.easeInOutCubic);
                       },
-                      child: Text(
-                        localToggler.localeStatus == kLocale.english
-                            ? kMenuPortfolioEn
-                            : kMenuPortfolioGr,
-                        style: GoogleFonts.gfsNeohellenic(fontSize: 30),
+                      text: localToggler.localeStatus == kLocale.english
+                          ? kMenuPortfolioEn
+                          : kMenuPortfolioGr,
+                      color: textColorSwitches.evaluate(
+                        AlwaysStoppedAnimation(
+                            _scaffoldBgColorController.value),
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {
+                    //SKILLS
+                    MenuItem(
+                      onPress: () {
                         mainPageController.animateToPage(2,
                             duration: Duration(seconds: 1),
                             curve: Curves.easeInOutCubic);
                       },
-                      child: Text(
-                        localToggler.localeStatus == kLocale.english
-                            ? kMenuSkillsEn
-                            : kMenuSkillsGr,
-                        style: GoogleFonts.gfsNeohellenic(fontSize: 30),
+                      text: localToggler.localeStatus == kLocale.english
+                          ? kMenuSkillsEn
+                          : kMenuSkillsGr,
+                      color: textColorSwitches.evaluate(
+                        AlwaysStoppedAnimation(
+                            _scaffoldBgColorController.value),
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {
+                    //CONTACT
+                    MenuItem(
+                      onPress: () {
                         mainPageController.animateToPage(3,
                             duration: Duration(seconds: 1),
                             curve: Curves.easeInOutCubic);
                       },
-                      child: Text(
-                        localToggler.localeStatus == kLocale.english
-                            ? kMenuContactEn
-                            : kMenuContactGr,
-                        style: GoogleFonts.gfsNeohellenic(fontSize: 30),
+                      text: localToggler.localeStatus == kLocale.english
+                          ? kMenuContactEn
+                          : kMenuContactGr,
+                      color: textColorSwitches.evaluate(
+                        AlwaysStoppedAnimation(
+                            _scaffoldBgColorController.value),
                       ),
                     ),
                   ],
@@ -185,171 +218,189 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                   child: PageView(
                     controller: mainPageController,
                     children: [
-                      ///SKILLS PAGEVIEW index 0
+                      //HOME PAGEVIEW index 0
                       Center(
-                        child: Text("Home"),
+                        child: Container(
+                          width: 300,
+                          height: 300,
+                          color: textColorSwitches.evaluate(
+                              AlwaysStoppedAnimation(
+                                  _scaffoldBgColorController.value)),
+                          child: Text("Home"),
+                        ),
                       ),
 
-                      ///SKILLS PAGEVIEW index 1
+                      //PORTFOLIO PAGEVIEW index 1
                       Center(child: Text("PORTFOLIO")),
 
-                      ///SKILLS PAGEVIEW index 2
+                      //SKILLS PAGEVIEW index 2
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             child: ListView(
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 85.0),
-                                  child: Text(
-                                    "Front End Skills",
-                                    style: GoogleFonts.gfsNeohellenic(
-                                        fontSize: 30),
-                                  ),
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kFlutterTextEn
+                                      : kFlutterTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "Flutter",
+                                  image: 'flutter.png',
                                 ),
-                                ListTile(
-                                  title: Text(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? kCssTextEn
-                                        : kCssTextGR,
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  subtitle: Text(
-                                    "CSS3",
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  leading: Image.asset('css3.png'),
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kCssTextEn
+                                      : kCssTextGR,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "CSS3",
+                                  image: 'css3.png',
                                 ),
-                                SizedBox(
-                                  height: 5,
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kHtmlTextEn
+                                      : kHtmlTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "HTML5",
+                                  image: 'html5.png',
                                 ),
-                                ListTile(
-                                  subtitle: Text(
-                                    "HTML5",
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  title: Text(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? kHtmlTextEn
-                                        : kHtmlTextGr,
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  leading: Image.asset('html5.png'),
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kJavascriptTextEn
+                                      : kJavascriptTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "javaScript",
+                                  image: 'javascript.png',
                                 ),
-                                SizedBox(
-                                  height: 5,
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kjQueryTextEn
+                                      : kjQueryTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "jQuery",
+                                  image: 'jquery.png',
                                 ),
-                                ListTile(
-                                  title: Text(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? kJavascriptTextEn
-                                        : kJavascriptTextGr,
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  subtitle: Text(
-                                    "javaScript",
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  leading: Image.asset('javascript.png'),
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kReactTextEn
+                                      : kReactTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "React",
+                                  image: 'react.png',
                                 ),
-                                ListTile(
-                                  title: Text(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? kjQueryTextEn
-                                        : kjQueryTextGr,
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  subtitle: Text(
-                                    "jQuery",
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  leading: Image.asset('jquery.png'),
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                      kLocale.english
+                                      ? kPhotoshopTextEn
+                                      : kPhotoshopTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "Photoshop",
+                                  image: 'photoshop.png',
                                 ),
-                                ListTile(
-                                  title: Text(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? kReactTextEn
-                                        : kReactTextGr,
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  subtitle: Text(
-                                    "React",
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  leading: Image.asset('react.png'),
-                                )
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                      kLocale.english
+                                      ? kIllustratorTextEn
+                                      : kIllustratorTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "Illustrator",
+                                  image: 'ai.png',
+                                ),
                               ],
                             ),
                           ),
+
                           Expanded(
                             child: ListView(
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 85.0),
-                                  child: Text(
-                                    "Back End Skills",
-                                    style: GoogleFonts.gfsNeohellenic(
-                                        fontSize: 30),
-                                  ),
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kMongoDbTextEn
+                                      : kMongoDbTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "Mongodb",
+                                  image: 'mongodb.png',
                                 ),
-                                ListTile(
-                                  title: Text(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? kMongoDbTextEn
-                                        : kMongoDbTextGr,
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  subtitle: Text(
-                                    "Mongodb",
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  leading: Image.asset('mongodb.png'),
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kNodeJsTextEn
+                                      : kNodeJsTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "Node.js",
+                                  image: 'nodejs.png',
                                 ),
-                                SizedBox(
-                                  height: 5,
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kExpressJsEn
+                                      : kExpressJsGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "Express",
+                                  image: 'express.png',
                                 ),
-                                ListTile(
-                                  subtitle: Text(
-                                    "Node.js",
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  title: Text(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? kNodeJsTextEn
-                                        : kNodeJsTextGr,
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  leading: Image.asset('nodejs.png'),
+
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                          kLocale.english
+                                      ? kPostgresSqlTextEn
+                                      : kPostgresSqlTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "PostgreSQL",
+                                  image: 'postgreSQL.png',
                                 ),
-                                SizedBox(
-                                  height: 5,
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                      kLocale.english
+                                      ? kJavaTextEn
+                                      : kJavaTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: "Java",
+                                  image: 'java.png',
                                 ),
-                                ListTile(
-                                  title: Text(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? kExpressJsEn
-                                        : kExpressJsGr,
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  subtitle: Text(
-                                    "Express",
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  leading: Image.asset('express.png'),
-                                ),
-                                ListTile(
-                                  title: Text(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? kPostgresSqlTextEn
-                                        : kPostgresSqlTextGr,
-                                    style: GoogleFonts.gfsNeohellenic(),
-                                  ),
-                                  subtitle: Text(
-                                    "PostgreSQL",
-                                    style: GoogleFonts.b612(),
-                                  ),
-                                  leading: Image.asset('PostgreSQL.png'),
+                                Skill(
+                                  text: localToggler.localeStatus ==
+                                      kLocale.english
+                                      ? kDotnetTextEn
+                                      : kDotnetTextGr,
+                                  shadowColor: textColorSwitches.evaluate(
+                                      AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value)),
+                                  subtitle: ".NET",
+                                  image: 'dotnet.png',
                                 ),
                               ],
                             ),
@@ -357,7 +408,7 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                         ],
                       ),
 
-                      ///SKILLS PAGEVIEW index 3
+                      //CONTACT PAGEVIEW index 3
                       Center(child: Text("CONTACT PAGE")),
                     ],
                   ),
