@@ -1,15 +1,17 @@
 import 'package:esentispws/components/menu_item.dart';
-import 'package:esentispws/components/skill.dart';
 import 'package:esentispws/components/states.dart';
+import 'package:esentispws/pages/desktop/widgets/menu.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:esentispws/constants.dart';
 import 'package:provider/provider.dart';
 
+import 'skills.dart';
+
 kLocale locale = kLocale.english;
 kTheme themeStyle = kTheme.light;
-PageController mainPageController = new PageController(initialPage: 0);
+PageController mainPageController = PageController(initialPage: 0);
 int currentIndex = 0;
 
 class MainPageDesktop extends StatefulWidget {
@@ -25,41 +27,22 @@ class _MainPageDesktopState extends State<MainPageDesktop>
   void initState() {
     super.initState();
     _scaffoldBgColorController = AnimationController(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 300),
       vsync: this,
       value: 0,
     );
   }
 
-  Animatable<Color> bgColorSwiches = TweenSequence<Color>([
-    TweenSequenceItem(
-      weight: 1.0,
-      tween: ColorTween(
-        begin: Color(0xFFe0dede),
-        end: Color(0xFF092532),
-      ),
-    ),
-  ]);
-  Animatable<Color> textColorSwitches = TweenSequence<Color>([
-    TweenSequenceItem(
-      weight: 1.0,
-      tween: ColorTween(
-        begin: Colors.black,
-        end: Colors.white,
-      ),
-    ),
-  ]);
-
   @override
   Widget build(BuildContext context) {
-    final themeToggler = context.watch<ThemeStyle>();
-    final localToggler = context.watch<Language>();
+    var themeToggler = context.watch<ThemeStyle>();
+    var localToggler = context.watch<Language>();
 
     return AnimatedBuilder(
         animation: _scaffoldBgColorController,
         builder: (context, child) {
           return Scaffold(
-            backgroundColor: bgColorSwiches.evaluate(
+            backgroundColor: bgColorSwitches.evaluate(
                 AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -80,33 +63,38 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                       child: Container(
                         width: 100,
                         height: 100,
-                        child: FlareActor("dark_light.flr",
+                        child: FlareActor('dark_light.flr',
                             alignment: Alignment.center,
                             animation: themeToggler.themeStatus == kTheme.light
-                                ? "A2"
-                                : "A1"),
+                                ? 'A2'
+                                : 'A1'),
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        FlatButton(
-                            onPressed: () {
-                              localToggler.toggleLanguage();
-                              setState(() {});
-                            },
-                            child: CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              radius: 40,
+                        GestureDetector(
+                          onTap: () {
+                            localToggler.toggleLanguage();
+                            setState(() {});
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(150),
                               child: Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Image.asset(
-                                    localToggler.localeStatus == kLocale.english
-                                        ? "english.png"
-                                        : "greekflag.png"),
+                                  localToggler.localeStatus == kLocale.english
+                                      ? 'english.png'
+                                      : 'greekflag.png',
+                                ),
                               ),
-                            )),
-                        SizedBox(
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
@@ -114,14 +102,14 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 14.0),
+                  padding: const EdgeInsets.only(left: 14.0),
                   child: Column(
                     children: [
                       Text(
                         localToggler.localeStatus == kLocale.english
-                            ? "George Leonidis"
-                            : "Γιώργος Λεωνίδης",
-                        style: GoogleFonts.gfsNeohellenic(
+                            ? 'George Leonidis'
+                            : 'Γιώργος Λεωνίδης',
+                        style: GoogleFonts.openSansCondensed(
                           fontSize: 50,
                           color: textColorSwitches.evaluate(
                               AlwaysStoppedAnimation(
@@ -130,9 +118,9 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                       ),
                       Text(
                         localToggler.localeStatus == kLocale.english
-                            ? "Software Developer"
-                            : "Προγραμματιστής Λογισμικού",
-                        style: GoogleFonts.gfsNeohellenic(
+                            ? 'Software Developer'
+                            : 'Προγραμματιστής Λογισμικού',
+                        style: GoogleFonts.openSansCondensed(
                           fontSize: 25,
                           color: textColorSwitches.evaluate(
                               AlwaysStoppedAnimation(
@@ -142,76 +130,14 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 // MAIN MENU
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //HOME
-                    MenuItem(
-                      onPress: () {
-                        mainPageController.animateToPage(0,
-                            duration: Duration(seconds: 1),
-                            curve: Curves.easeInOutCubic);
-                      },
-                      text: localToggler.localeStatus == kLocale.english
-                          ? kMenuHomeEn
-                          : kMenuHomeGr,
-                      color: textColorSwitches.evaluate(
-                        AlwaysStoppedAnimation(
-                            _scaffoldBgColorController.value),
-                      ),
-                    ),
-                    //PORTFOLIO
-                    MenuItem(
-                      onPress: () {
-                        mainPageController.animateToPage(1,
-                            duration: Duration(seconds: 1),
-                            curve: Curves.easeInOutCubic);
-                      },
-                      text: localToggler.localeStatus == kLocale.english
-                          ? kMenuPortfolioEn
-                          : kMenuPortfolioGr,
-                      color: textColorSwitches.evaluate(
-                        AlwaysStoppedAnimation(
-                            _scaffoldBgColorController.value),
-                      ),
-                    ),
-                    //SKILLS
-                    MenuItem(
-                      onPress: () {
-                        mainPageController.animateToPage(2,
-                            duration: Duration(seconds: 1),
-                            curve: Curves.easeInOutCubic);
-                      },
-                      text: localToggler.localeStatus == kLocale.english
-                          ? kMenuSkillsEn
-                          : kMenuSkillsGr,
-                      color: textColorSwitches.evaluate(
-                        AlwaysStoppedAnimation(
-                            _scaffoldBgColorController.value),
-                      ),
-                    ),
-                    //CONTACT
-                    MenuItem(
-                      onPress: () {
-                        mainPageController.animateToPage(3,
-                            duration: Duration(seconds: 1),
-                            curve: Curves.easeInOutCubic);
-                      },
-                      text: localToggler.localeStatus == kLocale.english
-                          ? kMenuContactEn
-                          : kMenuContactGr,
-                      color: textColorSwitches.evaluate(
-                        AlwaysStoppedAnimation(
-                            _scaffoldBgColorController.value),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
+                Menu(
+                    localToggler: localToggler,
+                    scaffoldBgColorController: _scaffoldBgColorController),
+                const SizedBox(
                   height: 70,
                 ),
                 Expanded(
@@ -219,197 +145,39 @@ class _MainPageDesktopState extends State<MainPageDesktop>
                     controller: mainPageController,
                     children: [
                       //HOME PAGEVIEW index 0
-                      Center(
-                        child: Container(
-                          width: 300,
-                          height: 300,
-                          color: textColorSwitches.evaluate(
-                              AlwaysStoppedAnimation(
-                                  _scaffoldBgColorController.value)),
-                          child: Text("Home"),
-                        ),
-                      ),
-
-                      //PORTFOLIO PAGEVIEW index 1
-                      Center(child: Text("PORTFOLIO")),
-
-                      //SKILLS PAGEVIEW index 2
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Column(
                         children: [
-                          Expanded(
-                            child: ListView(
-                              children: [
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kFlutterTextEn
-                                      : kFlutterTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "Flutter",
-                                  image: 'flutter.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kCssTextEn
-                                      : kCssTextGR,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "CSS3",
-                                  image: 'css3.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kHtmlTextEn
-                                      : kHtmlTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "HTML5",
-                                  image: 'html5.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kJavascriptTextEn
-                                      : kJavascriptTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "javaScript",
-                                  image: 'javascript.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kjQueryTextEn
-                                      : kjQueryTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "jQuery",
-                                  image: 'jquery.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kReactTextEn
-                                      : kReactTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "React",
-                                  image: 'react.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                      kLocale.english
-                                      ? kPhotoshopTextEn
-                                      : kPhotoshopTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "Photoshop",
-                                  image: 'photoshop.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                      kLocale.english
-                                      ? kIllustratorTextEn
-                                      : kIllustratorTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "Illustrator",
-                                  image: 'ai.png',
-                                ),
-                              ],
+                          Container(
+                            child: Image.asset(
+                              'flutter.png',
+                              fit: BoxFit.fill,
                             ),
                           ),
-
-                          Expanded(
-                            child: ListView(
-                              children: [
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kMongoDbTextEn
-                                      : kMongoDbTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "Mongodb",
-                                  image: 'mongodb.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kNodeJsTextEn
-                                      : kNodeJsTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "Node.js",
-                                  image: 'nodejs.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kExpressJsEn
-                                      : kExpressJsGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "Express",
-                                  image: 'express.png',
-                                ),
-
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                          kLocale.english
-                                      ? kPostgresSqlTextEn
-                                      : kPostgresSqlTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "PostgreSQL",
-                                  image: 'postgreSQL.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                      kLocale.english
-                                      ? kJavaTextEn
-                                      : kJavaTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: "Java",
-                                  image: 'java.png',
-                                ),
-                                Skill(
-                                  text: localToggler.localeStatus ==
-                                      kLocale.english
-                                      ? kDotnetTextEn
-                                      : kDotnetTextGr,
-                                  shadowColor: textColorSwitches.evaluate(
-                                      AlwaysStoppedAnimation(
-                                          _scaffoldBgColorController.value)),
-                                  subtitle: ".NET",
-                                  image: 'dotnet.png',
-                                ),
-                              ],
+                          Container(
+                            width: 300,
+                            height: 300,
+                            color: textColorSwitches.evaluate(
+                              AlwaysStoppedAnimation(
+                                _scaffoldBgColorController.value,
+                              ),
                             ),
+                            child: const Text('Home'),
                           ),
                         ],
                       ),
 
+                      //PORTFOLIO PAGEVIEW index 1
+                      const Center(child: Text('PORTFOLIO')),
+
+                      //SKILLS PAGEVIEW index 2
+                      Skills(
+                          localeToggler: localToggler,
+                          textColorSwitches: textColorSwitches,
+                          scaffoldBgColorController:
+                              _scaffoldBgColorController),
+
                       //CONTACT PAGEVIEW index 3
-                      Center(child: Text("CONTACT PAGE")),
+                      const Center(child: Text('CONTACT PAGE')),
                     ],
                   ),
                 ),
