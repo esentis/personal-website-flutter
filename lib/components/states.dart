@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 class ThemeStyle extends ChangeNotifier {
   kTheme themeStatus;
-  getStatus() => themeStatus;
+  kTheme getStatus() => themeStatus;
   ThemeStyle({this.themeStatus});
-  toggleTheme() {
+  void toggleTheme() {
     if (themeStatus == kTheme.light) {
       themeStatus = kTheme.dark;
-      print("CHANGING THEME");
+      print('CHANGING THEME');
       notifyListeners();
     } else {
       themeStatus = kTheme.light;
-      print("CHANGING THEME");
+      print('CHANGING THEME');
       notifyListeners();
     }
   }
@@ -20,16 +20,16 @@ class ThemeStyle extends ChangeNotifier {
 
 class Language extends ChangeNotifier {
   kLocale localeStatus;
-  getStatus() => localeStatus;
+  kLocale getStatus() => localeStatus;
   Language({this.localeStatus});
-  toggleLanguage() {
+  void toggleLanguage() {
     if (localeStatus == kLocale.greek) {
       localeStatus = kLocale.english;
-      print("CHANGING LANGUAGE");
+      print('CHANGING LANGUAGE');
       notifyListeners();
     } else {
       localeStatus = kLocale.greek;
-      print("CHANGING LANGUAGE");
+      print('CHANGING LANGUAGE');
       notifyListeners();
     }
   }

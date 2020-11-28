@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MenuItem extends StatelessWidget {
-  MenuItem({
+  const MenuItem({
     this.onPress,
     this.text,
     this.color,
@@ -16,7 +16,7 @@ class MenuItem extends StatelessWidget {
       onPressed: onPress,
       child: Text(
         text,
-        style: GoogleFonts.gfsNeohellenic(
+        style: GoogleFonts.openSansCondensed(
           fontSize: 30,
           color: color,
         ),

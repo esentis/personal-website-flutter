@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Skill extends StatelessWidget {
-  Skill({
+  const Skill({
     this.text,
     this.subtitle,
     this.image,
@@ -19,7 +19,7 @@ class Skill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       child: Material(
         shadowColor: shadowColor,
         shape: RoundedRectangleBorder(

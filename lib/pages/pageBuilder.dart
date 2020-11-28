@@ -22,13 +22,13 @@ class ResponsiveBuilder extends StatelessWidget {
         width: 150,
         height: 150,
         color: Colors.blue,
-        child: Text("MOBILE"),
+        child: const Text('MOBILE'),
       ),
       tablet: Container(
         width: 150,
         height: 150,
         color: Colors.yellow,
-        child: Text("Tablet"),
+        child: const Text('Tablet'),
       ),
 
       /// Desktop
@@ -37,7 +37,7 @@ class ResponsiveBuilder extends StatelessWidget {
         width: 150,
         height: 150,
         color: Colors.purple,
-        child: Text("Watch"),
+        child: const Text('Watch'),
       ),
     );
   }
