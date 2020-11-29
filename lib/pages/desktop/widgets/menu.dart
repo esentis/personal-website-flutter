@@ -3,17 +3,17 @@ import 'package:esentispws/components/states.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import '../mainpage_desktop.dart';
+import '../landing_page_desktop.dart';
 
 class Menu extends StatelessWidget {
   const Menu({
-    @required this.localToggler,
+    @required this.localeToggler,
     @required AnimationController scaffoldBgColorController,
     Key key,
   })  : _scaffoldBgColorController = scaffoldBgColorController,
         super(key: key);
 
-  final Language localToggler;
+  final Language localeToggler;
   final AnimationController _scaffoldBgColorController;
 
   @override
@@ -28,7 +28,7 @@ class Menu extends StatelessWidget {
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOutCubic);
           },
-          text: localToggler.localeStatus == kLocale.english
+          text: localeToggler.localeStatus == kLocale.english
               ? kMenuHomeEn
               : kMenuHomeGr,
           color: textColorSwitches.evaluate(
@@ -42,7 +42,7 @@ class Menu extends StatelessWidget {
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOutCubic);
           },
-          text: localToggler.localeStatus == kLocale.english
+          text: localeToggler.localeStatus == kLocale.english
               ? kMenuPortfolioEn
               : kMenuPortfolioGr,
           color: textColorSwitches.evaluate(
@@ -56,7 +56,7 @@ class Menu extends StatelessWidget {
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOutCubic);
           },
-          text: localToggler.localeStatus == kLocale.english
+          text: localeToggler.localeStatus == kLocale.english
               ? kMenuSkillsEn
               : kMenuSkillsGr,
           color: textColorSwitches.evaluate(
@@ -70,7 +70,7 @@ class Menu extends StatelessWidget {
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOutCubic);
           },
-          text: localToggler.localeStatus == kLocale.english
+          text: localeToggler.localeStatus == kLocale.english
               ? kMenuContactEn
               : kMenuContactGr,
           color: textColorSwitches.evaluate(

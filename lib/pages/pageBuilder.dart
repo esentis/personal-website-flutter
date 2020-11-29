@@ -1,4 +1,4 @@
-import 'package:esentispws/pages/desktop/mainpage_desktop.dart';
+import 'package:esentispws/pages/desktop/landing_page_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -32,7 +32,7 @@ class ResponsiveBuilder extends StatelessWidget {
       ),
 
       /// Desktop
-      desktop: MainPageDesktop(),
+      desktop: LandingPageDesktop(),
       watch: Container(
         width: 150,
         height: 150,
