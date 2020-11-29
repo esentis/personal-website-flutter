@@ -18,27 +18,17 @@ class Skill extends StatelessWidget {
   final Color shadowColor;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      child: Material(
-        shadowColor: shadowColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        elevation: 10,
-        child: ListTile(
-          title: Text(
-            text,
-            style: GoogleFonts.gfsNeohellenic(
-              fontSize: 20,
-              color: fontColor,
+    return Container(
+      width: 150,
+      height: 150,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            child: Image.asset(
+              image,
             ),
           ),
-          subtitle: Text(
-            subtitle,
-            style: GoogleFonts.gfsNeohellenic(color: Colors.red, fontSize: 16),
-          ),
-          leading: Image.asset(image),
         ),
       ),
     );
