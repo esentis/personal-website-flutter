@@ -18,8 +18,8 @@ class Skill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      height: 150,
+      width: 100,
+      height: 100,
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
