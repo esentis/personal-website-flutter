@@ -3,7 +3,7 @@ import 'package:esentispws/pages/desktop/widgets/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:esentispws/constants.dart';
 import 'package:provider/provider.dart';
-
+import 'package:lottie/lottie.dart';
 import 'skills.dart';
 import 'widgets/language_selector.dart';
 import 'widgets/page_title.dart';
@@ -46,51 +46,61 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
             body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ThemeSelector(
-                        scaffoldBgColorController: _scaffoldBgColorController,
-                      ),
-                      const LanguageSelector(),
-                    ],
+                Flexible(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ThemeSelector(
+                          scaffoldBgColorController: _scaffoldBgColorController,
+                        ),
+                        const LanguageSelector(),
+                      ],
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 2,
+                  child: Menu(
+                      localeToggler: localeToggler,
+                      scaffoldBgColorController: _scaffoldBgColorController),
+                ),
+                Flexible(
+                  flex: 2,
+                  child: PageTitle(
+                    scaffoldBgColorController: _scaffoldBgColorController,
+                  ),
+                ),
+                Flexible(
+                  flex: 5,
+                  child: Lottie.asset(
+                    'programmer.json',
                   ),
                 ),
 
-                PageTitle(
-                  scaffoldBgColorController: _scaffoldBgColorController,
-                ),
                 const SizedBox(
                   height: 20,
                 ),
                 // MAIN MENU
-                Menu(
-                    localeToggler: localeToggler,
-                    scaffoldBgColorController: _scaffoldBgColorController),
-                const SizedBox(
-                  height: 70,
-                ),
-                Expanded(
+
+                Flexible(
+                  flex: 3,
                   child: PageView(
                     controller: mainPageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       //HOME PAGEVIEW index 0
-                      Column(
-                        children: [
-                          Container(
-                            width: 300,
-                            height: 300,
-                            color: textColorSwitches.evaluate(
-                              AlwaysStoppedAnimation(
-                                _scaffoldBgColorController.value,
-                              ),
-                            ),
-                            child: const Text('Home'),
+                      Container(
+                        width: 300,
+                        height: 300,
+                        color: textColorSwitches.evaluate(
+                          AlwaysStoppedAnimation(
+                            _scaffoldBgColorController.value,
                           ),
-                        ],
+                        ),
+                        child: const Text('Home'),
                       ),
 
                       //PORTFOLIO PAGEVIEW index 1
