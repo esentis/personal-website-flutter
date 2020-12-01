@@ -43,80 +43,95 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
           return Scaffold(
             backgroundColor: bgColorSwitches.evaluate(
                 AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            body: Stack(
               children: [
-                Flexible(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ThemeSelector(
-                          scaffoldBgColorController: _scaffoldBgColorController,
+                Positioned.fill(
+                  child: Lottie.network(
+                    'https://assets9.lottiefiles.com/packages/lf20_MTEnXT.json',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                // Positioned.fill(
+                //   child: Lottie.network(
+                //     'https://assets9.lottiefiles.com/packages/lf20_xROXkJ.json',
+                //     fit: BoxFit.fill,
+                //   ),
+                // ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ThemeSelector(
+                              scaffoldBgColorController:
+                                  _scaffoldBgColorController,
+                            ),
+                            const LanguageSelector(),
+                          ],
                         ),
-                        const LanguageSelector(),
-                      ],
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 2,
-                  child: Menu(
-                      localeToggler: localeToggler,
-                      scaffoldBgColorController: _scaffoldBgColorController),
-                ),
-                Flexible(
-                  flex: 2,
-                  child: PageTitle(
-                    scaffoldBgColorController: _scaffoldBgColorController,
-                  ),
-                ),
-                Flexible(
-                  flex: 5,
-                  child: Lottie.asset(
-                    'programmer.json',
-                  ),
-                ),
-
-                const SizedBox(
-                  height: 20,
-                ),
-                // MAIN MENU
-
-                Flexible(
-                  flex: 3,
-                  child: PageView(
-                    controller: mainPageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      //HOME PAGEVIEW index 0
-                      Container(
-                        width: 300,
-                        height: 300,
-                        color: textColorSwitches.evaluate(
-                          AlwaysStoppedAnimation(
-                            _scaffoldBgColorController.value,
-                          ),
-                        ),
-                        child: const Text('Home'),
                       ),
-
-                      //PORTFOLIO PAGEVIEW index 1
-                      const Center(child: Text('PORTFOLIO')),
-
-                      //SKILLS PAGEVIEW index 2
-                      Skills(
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: Menu(
                           localeToggler: localeToggler,
-                          textColorSwitches: textColorSwitches,
                           scaffoldBgColorController:
                               _scaffoldBgColorController),
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: PageTitle(
+                        scaffoldBgColorController: _scaffoldBgColorController,
+                      ),
+                    ),
+                    Flexible(
+                      flex: 10,
+                      child: Row(
+                        children: [
+                          Flexible(
+                            flex: 1,
+                            child: Lottie.asset(
+                              'programmer.json',
+                            ),
+                          ),
+                          Flexible(
+                            flex: 2,
+                            child: PageView(
+                              controller: mainPageController,
+                              physics: const NeverScrollableScrollPhysics(),
+                              children: [
+                                //HOME PAGEVIEW index 0
+                                Container(
+                                  width: 300,
+                                  height: 300,
+                                ),
 
-                      //CONTACT PAGEVIEW index 3
-                      const Center(child: Text('CONTACT PAGE')),
-                    ],
-                  ),
+                                //PORTFOLIO PAGEVIEW index 1
+                                const Center(child: Text('PORTFOLIO')),
+
+                                //SKILLS PAGEVIEW index 2
+                                Skills(
+                                    localeToggler: localeToggler,
+                                    textColorSwitches: textColorSwitches,
+                                    scaffoldBgColorController:
+                                        _scaffoldBgColorController),
+
+                                //CONTACT PAGEVIEW index 3
+                                const Center(child: Text('CONTACT PAGE')),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // MAIN MENU
+                  ],
                 ),
               ],
             ),
