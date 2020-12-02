@@ -79,14 +79,25 @@ String kMenuSkillsEn = 'Skills';
 String kMenuContactEn = 'Contact';
 
 // Color switches
-
+// colors: [
+//             Color(0xffb088f9),
+//             Color(0xffda9ff9),
+//             Color(0xff98acf8),
+//             Color(0xffbedcfa)
+//           ],
 Animatable<Color> bgColorSwitches = TweenSequence<Color>([
   TweenSequenceItem(
     weight: 1.0,
     tween: ColorTween(
-      begin: const Color(0xFFe0dede),
-      end: Colors.black,
-      // end: const Color(0xFF092532),
+      begin: Color(0xffc8f0f0),
+      end: Color(0xfface7ef),
+    ),
+  ),
+  TweenSequenceItem(
+    weight: 1.0,
+    tween: ColorTween(
+      begin: Color(0xfface7ef),
+      end: Color(0xff133b5c),
     ),
   ),
 ]);
