@@ -85,28 +85,35 @@ String kMenuContactEn = 'Contact';
 //             Color(0xff98acf8),
 //             Color(0xffbedcfa)
 //           ],
-Animatable<Color> bgColorSwitches = TweenSequence<Color>([
+Animatable<Color> gradientColorOne = TweenSequence<Color>([
   TweenSequenceItem(
     weight: 1.0,
     tween: ColorTween(
-      begin: Color(0xffc8f0f0),
-      end: Color(0xfface7ef),
-    ),
-  ),
-  TweenSequenceItem(
-    weight: 1.0,
-    tween: ColorTween(
-      begin: Color(0xfface7ef),
-      end: Color(0xff133b5c),
+      // Light bottom
+      begin: Color(0xff51adcf),
+      // Dark bottom
+      end: Color(0xff0f3057),
     ),
   ),
 ]);
+Animatable<Color> gradientColorTwo = TweenSequence<Color>([
+  TweenSequenceItem(
+    weight: 1.0,
+    tween: ColorTween(
+      // Light theme sky
+      begin: const Color(0xffb9fffc),
+      // Dark theme sky
+      end: const Color(0xff7579e7),
+    ),
+  ),
+]);
+
 Animatable<Color> textColorSwitches = TweenSequence<Color>([
   TweenSequenceItem(
     weight: 1.0,
     tween: ColorTween(
-      begin: Colors.black,
-      end: Colors.white,
+      begin: const Color(0xff0278ae),
+      end: const Color(0xffe8ffc1),
     ),
   ),
 ]);

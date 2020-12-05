@@ -1,5 +1,6 @@
 import 'package:esentispws/components/states.dart';
 import 'package:esentispws/pages/desktop/widgets/menu.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:esentispws/constants.dart';
 import 'package:provider/provider.dart';
@@ -40,24 +41,30 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
     return AnimatedBuilder(
         animation: _scaffoldBgColorController,
         builder: (context, child) {
-          return Scaffold(
-            backgroundColor: bgColorSwitches.evaluate(
-                AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
-            body: Stack(
-              children: [
-                Positioned.fill(
-                  child: Lottie.network(
-                    'https://assets9.lottiefiles.com/packages/lf20_MTEnXT.json',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                // Positioned.fill(
-                //   child: Lottie.network(
-                //     'https://assets9.lottiefiles.com/packages/lf20_xROXkJ.json',
-                //     fit: BoxFit.fill,
-                //   ),
-                // ),
-                Column(
+          return Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    gradientColorTwo.evaluate(
+                      AlwaysStoppedAnimation(
+                        _scaffoldBgColorController.value,
+                      ),
+                    ),
+                    gradientColorOne.evaluate(
+                      AlwaysStoppedAnimation(
+                        _scaffoldBgColorController.value,
+                      ),
+                    )
+                  ],
+                )),
+              ),
+              Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Flexible(
@@ -78,10 +85,16 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                     ),
                     Flexible(
                       flex: 2,
-                      child: Menu(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 35.0,
+                          vertical: 20,
+                        ),
+                        child: Menu(
                           localeToggler: localeToggler,
-                          scaffoldBgColorController:
-                              _scaffoldBgColorController),
+                          scaffoldBgColorController: _scaffoldBgColorController,
+                        ),
+                      ),
                     ),
                     Flexible(
                       flex: 2,
@@ -107,12 +120,24 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                               children: [
                                 //HOME PAGEVIEW index 0
                                 Container(
-                                  width: 300,
-                                  height: 300,
+                                  width: 150,
+                                  height: 150,
+                                  child: ExpandableTheme(
+                                    data: const ExpandableThemeData(
+                                      iconColor: Colors.red,
+                                      animationDuration: Duration(
+                                        milliseconds: 400,
+                                      ),
+                                    ),
+                                    child: ExpandablePanel(
+                                      header: Text('article.title'),
+                                      expanded: Text(
+                                        'article.body',
+                                        softWrap: true,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-
-                                //PORTFOLIO PAGEVIEW index 1
-                                const Center(child: Text('PORTFOLIO')),
 
                                 //SKILLS PAGEVIEW index 2
                                 Skills(
@@ -133,8 +158,8 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                     // MAIN MENU
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         });
   }
