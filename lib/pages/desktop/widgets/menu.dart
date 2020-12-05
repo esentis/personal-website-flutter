@@ -21,24 +21,10 @@ class Menu extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        //HOME
-        MenuItem(
-          onPress: () {
-            mainPageController.animateToPage(0,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeInOutCubic);
-          },
-          text: localeToggler.localeStatus == kLocale.english
-              ? kMenuHomeEn
-              : kMenuHomeGr,
-          color: textColorSwitches.evaluate(
-            AlwaysStoppedAnimation(_scaffoldBgColorController.value),
-          ),
-        ),
         //PORTFOLIO
         MenuItem(
           onPress: () {
-            mainPageController.animateToPage(1,
+            mainPageController.animateToPage(0,
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOutCubic);
           },
@@ -52,7 +38,7 @@ class Menu extends StatelessWidget {
         //SKILLS
         MenuItem(
           onPress: () {
-            mainPageController.animateToPage(2,
+            mainPageController.animateToPage(1,
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOutCubic);
           },
@@ -66,7 +52,7 @@ class Menu extends StatelessWidget {
         //CONTACT
         MenuItem(
           onPress: () {
-            mainPageController.animateToPage(3,
+            mainPageController.animateToPage(2,
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOutCubic);
           },
