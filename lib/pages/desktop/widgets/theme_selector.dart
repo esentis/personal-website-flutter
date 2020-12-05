@@ -36,7 +36,7 @@ class _ThemeSelectorState extends State<ThemeSelector> {
         height: 100,
         child: FlareActor('dark_light.flr',
             alignment: Alignment.center,
-            animation: themeToggler.themeStatus == kTheme.light ? 'A2' : 'A1'),
+            animation: themeToggler.themeStatus == kTheme.light ? 'A1' : 'A2'),
       ),
     );
   }
