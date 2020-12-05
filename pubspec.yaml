@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  expandable: ^4.1.4
   flare_flutter: ^2.0.5
   google_fonts: ^1.1.0
   lottie: ^0.7.0+1
