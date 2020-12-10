@@ -9,6 +9,7 @@ import 'skills.dart';
 import 'widgets/language_selector.dart';
 import 'widgets/page_title.dart';
 import 'widgets/theme_selector.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 kLocale locale = kLocale.english;
 kTheme themeStyle = kTheme.light;
@@ -118,26 +119,178 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                               controller: mainPageController,
                               physics: const NeverScrollableScrollPhysics(),
                               children: [
+                                // TODO: FIX THE DARN FLEXES
                                 //HOME PAGEVIEW index 0
-                                Container(
-                                  width: 150,
-                                  height: 150,
-                                  child: ExpandableTheme(
-                                    data: const ExpandableThemeData(
-                                      iconColor: Colors.red,
-                                      animationDuration: Duration(
+                                Column(children: [
+                                  ExpandableTheme(
+                                    data: ExpandableThemeData(
+                                      iconColor: textColorSwitches.evaluate(
+                                        AlwaysStoppedAnimation(
+                                          _scaffoldBgColorController.value,
+                                        ),
+                                      ),
+                                      animationDuration: const Duration(
                                         milliseconds: 400,
                                       ),
                                     ),
-                                    child: ExpandablePanel(
-                                      header: Text('article.title'),
-                                      expanded: Text(
-                                        'article.body',
-                                        softWrap: true,
-                                      ),
+                                    child: Column(
+                                      children: [
+                                        ExpandablePanel(
+                                          header: Text(
+                                            projects[0].name,
+                                            style:
+                                                GoogleFonts.openSansCondensed(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold,
+                                              color: textColorSwitches.evaluate(
+                                                AlwaysStoppedAnimation(
+                                                  _scaffoldBgColorController
+                                                      .value,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          expanded: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Spacer(
+                                                flex: 1,
+                                              ),
+                                              Flexible(
+                                                flex: 12,
+                                                child: Text(
+                                                  projects[0].description,
+                                                  style: GoogleFonts
+                                                      .openSansCondensed(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: textColorSwitches
+                                                        .evaluate(
+                                                      AlwaysStoppedAnimation(
+                                                        _scaffoldBgColorController
+                                                            .value,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  softWrap: true,
+                                                ),
+                                              ),
+                                              Flexible(
+                                                flex: 20,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    projects[0].screenshots[0],
+                                                    projects[0].screenshots[1]
+                                                  ],
+                                                ),
+                                              ),
+                                              const Spacer(
+                                                flex: 1,
+                                              ),
+                                              Text(
+                                                'Tech used',
+                                                style: GoogleFonts
+                                                    .openSansCondensed(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: textColorSwitches
+                                                      .evaluate(
+                                                    AlwaysStoppedAnimation(
+                                                      _scaffoldBgColorController
+                                                          .value,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              projects[0].techStack[0],
+                                            ],
+                                          ),
+                                        ),
+                                        ExpandablePanel(
+                                          header: Text(
+                                            projects[0].name,
+                                            style:
+                                                GoogleFonts.openSansCondensed(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold,
+                                              color: textColorSwitches.evaluate(
+                                                AlwaysStoppedAnimation(
+                                                  _scaffoldBgColorController
+                                                      .value,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          expanded: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Spacer(
+                                                flex: 1,
+                                              ),
+                                              Flexible(
+                                                flex: 12,
+                                                child: Text(
+                                                  projects[0].description,
+                                                  style: GoogleFonts
+                                                      .openSansCondensed(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: textColorSwitches
+                                                        .evaluate(
+                                                      AlwaysStoppedAnimation(
+                                                        _scaffoldBgColorController
+                                                            .value,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  softWrap: true,
+                                                ),
+                                              ),
+                                              Flexible(
+                                                flex: 20,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    projects[0].screenshots[0],
+                                                    projects[0].screenshots[1]
+                                                  ],
+                                                ),
+                                              ),
+                                              const Spacer(
+                                                flex: 1,
+                                              ),
+                                              Text(
+                                                'Tech used',
+                                                style: GoogleFonts
+                                                    .openSansCondensed(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: textColorSwitches
+                                                      .evaluate(
+                                                    AlwaysStoppedAnimation(
+                                                      _scaffoldBgColorController
+                                                          .value,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              projects[0].techStack[0],
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ),
+                                ]),
 
                                 //SKILLS PAGEVIEW index 2
                                 Skills(
@@ -147,7 +300,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                                         _scaffoldBgColorController),
 
                                 //CONTACT PAGEVIEW index 3
-                                const Center(child: Text('CONTACT PAGE')),
+                                Center(child: projects[0].screenshots[0]),
                               ],
                             ),
                           ),
