@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:esentispws/components/skill.dart';
+import 'package:esentispws/models/project.dart';
 import 'package:flutter/material.dart';
 
 enum kLocale { greek, english }
@@ -90,9 +92,9 @@ Animatable<Color> gradientColorOne = TweenSequence<Color>([
     weight: 1.0,
     tween: ColorTween(
       // Light bottom
-      begin: Color(0xff51adcf),
+      begin: const Color(0xff51adcf),
       // Dark bottom
-      end: Color(0xff0f3057),
+      end: const Color(0xff0f3057),
     ),
   ),
 ]);
@@ -126,3 +128,25 @@ Animatable<Color> skillBadgeSwitches = TweenSequence<Color>([
     ),
   ),
 ]);
+
+// Data
+
+var projects = [
+  Project(
+    description:
+        'A movies application that connects to the TMDB Log . Get trending and newly released movies with in-depth details.',
+    liveUrl: 'https://hypothermal-mixture.000webhostapp.com/#/',
+    name: 'Movies Application',
+    screenshots: [
+      Image.asset('/projects/movies_1.gif'),
+      Image.asset('/projects/movies_2.gif'),
+    ],
+    sourceUrl: 'https://github.com/esentis/Flutter-Movies-Application',
+    techStack: [
+      const Skill(
+        image: 'assets/flutter.png',
+        iconSize: 50,
+      ),
+    ],
+  ),
+];
