@@ -1,6 +1,6 @@
 import 'package:esentispws/components/states.dart';
+import 'package:esentispws/pages/desktop/portfolio/project_widget.dart';
 import 'package:esentispws/pages/desktop/widgets/menu.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:esentispws/constants.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +9,6 @@ import 'skills.dart';
 import 'widgets/language_selector.dart';
 import 'widgets/page_title.dart';
 import 'widgets/theme_selector.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 kLocale locale = kLocale.english;
 kTheme themeStyle = kTheme.light;
@@ -119,178 +118,33 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                               controller: mainPageController,
                               physics: const NeverScrollableScrollPhysics(),
                               children: [
-                                // TODO: FIX THE DARN FLEXES
                                 //HOME PAGEVIEW index 0
-                                Column(children: [
-                                  ExpandableTheme(
-                                    data: ExpandableThemeData(
-                                      iconColor: textColorSwitches.evaluate(
-                                        AlwaysStoppedAnimation(
+                                Container(
+                                  width: double.infinity,
+                                  height: MediaQuery.of(context).size.height,
+                                  child: ListView(children: [
+                                    ProjectWidget(
+                                      colorControllerValue:
                                           _scaffoldBgColorController.value,
-                                        ),
-                                      ),
-                                      animationDuration: const Duration(
-                                        milliseconds: 400,
-                                      ),
+                                      name: projects.first.name,
+                                      description: projects.first.description,
+                                      techStack: projects.first.techStack,
+                                      screenshots: projects.first.screenshots,
+                                      sourceCode: projects.first.sourceUrl,
+                                      liveUrl: projects.first.liveUrl,
                                     ),
-                                    child: Column(
-                                      children: [
-                                        ExpandablePanel(
-                                          header: Text(
-                                            projects[0].name,
-                                            style:
-                                                GoogleFonts.openSansCondensed(
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.bold,
-                                              color: textColorSwitches.evaluate(
-                                                AlwaysStoppedAnimation(
-                                                  _scaffoldBgColorController
-                                                      .value,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          expanded: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Spacer(
-                                                flex: 1,
-                                              ),
-                                              Flexible(
-                                                flex: 12,
-                                                child: Text(
-                                                  projects[0].description,
-                                                  style: GoogleFonts
-                                                      .openSansCondensed(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: textColorSwitches
-                                                        .evaluate(
-                                                      AlwaysStoppedAnimation(
-                                                        _scaffoldBgColorController
-                                                            .value,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  softWrap: true,
-                                                ),
-                                              ),
-                                              Flexible(
-                                                flex: 20,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    projects[0].screenshots[0],
-                                                    projects[0].screenshots[1]
-                                                  ],
-                                                ),
-                                              ),
-                                              const Spacer(
-                                                flex: 1,
-                                              ),
-                                              Text(
-                                                'Tech used',
-                                                style: GoogleFonts
-                                                    .openSansCondensed(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: textColorSwitches
-                                                      .evaluate(
-                                                    AlwaysStoppedAnimation(
-                                                      _scaffoldBgColorController
-                                                          .value,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              projects[0].techStack[0],
-                                            ],
-                                          ),
-                                        ),
-                                        ExpandablePanel(
-                                          header: Text(
-                                            projects[0].name,
-                                            style:
-                                                GoogleFonts.openSansCondensed(
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.bold,
-                                              color: textColorSwitches.evaluate(
-                                                AlwaysStoppedAnimation(
-                                                  _scaffoldBgColorController
-                                                      .value,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          expanded: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Spacer(
-                                                flex: 1,
-                                              ),
-                                              Flexible(
-                                                flex: 12,
-                                                child: Text(
-                                                  projects[0].description,
-                                                  style: GoogleFonts
-                                                      .openSansCondensed(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: textColorSwitches
-                                                        .evaluate(
-                                                      AlwaysStoppedAnimation(
-                                                        _scaffoldBgColorController
-                                                            .value,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  softWrap: true,
-                                                ),
-                                              ),
-                                              Flexible(
-                                                flex: 20,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    projects[0].screenshots[0],
-                                                    projects[0].screenshots[1]
-                                                  ],
-                                                ),
-                                              ),
-                                              const Spacer(
-                                                flex: 1,
-                                              ),
-                                              Text(
-                                                'Tech used',
-                                                style: GoogleFonts
-                                                    .openSansCondensed(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: textColorSwitches
-                                                      .evaluate(
-                                                    AlwaysStoppedAnimation(
-                                                      _scaffoldBgColorController
-                                                          .value,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              projects[0].techStack[0],
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                    ProjectWidget(
+                                      colorControllerValue:
+                                          _scaffoldBgColorController.value,
+                                      name: projects.first.name,
+                                      description: projects.first.description,
+                                      techStack: projects.first.techStack,
+                                      screenshots: projects.first.screenshots,
+                                      sourceCode: projects.first.sourceUrl,
+                                      liveUrl: projects.first.liveUrl,
                                     ),
-                                  ),
-                                ]),
+                                  ]),
+                                ),
 
                                 //SKILLS PAGEVIEW index 2
                                 Skills(
