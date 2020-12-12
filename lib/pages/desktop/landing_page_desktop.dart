@@ -1,4 +1,5 @@
 import 'package:esentispws/components/states.dart';
+import 'package:esentispws/pages/desktop/contact/contact.dart';
 import 'package:esentispws/pages/desktop/portfolio/project_widget.dart';
 import 'package:esentispws/pages/desktop/widgets/menu.dart';
 import 'package:flutter/material.dart';
@@ -122,28 +123,23 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                                 Container(
                                   width: double.infinity,
                                   height: MediaQuery.of(context).size.height,
-                                  child: ListView(children: [
-                                    ProjectWidget(
-                                      colorControllerValue:
-                                          _scaffoldBgColorController.value,
-                                      name: projects.first.name,
-                                      description: projects.first.description,
-                                      techStack: projects.first.techStack,
-                                      screenshots: projects.first.screenshots,
-                                      sourceCode: projects.first.sourceUrl,
-                                      liveUrl: projects.first.liveUrl,
-                                    ),
-                                    ProjectWidget(
-                                      colorControllerValue:
-                                          _scaffoldBgColorController.value,
-                                      name: projects.first.name,
-                                      description: projects.first.description,
-                                      techStack: projects.first.techStack,
-                                      screenshots: projects.first.screenshots,
-                                      sourceCode: projects.first.sourceUrl,
-                                      liveUrl: projects.first.liveUrl,
-                                    ),
-                                  ]),
+                                  child: ListView.builder(
+                                      itemCount: 5,
+                                      itemBuilder: (context, index) =>
+                                          ProjectWidget(
+                                            colorControllerValue:
+                                                _scaffoldBgColorController
+                                                    .value,
+                                            name: projects.first.name,
+                                            description:
+                                                projects.first.description,
+                                            techStack: projects.first.techStack,
+                                            screenshots:
+                                                projects.first.screenshots,
+                                            sourceCode:
+                                                projects.first.sourceUrl,
+                                            liveUrl: projects.first.liveUrl,
+                                          )),
                                 ),
 
                                 //SKILLS PAGEVIEW index 2
@@ -154,7 +150,9 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                                         _scaffoldBgColorController),
 
                                 //CONTACT PAGEVIEW index 3
-                                Center(child: projects[0].screenshots[0]),
+                                Center(
+                                  child: ContactInfo(),
+                                ),
                               ],
                             ),
                           ),
