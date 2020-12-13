@@ -22,6 +22,7 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
@@ -36,10 +37,13 @@ android {
         applicationId "gr.esentis.esentispws"
         minSdkVersion 16
         targetSdkVersion 28
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
+    dependencies {
+     implementation 'com.android.support:multidex:1.0.3'
+    }
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
