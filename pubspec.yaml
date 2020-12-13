@@ -23,7 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cloud_firestore: ^0.14.4
   expandable: ^4.1.4
+  firebase_core: ^0.5.3
   flare_flutter: ^2.0.5
   google_fonts: ^1.1.0
   lottie: ^0.7.0+1
