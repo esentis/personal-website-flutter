@@ -1,10 +1,14 @@
 import 'package:esentispws/components/states.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/pageBuilder.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  // Firebase init
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
