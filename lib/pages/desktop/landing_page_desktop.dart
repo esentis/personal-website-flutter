@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esentispws/components/states.dart';
 import 'package:esentispws/pages/desktop/contact/contact.dart';
 import 'package:esentispws/pages/desktop/portfolio/project_widget.dart';
@@ -24,7 +25,7 @@ class LandingPageDesktop extends StatefulWidget {
 class _LandingPageDesktopState extends State<LandingPageDesktop>
     with SingleTickerProviderStateMixin {
   AnimationController _scaffoldBgColorController;
-
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   @override
   void initState() {
     super.initState();
