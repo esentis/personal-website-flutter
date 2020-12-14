@@ -5,6 +5,7 @@ import 'package:esentispws/pages/desktop/portfolio/project_widget.dart';
 import 'package:esentispws/pages/desktop/widgets/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:esentispws/constants.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 import 'skills.dart';
@@ -16,6 +17,7 @@ kLocale locale = kLocale.english;
 kTheme themeStyle = kTheme.light;
 PageController mainPageController = PageController(initialPage: 0);
 int currentIndex = 0;
+var logger = Logger();
 
 class LandingPageDesktop extends StatefulWidget {
   @override
@@ -121,28 +123,35 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                               physics: const NeverScrollableScrollPhysics(),
                               children: [
                                 //HOME PAGEVIEW index 0
-                                Container(
-                                  width: double.infinity,
-                                  height: MediaQuery.of(context).size.height,
-                                  child: ListView.builder(
-                                      itemCount: 5,
-                                      itemBuilder: (context, index) =>
-                                          ProjectWidget(
+                                StreamBuilder<QuerySnapshot>(
+                                    stream: firestore
+                                        .collection('projects')
+                                        .snapshots(),
+                                    builder: (context, snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return const Center(
+                                            child: CircularProgressIndicator());
+                                      }
+                                      return ListView(
+                                        children: snapshot.data.docs
+                                            .map((DocumentSnapshot document) {
+                                          return ProjectWidget(
+                                            name: document.data()['name'],
+                                            description:
+                                                document.data()['description'],
                                             colorControllerValue:
                                                 _scaffoldBgColorController
                                                     .value,
-                                            name: projects.first.name,
-                                            description:
-                                                projects.first.description,
-                                            techStack: projects.first.techStack,
                                             screenshots:
-                                                projects.first.screenshots,
+                                                document.data()['screenshots'],
                                             sourceCode:
-                                                projects.first.sourceUrl,
-                                            liveUrl: projects.first.liveUrl,
-                                          )),
-                                ),
-
+                                                document.data()['sourceUrl'],
+                                            techStack:
+                                                document.data()['techStack'],
+                                          );
+                                        }).toList(),
+                                      );
+                                    }),
                                 //SKILLS PAGEVIEW index 2
                                 Skills(
                                     localeToggler: localeToggler,
