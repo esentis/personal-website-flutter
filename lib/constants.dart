@@ -128,25 +128,3 @@ Animatable<Color> skillBadgeSwitches = TweenSequence<Color>([
     ),
   ),
 ]);
-
-// Data
-
-var projects = [
-  Project(
-    description:
-        'A movies application that connects to the TMDB Log . Get trending and newly released movies with in-depth details.',
-    liveUrl: 'https://hypothermal-mixture.000webhostapp.com/#/',
-    name: 'Movies Application',
-    screenshots: [
-      Image.asset('/projects/movies_1.gif'),
-      Image.asset('/projects/movies_2.gif'),
-    ],
-    sourceUrl: 'https://github.com/esentis/Flutter-Movies-Application',
-    techStack: [
-      const Skill(
-        image: 'assets/flutter.png',
-        iconSize: 50,
-      ),
-    ],
-  ),
-];
