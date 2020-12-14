@@ -9,8 +9,8 @@ class ProjectWidget extends StatefulWidget {
   final double colorControllerValue;
   final String name;
   final String description;
-  final List<Image> screenshots;
-  final List<Skill> techStack;
+  final List<dynamic> screenshots;
+  final List<dynamic> techStack;
   final String sourceCode;
   final String liveUrl;
   const ProjectWidget({
@@ -84,9 +84,11 @@ class _ProjectWidgetState extends State<ProjectWidget> {
                   ),
                   Flexible(
                     flex: 20,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: widget.screenshots,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: widget.screenshots
+                          .map((imageUrl) => Image.network(imageUrl))
+                          .toList(),
                     ),
                   ),
                   const Spacer(
@@ -104,7 +106,19 @@ class _ProjectWidgetState extends State<ProjectWidget> {
                       ),
                     ),
                   ),
-                  widget.techStack.first,
+                  Row(
+                    children: widget.techStack
+                        .map((techName) => Flexible(
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                child: Skill(
+                                  image: 'assets/$techName.png',
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ),
                   Text(
                     'Live url',
                     style: GoogleFonts.openSansCondensed(

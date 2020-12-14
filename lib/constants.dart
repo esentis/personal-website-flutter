@@ -1,7 +1,4 @@
 import 'dart:ui';
-
-import 'package:esentispws/components/skill.dart';
-import 'package:esentispws/models/project.dart';
 import 'package:flutter/material.dart';
 
 enum kLocale { greek, english }
