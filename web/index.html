@@ -28,21 +28,25 @@
       });
     }
   </script>
-  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
-  <script>
-    var firebaseConfig = {
-      apiKey: "...",
-      authDomain: "[YOUR_PROJECT].firebaseapp.com",
-      databaseURL: "https://[YOUR_PROJECT].firebaseio.com",
-      projectId: "[YOUR_PROJECT]",
-      storageBucket: "[YOUR_PROJECT].appspot.com",
-      messagingSenderId: "...",
-      appId: "1:...:web:...",
-      measurementId: "G-...",
-    };
 
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
+  <script>
+  
+      var firebaseConfig = {
+        apiKey: "AIzaSyC9XkwDD0ttRy9lGCFrbe3S8ODMaJw_a_4",
+        authDomain: "personal-website-5d733.firebaseapp.com",
+        projectId: "personal-website-5d733",
+        storageBucket: "personal-website-5d733.appspot.com",
+        messagingSenderId: "1083520059989",
+        appId: "1:1083520059989:web:c8c1d38a7b635687c9e2dc",
+        measurementId: "G-HGTD0PPVLJ"
+    };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
   </script>
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
