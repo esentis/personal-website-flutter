@@ -24,7 +24,7 @@ class Skill extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            child: Image.asset(
+            child: Image.network(
               image,
               fit: BoxFit.contain,
             ),

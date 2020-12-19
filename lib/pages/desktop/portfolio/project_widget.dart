@@ -124,7 +124,7 @@ class _ProjectWidgetState extends State<ProjectWidget> {
                                 height: 50,
                                 width: 50,
                                 child: Skill(
-                                  image: 'assets/$techName.png',
+                                  image: '$techName.png',
                                 ),
                               ),
                             ))
@@ -152,7 +152,7 @@ class _ProjectWidgetState extends State<ProjectWidget> {
                         height: 50,
                         width: 50,
                         child: const Skill(
-                          image: 'assets/github.png',
+                          image: 'github.png',
                         ),
                       ),
                     )

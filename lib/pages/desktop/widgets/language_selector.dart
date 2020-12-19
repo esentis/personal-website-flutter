@@ -28,7 +28,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
           borderRadius: BorderRadius.circular(150),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
+            child: Image.network(
               localeToggler.localeStatus == kLocale.english
                   ? 'english.png'
                   : 'greekflag.png',

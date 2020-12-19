@@ -12,8 +12,8 @@ class ContactInfo extends StatelessWidget {
             onTap: () {
               launchLink('http://www.github.com/esentis');
             },
-            child: Image.asset(
-              'assets/github_small.png',
+            child: Image.network(
+              'github_small.png',
             ),
           ),
         ),
@@ -22,8 +22,8 @@ class ContactInfo extends StatelessWidget {
             onTap: () {
               launchLink('mailto:esentakos@yahoo.gr');
             },
-            child: Image.asset(
-              'assets/email.png',
+            child: Image.network(
+              'email.png',
             ),
           ),
         ),
@@ -32,8 +32,8 @@ class ContactInfo extends StatelessWidget {
             onTap: () {
               launchLink('https://www.linkedin.com/in/gleonidis/');
             },
-            child: Image.asset(
-              'assets/linked.png',
+            child: Image.network(
+              'linked.png',
             ),
           ),
         ),
