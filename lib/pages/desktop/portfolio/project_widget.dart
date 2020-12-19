@@ -58,16 +58,15 @@ class _ProjectWidgetState extends State<ProjectWidget> {
             ),
             expanded: Container(
               width: double.infinity,
-              height: 650,
+              height: widget.screenshots.isEmpty
+                  ? MediaQuery.of(context).size.height / 5
+                  : MediaQuery.of(context).size.height / 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Spacer(
-                    flex: 1,
-                  ),
                   Flexible(
-                    flex: 12,
+                    flex: 2,
                     child: Text(
                       widget.description,
                       style: GoogleFonts.openSansCondensed(
@@ -82,18 +81,30 @@ class _ProjectWidgetState extends State<ProjectWidget> {
                       softWrap: true,
                     ),
                   ),
-                  Flexible(
-                    flex: 20,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: widget.screenshots
-                          .map((imageUrl) => Image.network(imageUrl))
-                          .toList(),
+                  if (widget.screenshots.isNotEmpty)
+                    Flexible(
+                      flex: 10,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: widget.screenshots
+                            .map((imageUrl) => Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 8.0,
+                                    bottom: 8.0,
+                                    right: 10,
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      launchLink(imageUrl);
+                                    },
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(imageUrl)),
+                                  ),
+                                ))
+                            .toList(),
+                      ),
                     ),
-                  ),
-                  const Spacer(
-                    flex: 1,
-                  ),
                   Text(
                     'Tech used',
                     style: GoogleFonts.openSansCondensed(
@@ -119,18 +130,32 @@ class _ProjectWidgetState extends State<ProjectWidget> {
                             ))
                         .toList(),
                   ),
-                  Text(
-                    'Live url',
-                    style: GoogleFonts.openSansCondensed(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: textColorSwitches.evaluate(
-                        AlwaysStoppedAnimation(
-                          widget.colorControllerValue,
+                  if (widget.sourceCode != null)
+                    Text(
+                      'Source code',
+                      style: GoogleFonts.openSansCondensed(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: textColorSwitches.evaluate(
+                          AlwaysStoppedAnimation(
+                            widget.colorControllerValue,
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  if (widget.sourceCode != null)
+                    GestureDetector(
+                      onTap: () {
+                        launchLink(widget.sourceCode);
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        child: const Skill(
+                          image: 'assets/github.png',
+                        ),
+                      ),
+                    )
                 ],
               ),
             ),
