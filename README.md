@@ -4,4 +4,6 @@
 
 ![Last commit](https://img.shields.io/github/last-commit/esentis/personal-website-flutter?style=for-the-badge)
 
+[![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=http%3A%2F%2Fhypothermal-mixture.000webhostapp.com)](https://personal-website-5d733.web.app/)
+
 My personal website made with Flutter/Dart (**work in progress**).
