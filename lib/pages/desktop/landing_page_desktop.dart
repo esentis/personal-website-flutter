@@ -49,22 +49,23 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
             children: [
               Container(
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    gradientColorTwo.evaluate(
-                      AlwaysStoppedAnimation(
-                        _scaffoldBgColorController.value,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      gradientColorTwo.evaluate(
+                        AlwaysStoppedAnimation(
+                          _scaffoldBgColorController.value,
+                        ),
                       ),
-                    ),
-                    gradientColorOne.evaluate(
-                      AlwaysStoppedAnimation(
-                        _scaffoldBgColorController.value,
-                      ),
-                    )
-                  ],
-                )),
+                      gradientColorOne.evaluate(
+                        AlwaysStoppedAnimation(
+                          _scaffoldBgColorController.value,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
               Scaffold(
                 backgroundColor: Colors.transparent,
@@ -124,17 +125,17 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                               children: [
                                 //HOME PAGEVIEW index 0
                                 StreamBuilder<QuerySnapshot>(
-                                    stream: firestore
-                                        .collection('projects')
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (!snapshot.hasData) {
-                                        return const Center(
-                                            child: CircularProgressIndicator());
-                                      }
-                                      return ListView(
-                                        children: snapshot.data.docs
-                                            .map((DocumentSnapshot document) {
+                                  stream: firestore
+                                      .collection('projects')
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return const Center(
+                                          child: CircularProgressIndicator());
+                                    }
+                                    return ListView(
+                                      children: snapshot.data.docs.map(
+                                        (DocumentSnapshot document) {
                                           return ProjectWidget(
                                             name: document.data()['name'],
                                             description:
@@ -149,15 +150,18 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                                             techStack:
                                                 document.data()['techStack'],
                                           );
-                                        }).toList(),
-                                      );
-                                    }),
+                                        },
+                                      ).toList(),
+                                    );
+                                  },
+                                ),
                                 //SKILLS PAGEVIEW index 2
                                 Skills(
-                                    localeToggler: localeToggler,
-                                    textColorSwitches: textColorSwitches,
-                                    scaffoldBgColorController:
-                                        _scaffoldBgColorController),
+                                  localeToggler: localeToggler,
+                                  textColorSwitches: textColorSwitches,
+                                  scaffoldBgColorController:
+                                      _scaffoldBgColorController,
+                                ),
 
                                 //CONTACT PAGEVIEW index 3
                                 Center(
