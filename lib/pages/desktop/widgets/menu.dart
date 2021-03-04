@@ -9,13 +9,18 @@ class Menu extends StatelessWidget {
   const Menu({
     @required this.localeToggler,
     @required AnimationController scaffoldBgColorController,
+    this.onPortfolio,
+    this.onContact,
+    this.onSkills,
     Key key,
   })  : _scaffoldBgColorController = scaffoldBgColorController,
         super(key: key);
 
   final Language localeToggler;
   final AnimationController _scaffoldBgColorController;
-
+  final VoidCallback onPortfolio;
+  final VoidCallback onSkills;
+  final VoidCallback onContact;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -23,11 +28,7 @@ class Menu extends StatelessWidget {
       children: [
         //PORTFOLIO
         MenuItem(
-          onPress: () {
-            mainPageController.animateToPage(0,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeInOutCubic);
-          },
+          onPress: onPortfolio,
           text: localeToggler.localeStatus == kLocale.english
               ? kMenuPortfolioEn
               : kMenuPortfolioGr,
@@ -37,11 +38,7 @@ class Menu extends StatelessWidget {
         ),
         //SKILLS
         MenuItem(
-          onPress: () {
-            mainPageController.animateToPage(1,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeInOutCubic);
-          },
+          onPress: onSkills,
           text: localeToggler.localeStatus == kLocale.english
               ? kMenuSkillsEn
               : kMenuSkillsGr,
@@ -51,11 +48,7 @@ class Menu extends StatelessWidget {
         ),
         //CONTACT
         MenuItem(
-          onPress: () {
-            mainPageController.animateToPage(2,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeInOutCubic);
-          },
+          onPress: onContact,
           text: localeToggler.localeStatus == kLocale.english
               ? kMenuContactEn
               : kMenuContactGr,
