@@ -8,7 +8,11 @@
             "name": "personal-website-flutter",
             "request": "launch",
             "type": "dart",
-            "deviceId": "chrome"
+            "deviceId": "chrome",
+            "args": [
+                "--web-renderer",
+                "html"
+            ]
         }
     ]
 }
