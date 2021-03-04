@@ -1,8 +1,12 @@
 import 'package:esentispws/components/states.dart';
 import 'package:esentispws/constants.dart';
+import 'package:esentispws/pages/desktop/contact/contact.dart';
+import 'package:esentispws/pages/not_found.dart';
 import 'package:esentispws/pages/pageBuilder.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -23,8 +27,18 @@ class MyApp extends StatelessWidget {
         ListenableProvider<Language>(
             create: (_) => Language(localeStatus: kLocale.english)),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        unknownRoute: GetPage(
+          name: '/notfound',
+          page: () => PageNotFound(),
+          transition: Transition.zoom,
+        ),
+        getPages: [
+          GetPage(name: '/', page: () => MainPage()),
+          GetPage(name: '/contact', page: () => ContactInfo()),
+        ],
         title: 'George Leonidis',
         home: MainPage(),
       ),
