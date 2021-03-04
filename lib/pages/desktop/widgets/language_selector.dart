@@ -30,8 +30,8 @@ class _LanguageSelectorState extends State<LanguageSelector> {
             padding: const EdgeInsets.all(8.0),
             child: Image.network(
               localeToggler.localeStatus == kLocale.english
-                  ? 'english.png'
-                  : 'greekflag.png',
+                  ? 'assets/english.png'
+                  : 'assets/greekflag.png',
             ),
           ),
         ),

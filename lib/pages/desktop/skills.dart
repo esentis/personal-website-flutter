@@ -34,7 +34,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'CSS3',
-                  image: 'css3.png',
+                  image: 'assets/css3.png',
                 ),
               ),
               Flexible(
@@ -45,7 +45,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'HTML5',
-                  image: 'html5.png',
+                  image: 'assets/html5.png',
                 ),
               ),
               Flexible(
@@ -56,7 +56,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'javaScript',
-                  image: 'javascript.png',
+                  image: 'assets/javascript.png',
                 ),
               ),
               Flexible(
@@ -67,7 +67,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'jQuery',
-                  image: 'jquery.png',
+                  image: 'assets/jquery.png',
                 ),
               ),
               Flexible(
@@ -78,7 +78,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'React',
-                  image: 'react.png',
+                  image: 'assets/react.png',
                 ),
               ),
               Flexible(
@@ -89,7 +89,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'Photoshop',
-                  image: 'photoshop.png',
+                  image: 'assets/photoshop.png',
                 ),
               ),
               Flexible(
@@ -100,7 +100,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'Illustrator',
-                  image: 'ai.png',
+                  image: 'assets/ai.png',
                 ),
               ),
             ],
@@ -118,7 +118,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'Mongodb',
-                  image: 'mongodb.png',
+                  image: 'assets/mongodb.png',
                 ),
               ),
               Flexible(
@@ -129,7 +129,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'Node.js',
-                  image: 'nodejs.png',
+                  image: 'assets/nodejs.png',
                 ),
               ),
               Flexible(
@@ -140,7 +140,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'Express',
-                  image: 'express.png',
+                  image: 'assets/express.png',
                 ),
               ),
               Flexible(
@@ -151,7 +151,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'PostgreSQL',
-                  image: 'postgreSQL.png',
+                  image: 'assets/postgreSQL.png',
                 ),
               ),
               Flexible(
@@ -162,7 +162,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: 'Java',
-                  image: 'java.png',
+                  image: 'assets/java.png',
                 ),
               ),
               Flexible(
@@ -173,7 +173,7 @@ class Skills extends StatelessWidget {
                   shadowColor: textColorSwitches.evaluate(
                       AlwaysStoppedAnimation(_scaffoldBgColorController.value)),
                   subtitle: '.NET',
-                  image: 'dotnet.png',
+                  image: 'assets/dotnet.png',
                 ),
               ),
             ],

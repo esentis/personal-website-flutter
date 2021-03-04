@@ -13,7 +13,7 @@ class ContactInfo extends StatelessWidget {
               launchLink('http://www.github.com/esentis');
             },
             child: Image.network(
-              'github_small.png',
+              'assets/github_small.png',
             ),
           ),
         ),
@@ -23,7 +23,7 @@ class ContactInfo extends StatelessWidget {
               launchLink('mailto:esentakos@yahoo.gr');
             },
             child: Image.network(
-              'email.png',
+              'assets/email.png',
             ),
           ),
         ),
@@ -33,7 +33,7 @@ class ContactInfo extends StatelessWidget {
               launchLink('https://www.linkedin.com/in/gleonidis/');
             },
             child: Image.network(
-              'linked.png',
+              'assets/linked.png',
             ),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:esentispws/components/skill.dart';
+import 'package:esentispws/pages/desktop/landing_page_desktop.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -86,23 +87,27 @@ class _ProjectWidgetState extends State<ProjectWidget> {
                       flex: 10,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
-                        children: widget.screenshots
-                            .map((imageUrl) => Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 8.0,
-                                    bottom: 8.0,
-                                    right: 10,
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      launchLink(imageUrl);
-                                    },
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(imageUrl)),
-                                  ),
-                                ))
-                            .toList(),
+                        children: widget.screenshots.map((imageUrl) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              top: 8.0,
+                              bottom: 8.0,
+                              right: 10,
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                launchLink(imageUrl);
+                              },
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    width: 150,
+                                    height: 150,
+                                    child: Image.network(imageUrl),
+                                  )),
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ),
                   Text(
@@ -124,7 +129,7 @@ class _ProjectWidgetState extends State<ProjectWidget> {
                                 height: 50,
                                 width: 50,
                                 child: Skill(
-                                  image: '$techName.png',
+                                  image: '/assets/$techName.png',
                                 ),
                               ),
                             ))
@@ -152,7 +157,7 @@ class _ProjectWidgetState extends State<ProjectWidget> {
                         height: 50,
                         width: 50,
                         child: const Skill(
-                          image: 'github.png',
+                          image: '/assets/github.png',
                         ),
                       ),
                     )
