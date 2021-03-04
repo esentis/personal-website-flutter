@@ -1,19 +1,34 @@
-import 'package:esentispws/components/skill.dart';
-import 'package:flutter/material.dart';
+// To parse this JSON data, do
+//
+//     final project = projectFromMap(jsonString);
 
 class Project {
-  final String name;
-  final String description;
-  final List<Image> screenshots;
-  final String liveUrl;
-  final String sourceUrl;
-  final List<Skill> techStack;
-  const Project({
-    @required this.description,
-    @required this.liveUrl,
-    @required this.name,
-    @required this.screenshots,
-    @required this.sourceUrl,
-    @required this.techStack,
+  Project({
+    this.sourceUrl,
+    this.screenshots,
+    this.liveUrl,
+    this.name,
+    this.techStack,
+    this.description,
   });
+
+  String sourceUrl;
+  List<String> screenshots;
+  String liveUrl;
+  String name;
+  List<String> techStack;
+  String description;
+
+  factory Project.fromMap(Map<String, dynamic> json) => Project(
+        sourceUrl: json['sourceUrl'] ?? null,
+        screenshots: json['screenshots'] == null
+            ? null
+            : List<String>.from(json['screenshots'].map((x) => x)),
+        liveUrl: json['liveUrl'] ?? null,
+        name: json['name'] ?? null,
+        techStack: json['techStack'] == null
+            ? null
+            : List<String>.from(json['techStack'].map((x) => x)),
+        description: json['description'] ?? null,
+      );
 }
