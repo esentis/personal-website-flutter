@@ -11,7 +11,7 @@
             "deviceId": "chrome",
             "args": [
                 "--web-renderer",
-                "html"
+                "canvaskit"
             ]
         }
     ]
