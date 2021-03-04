@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esentispws/components/states.dart';
+import 'package:esentispws/models/project.dart';
 import 'package:esentispws/pages/desktop/contact/contact.dart';
 import 'package:esentispws/pages/desktop/portfolio/project_widget.dart';
 import 'package:esentispws/pages/desktop/widgets/menu.dart';
+import 'package:esentispws/services/projects_service.dart';
 import 'package:flutter/material.dart';
 import 'package:esentispws/constants.dart';
 import 'package:logger/logger.dart';
@@ -42,144 +44,118 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
   Widget build(BuildContext context) {
     var localeToggler = context.watch<Language>();
 
-    return AnimatedBuilder(
-        animation: _scaffoldBgColorController,
-        builder: (context, child) {
-          return Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      gradientColorTwo.evaluate(
-                        AlwaysStoppedAnimation(
-                          _scaffoldBgColorController.value,
-                        ),
-                      ),
-                      gradientColorOne.evaluate(
-                        AlwaysStoppedAnimation(
-                          _scaffoldBgColorController.value,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Scaffold(
-                backgroundColor: Colors.transparent,
-                body: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ThemeSelector(
-                              scaffoldBgColorController:
-                                  _scaffoldBgColorController,
-                            ),
-                            const LanguageSelector(),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 35.0,
-                          vertical: 20,
-                        ),
-                        child: Menu(
-                          localeToggler: localeToggler,
-                          scaffoldBgColorController: _scaffoldBgColorController,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 2,
-                      child: PageTitle(
-                        scaffoldBgColorController: _scaffoldBgColorController,
-                      ),
-                    ),
-                    Flexible(
-                      flex: 10,
-                      child: Row(
-                        children: [
-                          Flexible(
-                            flex: 1,
-                            child: Lottie.asset(
-                              'programmer.json',
+    return Scaffold(
+      body: AnimatedBuilder(
+          animation: _scaffoldBgColorController,
+          builder: (context, child) {
+            return Stack(
+              children: [
+                // Animated background
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          gradientColorTwo.evaluate(
+                            AlwaysStoppedAnimation(
+                              _scaffoldBgColorController.value,
                             ),
                           ),
-                          Flexible(
-                            flex: 2,
-                            child: PageView(
-                              controller: mainPageController,
-                              physics: const NeverScrollableScrollPhysics(),
-                              children: [
-                                //HOME PAGEVIEW index 0
-                                StreamBuilder<QuerySnapshot>(
-                                  stream: firestore
-                                      .collection('projects')
-                                      .snapshots(),
-                                  builder: (context, snapshot) {
-                                    if (!snapshot.hasData) {
-                                      return const Center(
-                                          child: CircularProgressIndicator());
-                                    }
-                                    return ListView(
-                                      children: snapshot.data.docs.map(
-                                        (DocumentSnapshot document) {
-                                          return ProjectWidget(
-                                            name: document.data()['name'],
-                                            description:
-                                                document.data()['description'],
-                                            colorControllerValue:
-                                                _scaffoldBgColorController
-                                                    .value,
-                                            screenshots:
-                                                document.data()['screenshots'],
-                                            sourceCode:
-                                                document.data()['sourceUrl'],
-                                            techStack:
-                                                document.data()['techStack'],
-                                          );
-                                        },
-                                      ).toList(),
-                                    );
-                                  },
-                                ),
-                                //SKILLS PAGEVIEW index 2
-                                Skills(
-                                  localeToggler: localeToggler,
-                                  textColorSwitches: textColorSwitches,
-                                  scaffoldBgColorController:
-                                      _scaffoldBgColorController,
-                                ),
-
-                                //CONTACT PAGEVIEW index 3
-                                Center(
-                                  child: ContactInfo(),
-                                ),
-                              ],
+                          gradientColorOne.evaluate(
+                            AlwaysStoppedAnimation(
+                              _scaffoldBgColorController.value,
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
-
-                    // MAIN MENU
-                  ],
+                  ),
                 ),
-              ),
-            ],
-          );
-        });
+
+                Positioned(
+                  child: Column(
+                    children: <Widget>[
+                      // Dark - Light theme toggler AND language toggler
+                      Flexible(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ThemeSelector(
+                                scaffoldBgColorController:
+                                    _scaffoldBgColorController,
+                              ),
+                              const LanguageSelector(),
+                            ],
+                          ),
+                        ),
+                      ),
+                      //
+                      Flexible(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 35.0,
+                            vertical: 20,
+                          ),
+                          child: Menu(
+                            localeToggler: localeToggler,
+                            scaffoldBgColorController:
+                                _scaffoldBgColorController,
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: PageTitle(
+                          scaffoldBgColorController: _scaffoldBgColorController,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: MediaQuery.of(context).size.height * .5,
+                  // right: MediaQuery.of(context).size.width * .3,
+                  // left: MediaQuery.of(context).size.width * .3,
+                  bottom: 0,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: StreamBuilder<List<Project>>(
+                      stream: projectsStream(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        var projects = snapshot.data;
+                        return Scrollbar(
+                          child: ListView.builder(
+                            itemCount: projects.length,
+                            itemBuilder: (context, index) => ProjectWidget(
+                              name: projects[index].name,
+                              description: projects[index].description,
+                              colorControllerValue:
+                                  _scaffoldBgColorController.value,
+                              screenshots: projects[index].screenshots,
+                              sourceCode: projects[index].sourceUrl,
+                              techStack: projects[index].techStack,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
+    );
   }
 }
