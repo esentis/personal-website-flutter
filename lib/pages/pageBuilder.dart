@@ -20,22 +20,17 @@ class ResponsiveBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
-      mobile: LandingPageMobile(),
-      tablet: Container(
-        width: 150,
-        height: 150,
-        color: Colors.yellow,
-        child: const Text('Tablet'),
-      ),
+      /// Mobile
+      mobile: LandingPageDesktop(),
+
+      /// Tablet
+      tablet: LandingPageDesktop(),
 
       /// Desktop
       desktop: LandingPageDesktop(),
-      watch: Container(
-        width: 150,
-        height: 150,
-        color: Colors.purple,
-        child: const Text('Watch'),
-      ),
+
+      /// Watch
+      watch: LandingPageDesktop(),
     );
   }
 }
