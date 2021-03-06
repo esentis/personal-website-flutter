@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         unknownRoute: GetPage(
           name: '/notfound',
           page: () => PageNotFound(),
-          transition: Transition.zoom,
+          transition: Transition.fadeIn,
         ),
         getPages: [
           GetPage(name: '/', page: () => MainPage()),

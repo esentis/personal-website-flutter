@@ -2,8 +2,7 @@ import 'package:esentispws/components/menu_item.dart';
 import 'package:esentispws/components/states.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
-import '../landing_page_desktop.dart';
+import 'package:esentispws/constants.dart';
 
 class Menu extends StatelessWidget {
   const Menu({

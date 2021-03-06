@@ -12,7 +12,7 @@ class MenuItem extends StatelessWidget {
   final Color color;
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       onPressed: onPress,
       child: Text(
         text,

@@ -1,10 +1,9 @@
 import 'package:esentispws/components/skill.dart';
-import 'package:esentispws/pages/desktop/landing_page_desktop.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../constants.dart';
+import 'package:esentispws/constants.dart';
 
 class ProjectWidget extends StatefulWidget {
   final double colorControllerValue;
