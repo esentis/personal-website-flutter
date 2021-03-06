@@ -31,13 +31,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         unknownRoute: GetPage(
-          name: '/notfound',
+          name: '/NotFound',
           page: () => PageNotFound(),
           transition: Transition.fadeIn,
         ),
         getPages: [
           GetPage(name: '/', page: () => MainPage()),
-          GetPage(name: '/contact', page: () => ContactInfo()),
+          GetPage(name: '/Contact', page: () => ContactInfo()),
         ],
         title: 'George Leonidis',
         home: MainPage(),
