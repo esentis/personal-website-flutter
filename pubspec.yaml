@@ -27,6 +27,7 @@ dependencies:
   expandable: ^4.1.4
   firebase_core: ^1.0.0
   flare_flutter: ^2.0.5
+  flutter_zoom_drawer: ^1.0.5
   get: ^3.25.6
   google_fonts: ^2.0.0
   logger: ^0.9.4
