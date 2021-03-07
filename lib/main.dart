@@ -1,6 +1,5 @@
 import 'package:esentispws/components/states.dart';
 import 'package:esentispws/constants.dart';
-import 'package:esentispws/pages/desktop/contact/contact.dart';
 import 'package:esentispws/pages/not_found.dart';
 import 'package:esentispws/pages/pageBuilder.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,7 +36,6 @@ class MyApp extends StatelessWidget {
         ),
         getPages: [
           GetPage(name: '/', page: () => MainPage()),
-          GetPage(name: '/Contact', page: () => ContactInfo()),
         ],
         title: 'George Leonidis',
         home: MainPage(),
