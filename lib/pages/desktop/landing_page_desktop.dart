@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esentispws/components/animated_backgrounds.dart';
+import 'package:esentispws/pages/desktop/contact.dart';
+import 'package:esentispws/pages/desktop/portfolio.dart';
 import 'package:flutter/material.dart';
 import 'package:esentispws/constants.dart';
 import 'package:flutter/rendering.dart';
@@ -37,9 +39,14 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
 
   var currentScreen = screens.HOME;
 
-  ZoomDrawerController _zoomDrawerController = ZoomDrawerController();
+  ZoomDrawerController _zoomDrawerController;
+
+  AnimationController _menuAnimationController;
 
   Animation<double> size;
+
+  bool isDrawerOpen = false;
+  bool globalTapToDismiss = false;
 
   double width = 350;
   double height = 150;
@@ -54,6 +61,14 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
   @override
   void initState() {
     super.initState();
+    _zoomDrawerController = ZoomDrawerController();
+
+    _menuAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        milliseconds: 700,
+      ),
+    )..curve(Curves.easeInOut);
   }
 
   @override
@@ -75,9 +90,11 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                 top: 100,
                 child: TextButton(
                   onPressed: () {
-                    setState(() {
-                      currentScreen = screens.PORTFOLIO;
-                    });
+                    setState(
+                      () {
+                        currentScreen = screens.PORTFOLIO;
+                      },
+                    );
                   },
                   child: Text(
                     'Portfolio',
@@ -110,176 +127,232 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
       openCurve: Curves.fastOutSlowIn,
       closeCurve: Curves.bounceIn,
       style: DrawerStyle.Style1,
-      mainScreen: Scaffold(
-        backgroundColor: Colors.black,
-        body: Stack(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: PlasmaRenderer(
-                type: PlasmaType.infinity,
-                particles: 17,
-                color: const Color(0xaf881cbd),
-                blur: 0.43,
-                size: 0.39,
-                speed: 1.64,
-                offset: 1.57,
-                blendMode: BlendMode.plus,
-                variation1: 0,
-                variation2: 0,
-                variation3: 0,
-                rotation: 0.04,
-                fps: 34,
+
+      mainScreen: Listener(
+        onPointerDown: (event) {
+          if (_zoomDrawerController.isOpen()) {
+            logger.wtf('Closing drawer by global tap');
+            setState(() {
+              _zoomDrawerController.close();
+              isDrawerOpen = false;
+              _menuAnimationController.animateBack(0);
+            });
+          }
+        },
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          body: Stack(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
                 child: PlasmaRenderer(
                   type: PlasmaType.infinity,
-                  particles: 5,
-                  color: const Color(0x442361e4),
-                  blur: 0.4,
-                  size: 1,
-                  speed: 1,
-                  offset: 0,
+                  particles: 17,
+                  color: const Color(0xaf881cbd),
+                  blur: 0.43,
+                  size: 0.39,
+                  speed: 1.64,
+                  offset: 1.57,
                   blendMode: BlendMode.plus,
                   variation1: 0,
                   variation2: 0,
                   variation3: 0,
-                  rotation: 0,
-                  child: SafeArea(
-                    child: Stack(
-                      children: [
-                        Column(
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 400),
-                              transform: Matrix4.rotationY(nameAngle),
-                              child: Center(
-                                child: Text(
-                                  'George Leonidis',
-                                  style: kStyleDefault,
-                                ),
-                              ),
-                            ),
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 400),
-                              child: Center(
-                                child: Text(
-                                  'Software Developer',
-                                  style: GoogleFonts.bebasNeue(
-                                    color: Colors.white,
-                                    fontSize: 20,
+                  rotation: 0.04,
+                  fps: 34,
+                  child: PlasmaRenderer(
+                    type: PlasmaType.infinity,
+                    particles: 5,
+                    color: const Color(0x442361e4),
+                    blur: 0.4,
+                    size: 1,
+                    speed: 1,
+                    offset: 0,
+                    blendMode: BlendMode.plus,
+                    variation1: 0,
+                    variation2: 0,
+                    variation3: 0,
+                    rotation: 0,
+                    child: SafeArea(
+                      child: Stack(
+                        children: [
+                          Column(
+                            children: [
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 400),
+                                transform: Matrix4.rotationY(nameAngle),
+                                child: Center(
+                                  child: Text(
+                                    'George Leonidis',
+                                    style: kStyleDefault,
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          width: 80,
-                          height: 80,
-                          child: IconButton(
-                            onPressed: () {
-                              _zoomDrawerController.open();
-                            },
-                            icon: Icon(
-                              Icons.menu,
-                              size: 80,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: MouseRegion(
-                            cursor: MouseCursor.uncontrolled,
-                            onEnter: (event) {
-                              setState(() {
-                                fontSize = 60;
-                                width += 50;
-                                angle = 0.15;
-                              });
-                            },
-                            onExit: (event) {
-                              setState(() {
-                                fontSize = 45;
-                                width -= 50;
-                                angle = 0;
-                              });
-                            },
-                            child: AnimatedContainer(
-                              transform: Matrix4.rotationZ(angle),
-                              width: width,
-                              height: height,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(45),
-                                border: Border.all(
-                                  width: 15,
-                                  color: const Color(0xaf881cbd),
-                                ),
-                              ),
-                              duration: const Duration(milliseconds: 400),
-                              child: Container(
-                                width: 250,
-                                height: 150,
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 400),
                                 child: Center(
-                                  child: AnimatedDefaultTextStyle(
-                                    duration: const Duration(milliseconds: 400),
-                                    curve: Curves.easeInOut,
+                                  child: Text(
+                                    'Software Developer',
                                     style: GoogleFonts.bebasNeue(
                                       color: Colors.white,
-                                      fontSize: fontSize,
+                                      fontSize: 20,
                                     ),
-                                    child: Text(
-                                      currentScreen == screens.HOME
-                                          ? 'Welcome to my website'
-                                          : currentScreen == screens.PORTFOLIO
-                                              ? 'This is my portfolio'
-                                              : 'Contact',
-                                      textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          // Drawer toggle button
+                          Container(
+                            width: 80,
+                            height: 80,
+                            child: IgnorePointer(
+                              ignoring: isDrawerOpen,
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    if (!_zoomDrawerController.isOpen()) {
+                                      isDrawerOpen = true;
+                                      _zoomDrawerController.open();
+                                      _menuAnimationController.forward();
+                                    }
+                                  });
+                                },
+                                icon: AnimatedIcon(
+                                  progress: _menuAnimationController,
+                                  icon: AnimatedIcons.menu_close,
+                                  size: 80,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: MouseRegion(
+                              cursor: MouseCursor.uncontrolled,
+                              onEnter: (event) {
+                                // setState(() {
+                                //   fontSize = 60;
+                                //   width += 50;
+                                //   angle = -1.25;
+                                // });
+                              },
+                              onExit: (event) {
+                                // setState(
+                                //   () {
+                                //     fontSize = 45;
+                                //     width -= 50;
+                                //     angle = 0;
+                                //   },
+                                // );
+                              },
+                              child: ClipRRect(
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                    sigmaX: 5,
+                                    sigmaY: 5,
+                                  ),
+                                  child: AnimatedContainer(
+                                    transform: Matrix4.rotationY(angle)
+                                      ..rotateZ(angle * 200),
+                                    curve: Curves.easeInOut,
+                                    width: isDrawerOpen
+                                        ? 250
+                                        : currentScreen == screens.HOME
+                                            ? 250
+                                            : currentScreen == screens.PORTFOLIO
+                                                ? 350
+                                                : MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2,
+                                    height: isDrawerOpen
+                                        ? 250
+                                        : currentScreen == screens.HOME
+                                            ? 250
+                                            : currentScreen == screens.PORTFOLIO
+                                                ? 250
+                                                : 350,
+                                    decoration: BoxDecoration(
+                                      color: kColorPurple.withOpacity(0.6),
+                                      borderRadius: BorderRadius.circular(
+                                        isDrawerOpen ? 120 : 45,
+                                      ),
+                                      border: Border.all(
+                                        width: 15,
+                                        color: Colors.white.withOpacity(0.3),
+                                      ),
+                                    ),
+                                    duration: const Duration(milliseconds: 400),
+                                    child: Container(
+                                      child: Center(
+                                        child: AnimatedDefaultTextStyle(
+                                          duration:
+                                              const Duration(milliseconds: 400),
+                                          curve: Curves.easeInOut,
+                                          style: GoogleFonts.bebasNeue(
+                                            color: Colors.white,
+                                            fontSize: fontSize,
+                                          ),
+                                          child: currentScreen == screens.HOME
+                                              ? Text(
+                                                  'Welcome',
+                                                  style: kStyleDefault.copyWith(
+                                                    color: Colors.white,
+                                                  ),
+                                                )
+                                              : currentScreen ==
+                                                      screens.PORTFOLIO
+                                                  ? PortfolioPage()
+                                                  : ContactInfo(),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 150,
-                          left: 150,
-                          child: MouseRegion(
-                            cursor: MouseCursor.uncontrolled,
-                            onEnter: (event) {
-                              setState(() {
-                                copyRightFontSize += 15;
-                              });
-                            },
-                            onExit: (event) {
-                              setState(() {
-                                copyRightFontSize -= 15;
-                              });
-                            },
-                            child: Center(
-                              child: AnimatedDefaultTextStyle(
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.easeInOut,
-                                style: GoogleFonts.bebasNeue(
-                                  color: Colors.white,
-                                  fontSize: copyRightFontSize,
-                                ),
-                                child: Text(
-                                  'esentis 2021 ©',
+                          Positioned(
+                            bottom: 0,
+                            right: 150,
+                            left: 150,
+                            child: MouseRegion(
+                              cursor: MouseCursor.uncontrolled,
+                              onEnter: (event) {
+                                setState(() {
+                                  copyRightFontSize += 15;
+                                });
+                              },
+                              onExit: (event) {
+                                setState(() {
+                                  copyRightFontSize -= 15;
+                                });
+                              },
+                              child: Center(
+                                child: AnimatedDefaultTextStyle(
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeInOut,
+                                  style: GoogleFonts.bebasNeue(
+                                    color: Colors.white,
+                                    fontSize: copyRightFontSize,
+                                  ),
+                                  child: const Text(
+                                    'esentis 2021 ©',
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
