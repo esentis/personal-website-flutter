@@ -11,7 +11,7 @@ class DrawerAnimatedBackground extends StatelessWidget {
     return PlasmaRenderer(
       type: PlasmaType.infinity,
       particles: 10,
-      color: const Color(0x44150fdf),
+      color: const Color(0x442361e4),
       blur: 0.4,
       size: 0.69,
       speed: 1,
@@ -24,7 +24,7 @@ class DrawerAnimatedBackground extends StatelessWidget {
       child: PlasmaRenderer(
         type: PlasmaType.infinity,
         particles: 4,
-        color: const Color(0x44e42323),
+        color: const Color(0x44f0c929),
         blur: 0.4,
         size: 1,
         speed: 1,
