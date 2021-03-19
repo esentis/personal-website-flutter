@@ -184,6 +184,14 @@ List<Icon> skillIcons(Project project) {
             size: 35,
           ),
         );
+      } else if (skillName == 'python') {
+        skillIcons.add(
+          const Icon(
+            Esentis.python,
+            color: Color(0xff5E7D98),
+            size: 35,
+          ),
+        );
       }
     },
   );
