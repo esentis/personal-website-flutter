@@ -42,53 +42,56 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   var projects = snapshot.data.docs.mapProjects();
 
                   return Container(
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) => Divider(
-                        color: Colors.white.withOpacity(0.5),
-                        height: 5,
-                      ),
-                      itemCount: projects.length,
-                      itemBuilder: (context, index) {
-                        var icons = skillIcons(projects[index]);
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 9.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              launchLink(projects[index].sourceUrl);
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Flexible(
-                                  flex: 2,
-                                  child: Text(
-                                    projects[index].name,
-                                    style: const TextStyle(
-                                      fontSize: 35,
+                    child: Scrollbar(
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) => Divider(
+                          color: Colors.white.withOpacity(0.5),
+                          height: 5,
+                        ),
+                        itemCount: projects.length,
+                        itemBuilder: (context, index) {
+                          var icons = skillIcons(projects[index]);
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 9.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                launchLink(projects[index].sourceUrl);
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Flexible(
+                                    flex: 2,
+                                    child: Text(
+                                      projects[index].name,
+                                      style: const TextStyle(
+                                        fontSize: 35,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Flexible(
-                                  child: Row(
-                                    children: [
-                                      ...icons.map(
-                                        (e) => Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 8.0),
-                                            child: e,
+                                  Flexible(
+                                    child: Row(
+                                      children: [
+                                        ...icons.map(
+                                          (e) => Flexible(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0),
+                                              child: e,
+                                            ),
                                           ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   );
                 }),
