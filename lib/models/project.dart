@@ -2,6 +2,8 @@
 //
 //     final project = projectFromMap(jsonString);
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Project {
   Project({
     this.sourceUrl,
@@ -35,4 +37,11 @@ class Project {
         // ignore: unnecessary_null_in_if_null_operators
         description: json['description'] ?? null,
       );
+}
+
+extension PortfolioExts on List<QueryDocumentSnapshot> {
+  List<Project> mapProjects() {
+    return List<Project>.generate(
+        length, (index) => Project.fromMap(this[index].data()));
+  }
 }
