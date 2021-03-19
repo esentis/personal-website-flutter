@@ -72,8 +72,6 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
       ),
     )..curve(Curves.easeInOut);
 
-    void prepareStuff() {}
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // This is mainly to get zoomController values and first it has to be assigned and built.
       setState(() {
@@ -287,6 +285,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                             ),
                           ),
                         ),
+                        // The main animated container
                         Align(
                           alignment: Alignment.center,
                           child: MouseRegion(
@@ -320,12 +319,12 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                                   width: currentScreen == screens.HOME
                                       ? 250
                                       : currentScreen == screens.PORTFOLIO
-                                          ? 250
+                                          ? 550
                                           : 400,
                                   height: currentScreen == screens.HOME
                                       ? 250
                                       : currentScreen == screens.PORTFOLIO
-                                          ? 250
+                                          ? 550
                                           : MediaQuery.of(context).size.height *
                                               .6,
                                   decoration: BoxDecoration(
