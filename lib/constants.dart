@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 enum kLocale { greek, english }
@@ -21,3 +22,5 @@ TextStyle kStyleDefault = GoogleFonts.bebasNeue(
   color: Colors.white,
   fontSize: 35,
 );
+
+var kLog = Logger();
