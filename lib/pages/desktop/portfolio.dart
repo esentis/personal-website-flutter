@@ -192,6 +192,70 @@ List<Icon> skillIcons(Project project) {
             size: 35,
           ),
         );
+      } else if (skillName == 'csharp') {
+        skillIcons.add(
+          const Icon(
+            Esentis.csharp,
+            color: Color(0xff642076),
+            size: 35,
+          ),
+        );
+      } else if (skillName == 'css') {
+        skillIcons.add(
+          const Icon(
+            Esentis.css3,
+            color: Color(0xff1C89B6),
+            size: 35,
+          ),
+        );
+      } else if (skillName == 'react') {
+        skillIcons.add(
+          const Icon(
+            Esentis.react,
+            color: Color(0xff58C4E9),
+            size: 35,
+          ),
+        );
+      } else if (skillName == 'dotnet') {
+        skillIcons.add(
+          const Icon(
+            Esentis.dot,
+            color: Color(0xff47B6E7),
+            size: 35,
+          ),
+        );
+      } else if (skillName == 'bootstrap') {
+        skillIcons.add(
+          const Icon(
+            Esentis.bootstrap,
+            color: Color(0xff7511F1),
+            size: 35,
+          ),
+        );
+      } else if (skillName == 'jquery') {
+        skillIcons.add(
+          const Icon(
+            Esentis.jquery,
+            color: Color(0xff345975),
+            size: 35,
+          ),
+        );
+      } else if (skillName == 'html') {
+        skillIcons.add(
+          const Icon(
+            Esentis.html5,
+            color: Color(0xffEA6D2C),
+            size: 35,
+          ),
+        );
+      } else if (skillName == 'studio') {
+        skillIcons.add(
+          const Icon(
+            Esentis.visualstudio,
+            color: Color(0xffB482EA),
+            size: 35,
+          ),
+        );
       }
     },
   );
