@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:esentispws/components/esentis_icons.dart';
 import 'package:esentispws/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:esentispws/models/project.dart';
+import 'package:flutter/rendering.dart';
+import 'package:scroll_shadow_container/scroll_shadow_container.dart';
+import 'package:supercharged/supercharged.dart';
 
 class PortfolioPage extends StatefulWidget {
   @override
@@ -25,9 +29,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
           child: Padding(
             padding: const EdgeInsets.only(
               top: 30.0,
-              bottom: 60,
-              right: 10.0,
-              left: 10,
             ),
             child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
@@ -39,58 +40,96 @@ class _PortfolioPageState extends State<PortfolioPage> {
                       child: CircularProgressIndicator(),
                     );
                   }
-                  var projects = snapshot.data.docs.mapProjects();
 
+                  // We map the response to a list of projects and we sort them by date.
+                  var projects = snapshot.data.docs.mapProjects()
+                    ..sort((a, b) => b.createdAt.millisecondsSinceEpoch
+                        .compareTo(a.createdAt.millisecondsSinceEpoch));
+                  kLog.wtf(projects.first.createdAt);
                   return Container(
-                    child: Scrollbar(
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) => Divider(
-                          color: Colors.white.withOpacity(0.5),
-                          height: 5,
+                    child: RawScrollbar(
+                      timeToFade: 5.seconds,
+                      thumbColor: Colors.white,
+                      radius: const Radius.circular(20),
+                      child: ScrollShadowContainer.custom(
+                        boxShadow: BoxShadow(
+                          blurRadius: 5,
+                          spreadRadius: 5,
+                          color: kColorPurple,
                         ),
-                        itemCount: projects.length,
-                        itemBuilder: (context, index) {
-                          var icons = skillIcons(projects[index]);
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 9.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                launchLink(projects[index].sourceUrl);
-                              },
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Flexible(
-                                    flex: 2,
-                                    child: Text(
-                                      projects[index].name,
-                                      style: const TextStyle(
-                                        fontSize: 35,
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Row(
-                                      children: [
-                                        ...icons.map(
-                                          (e) => Flexible(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8.0),
-                                              child: e,
+                        child: ListView.builder(
+                          itemCount: projects.length,
+                          itemBuilder: (context, index) {
+                            var icons = skillIcons(projects[index]);
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 9.0,
+                                horizontal: 8,
+                              ),
+                              child: TextButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.resolveWith(
+                                          (states) => Colors.transparent),
+                                ),
+                                onPressed: () {
+                                  launchLink(projects[index].sourceUrl);
+                                },
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Flexible(
+                                      flex: 2,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            projects[index].name,
+                                            style: kStyleDefault.copyWith(
+                                              fontSize: 30,
                                             ),
                                           ),
-                                        )
-                                      ],
+                                          Text(
+                                            formatDate(
+                                              DateTime.fromMillisecondsSinceEpoch(
+                                                  projects[index]
+                                                      .createdAt
+                                                      .millisecondsSinceEpoch),
+                                              [d, '-', MM, '-', yyyy],
+                                            ),
+                                            style: kStyleDefault.copyWith(
+                                              fontSize: 15,
+                                              color:
+                                                  Colors.white.withOpacity(0.6),
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  )
-                                ],
+                                    Flexible(
+                                      child: Row(
+                                        children: [
+                                          ...icons.map(
+                                            (e) => Flexible(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 8.0),
+                                                child: e,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     ),
                   );

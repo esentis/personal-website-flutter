@@ -208,7 +208,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
               child: PlasmaRenderer(
                 type: PlasmaType.infinity,
                 particles: 17,
-                color: const Color(0xaf881cbd),
+                color: kColorPurple,
                 blur: 0.43,
                 size: 0.39,
                 speed: 1.64,
@@ -222,7 +222,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                 child: PlasmaRenderer(
                   type: PlasmaType.infinity,
                   particles: 5,
-                  color: const Color(0x442361e4),
+                  color: kColorBlueDark,
                   blur: 0.4,
                   size: 1,
                   speed: 1,
@@ -288,77 +288,72 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                         // The main animated container
                         Align(
                           alignment: Alignment.center,
-                          child: MouseRegion(
-                            cursor: MouseCursor.uncontrolled,
-                            onEnter: (event) {
-                              // setState(() {
-                              //   fontSize = 60;
-                              //   width += 50;
-                              //   angle = -1.25;
-                              // });
-                            },
-                            onExit: (event) {
-                              // setState(
-                              //   () {
-                              //     fontSize = 45;
-                              //     width -= 50;
-                              //     angle = 0;
-                              //   },
-                              // );
-                            },
-                            child: ClipRRect(
-                              child: BackdropFilter(
-                                filter: ImageFilter.blur(
-                                  sigmaX: 5,
-                                  sigmaY: 5,
-                                ),
-                                child: AnimatedContainer(
-                                  transform: Matrix4.rotationY(angle)
-                                    ..rotateZ(angle * 200),
-                                  curve: Curves.easeInOut,
-                                  width: currentScreen == screens.HOME
-                                      ? 250
-                                      : currentScreen == screens.PORTFOLIO
-                                          ? 550
-                                          : 400,
-                                  height: currentScreen == screens.HOME
-                                      ? 250
-                                      : currentScreen == screens.PORTFOLIO
-                                          ? 550
-                                          : MediaQuery.of(context).size.height *
-                                              .6,
-                                  decoration: BoxDecoration(
-                                    color: kColorPurple.withOpacity(0.6),
-                                    borderRadius: BorderRadius.circular(
-                                      120,
-                                    ),
-                                    border: Border.all(
-                                      width: 15,
-                                      color: Colors.white.withOpacity(0.3),
-                                    ),
-                                  ),
-                                  duration: const Duration(milliseconds: 400),
-                                  child: Container(
-                                    child: Center(
-                                      child: AnimatedDefaultTextStyle(
-                                        duration:
-                                            const Duration(milliseconds: 400),
-                                        curve: Curves.easeInOut,
-                                        style: GoogleFonts.bebasNeue(
-                                          color: Colors.white,
-                                          fontSize: fontSize,
-                                        ),
-                                        child: currentScreen == screens.HOME
-                                            ? Text(
-                                                'Welcome',
-                                                style: kStyleDefault.copyWith(
-                                                  color: Colors.white,
+                          child: ClipRRect(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(
+                                sigmaX: 5,
+                                sigmaY: 5,
+                              ),
+                              child: AnimatedContainer(
+                                transform: Matrix4.rotationY(angle)
+                                  ..rotateZ(angle * 200),
+                                curve: Curves.easeInOut,
+                                width: currentScreen == screens.HOME
+                                    ? 250
+                                    : currentScreen == screens.PORTFOLIO
+                                        ? 550
+                                        : 200,
+                                height: currentScreen == screens.HOME
+                                    ? 250
+                                    : currentScreen == screens.PORTFOLIO
+                                        ? 550
+                                        : 500,
+                                decoration: BoxDecoration(
+                                  color: currentScreen == screens.HOME
+                                      ? Colors.black.withOpacity(0.4)
+                                      : Colors.black.withOpacity(0.8),
+                                  borderRadius:
+                                      currentScreen == screens.PORTFOLIO
+                                          ? const BorderRadius.only(
+                                              topRight: Radius.circular(40),
+                                              topLeft: Radius.circular(40))
+                                          : currentScreen == screens.CONTACT
+                                              ? BorderRadius.circular(49)
+                                              : BorderRadius.circular(
+                                                  120,
                                                 ),
-                                              )
-                                            : currentScreen == screens.PORTFOLIO
-                                                ? PortfolioPage()
-                                                : ContactInfo(),
+                                  border: Border.all(
+                                    width: currentScreen == screens.PORTFOLIO
+                                        ? 0
+                                        : 3,
+                                    color: currentScreen == screens.PORTFOLIO
+                                        ? Colors.transparent
+                                        : Colors.white,
+                                  ),
+                                ),
+                                duration: const Duration(milliseconds: 400),
+                                child: Container(
+                                  child: Center(
+                                    child: AnimatedDefaultTextStyle(
+                                      duration:
+                                          const Duration(milliseconds: 400),
+                                      curve: Curves.easeInOut,
+                                      style: GoogleFonts.bebasNeue(
+                                        color: Colors.white,
+                                        fontSize: fontSize,
                                       ),
+                                      child: currentScreen == screens.HOME
+                                          ? Text(
+                                              'Welcome\nto my personal website',
+                                              textAlign: TextAlign.center,
+                                              style: kStyleDefault.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 25,
+                                              ),
+                                            )
+                                          : currentScreen == screens.PORTFOLIO
+                                              ? PortfolioPage()
+                                              : ContactInfo(),
                                     ),
                                   ),
                                 ),
