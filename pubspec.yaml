@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   cloud_firestore: ^1.0.0
+  date_format: ^2.0.2
   expandable: ^4.1.4
   firebase_core: ^1.0.0
   flare_flutter: ^2.0.5
@@ -32,10 +33,10 @@ dependencies:
   get: ^3.25.6
   google_fonts: ^2.0.0
   logger: ^0.9.4
-  lottie: ^1.0.0
   provider: ^5.0.0
   responsive_builder: ^0.3.0
   rxdart: ^0.26.0
+  scroll_shadow_container: ^1.0.1
   simple_animations: ^3.0.0
   supercharged: ^2.0.0
   url_launcher: ^6.0.2
@@ -68,8 +69,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family:  Esentis
+    - family: Esentis
       fonts:
         - asset: fonts/Esentis.ttf
-
-
