@@ -17,6 +17,7 @@ void launchLink(String url) async {
 }
 
 Color kColorPurple = const Color(0xaf881cbd);
+Color kColorBlueDark = const Color(0x442361e4);
 
 TextStyle kStyleDefault = GoogleFonts.bebasNeue(
   color: Colors.white,

@@ -12,6 +12,7 @@ class Project {
     this.name,
     this.techStack,
     this.description,
+    this.createdAt,
   });
 
   String sourceUrl;
@@ -20,10 +21,12 @@ class Project {
   String name;
   List<String> techStack;
   String description;
+  Timestamp createdAt;
 
   factory Project.fromMap(Map<String, dynamic> json) => Project(
         // ignore: unnecessary_null_in_if_null_operators
         sourceUrl: json['sourceUrl'] ?? null,
+        createdAt: json['createdAt'],
         screenshots: json['screenshots'] == null
             ? null
             : List<String>.from(json['screenshots'].map((x) => x)),
