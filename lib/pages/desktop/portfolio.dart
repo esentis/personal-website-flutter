@@ -261,7 +261,7 @@ List<Icon> skillIcons(Project project) {
       } else if (skillName == 'dotnet') {
         skillIcons.add(
           const Icon(
-            Esentis.dot,
+            Esentis.dotnet,
             color: Color(0xff47B6E7),
             size: 35,
           ),
@@ -295,6 +295,22 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.visualstudio,
             color: Color(0xffB482EA),
+            size: 35,
+          ),
+        );
+      } else if (skillName == 'dart') {
+        skillIcons.add(
+          const Icon(
+            Esentis.dart,
+            color: Color(0xff75ACE6),
+            size: 35,
+          ),
+        );
+      } else if (skillName == 'dotnetcore') {
+        skillIcons.add(
+          const Icon(
+            Esentis.dotnetcore,
+            color: Color(0xff694097),
             size: 35,
           ),
         );

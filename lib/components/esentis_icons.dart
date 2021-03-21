@@ -19,7 +19,7 @@ class Esentis {
       IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData css3 =
       IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData dot =
+  static const IconData dotnet =
       IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData express =
       IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -63,4 +63,8 @@ class Esentis {
       IconData(0xe819, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData apple =
       IconData(0xe81a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData dart =
+      IconData(0xe81b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData dotnetcore =
+      IconData(0xe81c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
