@@ -1,6 +1,6 @@
 # My personal website with Flutter/Dart
 
-![Flutter CI](https://github.com/esentis/personal-website-flutter/workflows/Flutter%20CI/badge.svg)
+[![Codemagic build status](https://api.codemagic.io/apps/605d1f71e4784472c8d125bc/605d1f71e4784472c8d125bb/status_badge.svg)](https://codemagic.io/apps/605d1f71e4784472c8d125bc/605d1f71e4784472c8d125bb/latest_build)
 
 ![Last commit](https://img.shields.io/github/last-commit/esentis/personal-website-flutter?style=for-the-badge)
 
