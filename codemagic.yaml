@@ -3,7 +3,7 @@
 
 workflows:
   default-workflow:
-    name: Default Workflow
+    name: Personal Website Flow
     max_build_duration: 60
     environment:
       vars:
