@@ -1,6 +1,3 @@
-# Automatically generated on 2021-03-26 UTC from https://codemagic.io/app/605d1f71e4784472c8d125bc/settings
-# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
-
 workflows:
   default-workflow:
     name: Personal Website Flow
@@ -24,7 +21,7 @@ workflows:
       - |
         # build web
         cd .
-        flutter build web --release
+        flutter build web --web-renderer -canvaskit
         cd build/web
         7z a -r ../web.zip ./*
       - firebase deploy --token "$FIREBASE_TOKEN"
