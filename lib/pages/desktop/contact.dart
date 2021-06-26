@@ -20,98 +20,82 @@ class ContactInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Flexible(
-          child: ElevatedButton(
-            style: ButtonStyle(
-              mouseCursor: ContactCursor(),
-              overlayColor: MaterialStateProperty.resolveWith(
-                  (states) => Colors.white.withOpacity(0.1)),
-              backgroundColor: MaterialStateProperty.resolveWith(
-                (states) => Colors.white.withOpacity(0.1),
+        Center(
+          child: Wrap(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: kButtonStyleDefault,
+                  onPressed: () {
+                    launchLink('https://www.github.com/esentis');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FaIcon(
+                      FontAwesomeIcons.github,
+                      size: 65,
+                      color: kColorMain,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            onPressed: () {
-              launchLink('https://www.github.com/esentis');
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: FaIcon(
-                FontAwesomeIcons.github,
-                size: 65,
-                color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: kButtonStyleDefault,
+                  onPressed: () {
+                    launchLink('mailto:esentakos@yahoo.gr');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FaIcon(
+                      FontAwesomeIcons.envelopeOpen,
+                      size: 65,
+                      color: kColorMain,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-        Flexible(
-          child: ElevatedButton(
-            style: ButtonStyle(
-                mouseCursor: ContactCursor(),
-                overlayColor: MaterialStateProperty.resolveWith(
-                    (states) => Colors.white.withOpacity(0.1)),
-                backgroundColor: MaterialStateProperty.resolveWith(
-                  (states) => Colors.white.withOpacity(0.1),
-                )),
-            onPressed: () {
-              launchLink('mailto:esentakos@yahoo.gr');
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: FaIcon(
-                FontAwesomeIcons.envelopeOpen,
-                size: 65,
-                color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: kButtonStyleDefault,
+                  onPressed: () {
+                    launchLink('https://www.linkedin.com/in/gleonidis/');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FaIcon(
+                      FontAwesomeIcons.linkedin,
+                      size: 65,
+                      color: kColorMain,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-        Flexible(
-          child: ElevatedButton(
-            style: ButtonStyle(
-              mouseCursor: ContactCursor(),
-              overlayColor: MaterialStateProperty.resolveWith(
-                  (states) => Colors.white.withOpacity(0.1)),
-              backgroundColor: MaterialStateProperty.resolveWith(
-                (states) => Colors.white.withOpacity(0.1),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: kButtonStyleDefault,
+                  onPressed: () {
+                    launchLink(
+                        'https://play.google.com/store/apps/dev?id=7040603848130357887');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FaIcon(
+                      FontAwesomeIcons.googlePlay,
+                      size: 65,
+                      color: kColorMain,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            onPressed: () {
-              launchLink('https://www.linkedin.com/in/gleonidis/');
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: FaIcon(
-                FontAwesomeIcons.linkedin,
-                size: 65,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-        Flexible(
-          child: ElevatedButton(
-            style: ButtonStyle(
-              mouseCursor: ContactCursor(),
-              overlayColor: MaterialStateProperty.resolveWith(
-                  (states) => Colors.white.withOpacity(0.1)),
-              backgroundColor: MaterialStateProperty.resolveWith(
-                (states) => Colors.white.withOpacity(0.1),
-              ),
-            ),
-            onPressed: () {
-              launchLink(
-                  'https://play.google.com/store/apps/dev?id=7040603848130357887');
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: FaIcon(
-                FontAwesomeIcons.googlePlay,
-                size: 65,
-                color: Colors.white,
-              ),
-            ),
+            ],
           ),
         ),
       ],
