@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-  <!--
+<!--
     Oh hello there ;) Feel free to contact me at discord esentis#1385 !
 
          _          __________                              _,
@@ -17,41 +17,40 @@
 
 -->
 <html>
-<head>
-  <base href="/">
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="My personal website.">
+  <head>
+    <base href="/" />
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="My personal website." />
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="esentispws">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="esentispws" />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="favicon.ico" />
 
-  <title>George Leonidis</title>
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
+    <title>George Leonidis</title>
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js');
-      });
-    }
-  </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("flutter_service_worker.js");
+        });
+      }
+    </script>
 
-  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
-  <script>
-  
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+    <script>
       var firebaseConfig = {
         apiKey: "AIzaSyC9XkwDD0ttRy9lGCFrbe3S8ODMaJw_a_4",
         authDomain: "personal-website-5d733.firebaseapp.com",
@@ -59,13 +58,12 @@
         storageBucket: "personal-website-5d733.appspot.com",
         messagingSenderId: "1083520059989",
         appId: "1:1083520059989:web:c8c1d38a7b635687c9e2dc",
-        measurementId: "G-HGTD0PPVLJ"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-
-  </script>
-  <script src="main.dart.js" type="application/javascript"></script>
-</body>
+        measurementId: "G-HGTD0PPVLJ",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+    <script src="main.dart.js" type="application/javascript"></script>
+  </body>
 </html>

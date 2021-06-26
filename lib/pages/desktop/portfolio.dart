@@ -5,8 +5,6 @@ import 'package:esentispws/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:esentispws/models/project.dart';
 import 'package:flutter/rendering.dart';
-import 'package:scroll_shadow_container/scroll_shadow_container.dart';
-import 'package:supercharged/supercharged.dart';
 
 class PortfolioPage extends StatefulWidget {
   @override
@@ -19,63 +17,55 @@ class _PortfolioPageState extends State<PortfolioPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          'Portfolio',
-          style: kStyleDefault.copyWith(
-            color: Colors.white,
-          ),
-        ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 30.0,
-            ),
-            child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('projects')
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
+          child: StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('projects').snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
 
-                  // We map the response to a list of projects and we sort them by date.
-                  var projects = snapshot.data.docs.mapProjects()
-                    ..sort((a, b) => b.createdAt.millisecondsSinceEpoch
-                        .compareTo(a.createdAt.millisecondsSinceEpoch));
-                  kLog.wtf(projects.first.createdAt);
-                  return Container(
-                    child: RawScrollbar(
-                      timeToFade: 5.seconds,
-                      thumbColor: Colors.white,
-                      radius: const Radius.circular(20),
-                      child: ScrollShadowContainer.custom(
-                        boxShadow: BoxShadow(
-                          blurRadius: 5,
-                          spreadRadius: 5,
-                          color: kColorPurple,
-                        ),
-                        child: ListView.builder(
-                          itemCount: projects.length,
-                          itemBuilder: (context, index) {
-                            var icons = skillIcons(projects[index]);
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 9.0,
-                                horizontal: 8,
-                              ),
-                              child: TextButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.resolveWith(
-                                          (states) => Colors.transparent),
-                                ),
-                                onPressed: () {
-                                  launchLink(projects[index].sourceUrl);
-                                },
-                                child: Row(
+                // We map the response to a list of projects and we sort them by date.
+                var projects = snapshot.data.docs.mapProjects()
+                  ..sort((a, b) => b.createdAt.millisecondsSinceEpoch
+                      .compareTo(a.createdAt.millisecondsSinceEpoch));
+                return Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.builder(
+                      itemCount: projects.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 250,
+                        childAspectRatio: 0.7,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                      ),
+                      itemBuilder: (context, index) {
+                        var icons = skillIcons(projects[index]);
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 9.0,
+                            horizontal: 8,
+                          ),
+                          child: TextButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith(
+                                      (states) => Colors.transparent),
+                            ),
+                            onPressed: () {
+                              launchLink(projects[index].sourceUrl);
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,27 +75,23 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            projects[index].name,
-                                            style: kStyleDefault.copyWith(
-                                              fontSize: 30,
-                                            ),
+                                          kTitle(
+                                            text: projects[index].name,
+                                            fontSize: 17,
+                                            color: kColorMain,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          Text(
-                                            formatDate(
-                                              DateTime.fromMillisecondsSinceEpoch(
-                                                  projects[index]
-                                                      .createdAt
-                                                      .millisecondsSinceEpoch),
-                                              [d, '-', MM, '-', yyyy],
-                                            ),
-                                            style: kStyleDefault.copyWith(
-                                              fontSize: 15,
-                                              color:
-                                                  Colors.white.withOpacity(0.6),
-                                            ),
-                                          )
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          kText(
+                                            text: projects[index].description,
+                                            fontSize: 15,
+                                            color: kColorMain.withOpacity(0.6),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -123,18 +109,29 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                           )
                                         ],
                                       ),
+                                    ),
+                                    kText(
+                                      text: formatDate(
+                                        DateTime.fromMillisecondsSinceEpoch(
+                                            projects[index]
+                                                .createdAt
+                                                .millisecondsSinceEpoch),
+                                        [d, '-', MM, '-', yyyy],
+                                      ),
+                                      fontSize: 15,
+                                      color: kColorMain.withOpacity(0.6),
                                     )
                                   ],
                                 ),
                               ),
-                            );
-                          },
-                        ),
-                      ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                }),
-          ),
+                  ),
+                );
+              }),
         ),
       ],
     );
@@ -151,7 +148,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.flutter,
             color: Color(0xff27B0EE),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'firebase') {
@@ -159,15 +156,15 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.firebase,
             color: Color(0xffFFCB2B),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'express') {
         skillIcons.add(
           const Icon(
             Esentis.express,
-            color: Colors.white,
-            size: 35,
+            color: Colors.black,
+            size: 30,
           ),
         );
       } else if (skillName == 'nodejs') {
@@ -175,7 +172,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.nodejs,
             color: Color(0xff73B300),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'mongodb') {
@@ -183,7 +180,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.mongodb,
             color: Color(0xff8CCC8A),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'javascript') {
@@ -191,15 +188,15 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.javascript,
             color: Color(0xffEDD718),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'java') {
         skillIcons.add(
           const Icon(
             Esentis.java,
-            color: Colors.white,
-            size: 35,
+            color: Color(0xff0776BD),
+            size: 30,
           ),
         );
       } else if (skillName == 'postgres') {
@@ -207,7 +204,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.postgresql,
             color: Color(0xff2C618B),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'android') {
@@ -215,7 +212,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.android,
             color: Color(0xff73BA58),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'apple') {
@@ -223,7 +220,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.apple,
             color: Color(0xffB0B1B6),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'python') {
@@ -231,7 +228,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.python,
             color: Color(0xff5E7D98),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'csharp') {
@@ -239,7 +236,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.csharp,
             color: Color(0xff642076),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'css') {
@@ -247,7 +244,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.css3,
             color: Color(0xff1C89B6),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'react') {
@@ -255,7 +252,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.react,
             color: Color(0xff58C4E9),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'dotnet') {
@@ -263,7 +260,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.dotnet,
             color: Color(0xff47B6E7),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'bootstrap') {
@@ -271,7 +268,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.bootstrap,
             color: Color(0xff7511F1),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'jquery') {
@@ -279,7 +276,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.jquery,
             color: Color(0xff345975),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'html') {
@@ -287,7 +284,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.html5,
             color: Color(0xffEA6D2C),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'studio') {
@@ -295,7 +292,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.visualstudio,
             color: Color(0xffB482EA),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'dart') {
@@ -303,7 +300,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.dart,
             color: Color(0xff75ACE6),
-            size: 35,
+            size: 30,
           ),
         );
       } else if (skillName == 'dotnetcore') {
@@ -311,7 +308,7 @@ List<Icon> skillIcons(Project project) {
           const Icon(
             Esentis.dotnetcore,
             color: Color(0xff694097),
-            size: 35,
+            size: 30,
           ),
         );
       }
