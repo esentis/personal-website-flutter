@@ -32,14 +32,16 @@ ButtonStyle kButtonStyleDefault = ButtonStyle(
   ),
 );
 
-Text kTitle(
-        {String text,
-        double fontSize = 35,
-        Color color = Colors.white,
-        FontWeight fontWeight = FontWeight.w100}) =>
+Text kTitle({
+  String text,
+  double fontSize = 35,
+  Color color = Colors.white,
+  FontWeight fontWeight = FontWeight.w100,
+  TextAlign textAlign = TextAlign.left,
+}) =>
     Text(
       text,
-      textAlign: TextAlign.center,
+      textAlign: textAlign,
       style: GoogleFonts.commissioner(
         color: color,
         fontSize: fontSize,
@@ -47,13 +49,16 @@ Text kTitle(
       ),
     );
 
-Text kText(
-        {String text,
-        double fontSize = 17,
-        Color color = Colors.white,
-        FontWeight fontWeight = FontWeight.w100}) =>
+Text kText({
+  String text,
+  double fontSize = 17,
+  Color color = Colors.white,
+  FontWeight fontWeight = FontWeight.w100,
+  TextAlign textAlign = TextAlign.left,
+}) =>
     Text(
       text,
+      textAlign: textAlign,
       style: GoogleFonts.tinos(
         color: color,
         fontSize: fontSize,
