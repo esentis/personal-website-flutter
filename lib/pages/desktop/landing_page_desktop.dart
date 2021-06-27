@@ -68,6 +68,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: const NeverScrollableScrollPhysics(),
       slivers: [
         SliverAppBar(
           toolbarHeight: 140,
@@ -165,7 +166,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
         SliverToBoxAdapter(
           child: Container(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height - kToolbarHeight - 84,
+            height: MediaQuery.of(context).size.height - kToolbarHeight - 85,
             child: PageView(
               controller: _pageController,
               scrollDirection: Axis.vertical,
