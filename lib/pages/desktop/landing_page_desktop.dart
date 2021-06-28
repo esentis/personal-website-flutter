@@ -227,7 +227,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                   body: PortfolioPage(),
                 ),
                 Scaffold(
-                  backgroundColor: kColorPageBackground,
+                  backgroundColor: kColorBackground,
                   body: ContactInfo(),
                 ),
               ],

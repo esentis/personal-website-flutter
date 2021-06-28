@@ -21,7 +21,7 @@ Color kColorMain = const Color(0xff325288);
 
 Color kColorBackground = const Color(0xffF4EEE8);
 
-Color kColorPageBackground = const Color(0xffF4EEE8);
+Color kColorPageBackground = const Color(0xffE8F6EF);
 
 ButtonStyle kButtonStyleDefault = ButtonStyle(
   mouseCursor: ContactCursor(),
