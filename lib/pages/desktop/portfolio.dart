@@ -40,103 +40,108 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     var icons = skillIcons(projects[index]);
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ExpandableNotifier(
-                        child: ScrollOnExpand(
-                          child: ExpandablePanel(
-                            theme: const ExpandableThemeData(
-                              tapBodyToExpand: true,
-                              tapBodyToCollapse: true,
-                            ),
-                            header: kTitle(
-                              text: projects[index].name,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: kColorMain,
-                            ),
-                            collapsed: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                                  child: kText(
-                                    text: formatDate(
-                                      DateTime.fromMillisecondsSinceEpoch(
-                                          projects[index]
-                                              .createdAt
-                                              .millisecondsSinceEpoch),
-                                      [d, '-', MM, '-', yyyy],
-                                    ),
-                                    fontSize: 15,
-                                    color: kColorMain.withOpacity(0.6),
-                                  ),
+                      child: Card(
+                        color: const Color(0xffFAF1E6),
+                        shadowColor: kColorMain,
+                        elevation: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ExpandableNotifier(
+                            child: ScrollOnExpand(
+                              child: ExpandablePanel(
+                                theme: const ExpandableThemeData(
+                                  tapBodyToExpand: true,
+                                  tapBodyToCollapse: true,
                                 ),
-                                TextButton(
-                                  style: ButtonStyle(
-                                    padding: MaterialStateProperty.resolveWith(
-                                      (states) => const EdgeInsets.all(0),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    launchLink(projects[index].sourceUrl);
-                                  },
-                                  child: kText(
-                                      text: 'Source Code', color: kColorMain),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                                  child: Wrap(
-                                    children: icons,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            expanded: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                                  child: kText(
-                                    text: formatDate(
-                                      DateTime.fromMillisecondsSinceEpoch(
-                                          projects[index]
-                                              .createdAt
-                                              .millisecondsSinceEpoch),
-                                      [d, '-', MM, '-', yyyy],
-                                    ),
-                                    fontSize: 15,
-                                    color: kColorMain.withOpacity(0.6),
-                                  ),
-                                ),
-                                kText(
-                                  text: projects[index].description,
-                                  fontSize: 20,
+                                header: kTitle(
+                                  text: projects[index].name,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
                                   color: kColorMain,
                                 ),
-                                TextButton(
-                                  style: ButtonStyle(
-                                    padding: MaterialStateProperty.resolveWith(
-                                      (states) => const EdgeInsets.all(0),
+                                collapsed: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextButton(
+                                      style: ButtonStyle(
+                                        padding:
+                                            MaterialStateProperty.resolveWith(
+                                          (states) => const EdgeInsets.all(0),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        launchLink(projects[index].sourceUrl);
+                                      },
+                                      child: kText(
+                                          text: 'Source Code',
+                                          color: kColorMain),
                                     ),
-                                  ),
-                                  onPressed: () {
-                                    launchLink(projects[index].sourceUrl);
-                                  },
-                                  child: kText(
-                                      text: 'Source Code', color: kColorMain),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(0, 8, 8, 8),
+                                      child: kText(
+                                        text: formatDate(
+                                          DateTime.fromMillisecondsSinceEpoch(
+                                              projects[index]
+                                                  .createdAt
+                                                  .millisecondsSinceEpoch),
+                                          [d, '-', MM, '-', yyyy],
+                                        ),
+                                        fontSize: 15,
+                                        color: kColorMain.withOpacity(0.6),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                                  child: Wrap(
-                                    children: icons,
-                                  ),
+                                expanded: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    kText(
+                                      text: projects[index].description,
+                                      fontSize: 20,
+                                      color: kColorMain,
+                                    ),
+                                    TextButton(
+                                      style: ButtonStyle(
+                                        padding:
+                                            MaterialStateProperty.resolveWith(
+                                          (states) => const EdgeInsets.all(0),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        launchLink(projects[index].sourceUrl);
+                                      },
+                                      child: kText(
+                                          text: 'Source Code',
+                                          color: kColorMain),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(0, 8, 8, 8),
+                                      child: kText(
+                                        text: formatDate(
+                                          DateTime.fromMillisecondsSinceEpoch(
+                                              projects[index]
+                                                  .createdAt
+                                                  .millisecondsSinceEpoch),
+                                          [d, '-', MM, '-', yyyy],
+                                        ),
+                                        fontSize: 15,
+                                        color: kColorMain.withOpacity(0.6),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(0, 8, 8, 8),
+                                      child: Wrap(
+                                        children: icons,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
