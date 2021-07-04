@@ -67,173 +67,211 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: const NeverScrollableScrollPhysics(),
-      slivers: [
-        SliverAppBar(
-          toolbarHeight: 140,
-          centerTitle: true,
-          backgroundColor: kColorBackground,
-          forceElevated: true,
-          title: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: 450,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: kColorMain,
+    return Stack(
+      children: [
+        CustomScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          slivers: [
+            SliverAppBar(
+              toolbarHeight: 140,
+              centerTitle: true,
+              shadowColor: Colors.grey.withOpacity(0.5),
+              backgroundColor: kColorBackground,
+              forceElevated: true,
+              title: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 450,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: kColorMain,
+                          ),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            kTitle(text: 'George ', color: kColorMain),
+                            kTitle(
+                                text: 'Leonidis ',
+                                fontWeight: FontWeight.bold,
+                                color: kColorMain),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  child: Padding(
+                  kText(
+                      text: 'Software Developer',
+                      fontSize: 20,
+                      color: kColorMain,
+                      fontWeight: FontWeight.bold),
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        kTitle(text: 'George ', color: kColorMain),
-                        kTitle(
-                            text: 'Leonidis ',
-                            fontWeight: FontWeight.bold,
-                            color: kColorMain),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextButton(
+                            onPressed: () async {
+                              await _pageController.animateToPage(0,
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeInOut);
+                            },
+                            child: kText(
+                              text: 'Home',
+                              color: kColorMain,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextButton(
+                            onPressed: () async {
+                              await _pageController.animateToPage(1,
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeInOut);
+                            },
+                            child: kText(
+                              text: 'Portfolio',
+                              color: kColorMain,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextButton(
+                            onPressed: () async {
+                              await _pageController.animateToPage(2,
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeInOut);
+                            },
+                            child: kText(
+                              text: 'Contact',
+                              color: kColorMain,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                ),
+                  )
+                ],
               ),
-              kText(
-                  text: 'Software Developer',
-                  fontSize: 20,
-                  color: kColorMain,
-                  fontWeight: FontWeight.bold),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              floating: true,
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                width: double.infinity,
+                height:
+                    MediaQuery.of(context).size.height - kToolbarHeight - 135,
+                child: PageView(
+                  controller: _pageController,
+                  scrollDirection: Axis.vertical,
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        onPressed: () async {
-                          await _pageController.animateToPage(0,
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.easeInOut);
-                        },
-                        child: kText(
-                          text: 'Home',
-                          color: kColorMain,
+                    Scaffold(
+                      backgroundColor: kColorBackground,
+                      body: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            DefaultTextStyle(
+                              style: GoogleFonts.tinos(
+                                fontSize: 50,
+                              ),
+                              child: AnimatedTextKit(
+                                repeatForever: true,
+                                animatedTexts: [
+                                  TyperAnimatedText(
+                                    'Hello and welcome...',
+                                    speed: const Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut,
+                                    textStyle: GoogleFonts.tinos(
+                                      fontSize: 25,
+                                      color: kColorMain,
+                                    ),
+                                  ),
+                                ],
+                                isRepeatingAnimation: true,
+                                onTap: () {
+                                  print('Tap Event');
+                                },
+                              ),
+                            ),
+                            Flexible(
+                              child: Lottie.network(
+                                  'https://assets4.lottiefiles.com/packages/lf20_9unpvaft.json'),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await _pageController.animateToPage(1,
+                                    duration: const Duration(milliseconds: 400),
+                                    curve: Curves.easeInOut);
+                              },
+                              child: kText(
+                                text: 'Check my work ',
+                                color: kColorMain,
+                                fontSize: 25,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        onPressed: () async {
-                          await _pageController.animateToPage(1,
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.easeInOut);
-                        },
-                        child: kText(
-                          text: 'Portfolio',
-                          color: kColorMain,
-                        ),
-                      ),
+                    Scaffold(
+                      backgroundColor: kColorBackground,
+                      body: PortfolioPage(),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        onPressed: () async {
-                          await _pageController.animateToPage(2,
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.easeInOut);
-                        },
-                        child: kText(
-                          text: 'Contact',
-                          color: kColorMain,
-                        ),
-                      ),
+                    Scaffold(
+                      backgroundColor: kColorBackground,
+                      body: ContactInfo(),
                     ),
                   ],
                 ),
-              )
-            ],
-          ),
-          floating: true,
+              ),
+            ),
+          ],
         ),
-        SliverToBoxAdapter(
-          child: Container(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height - kToolbarHeight - 85,
-            child: PageView(
-              controller: _pageController,
-              scrollDirection: Axis.vertical,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                Scaffold(
-                  backgroundColor: kColorBackground,
-                  body: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        DefaultTextStyle(
-                          style: GoogleFonts.tinos(
-                            fontSize: 50,
-                          ),
-                          child: AnimatedTextKit(
-                            repeatForever: true,
-                            animatedTexts: [
-                              TyperAnimatedText(
-                                'Hello and welcome...',
-                                speed: const Duration(milliseconds: 200),
-                                curve: Curves.easeInOut,
-                                textStyle: GoogleFonts.tinos(
-                                  fontSize: 25,
-                                  color: kColorMain,
-                                ),
-                              ),
-                            ],
-                            isRepeatingAnimation: true,
-                            onTap: () {
-                              print('Tap Event');
-                            },
-                          ),
-                        ),
-                        Flexible(
-                          child: Lottie.network(
-                              'https://assets4.lottiefiles.com/packages/lf20_9unpvaft.json'),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            await _pageController.animateToPage(1,
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.easeInOut);
-                          },
-                          child: kText(
-                            text: 'Check my work ',
-                            color: kColorMain,
-                            fontSize: 25,
-                          ),
-                        ),
-                      ],
-                    ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Material(
+            child: Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(color: kColorBackground, boxShadow: [
+                BoxShadow(
+                  blurRadius: 2,
+                  color: Colors.grey.withOpacity(0.5),
+                  offset: const Offset(1, 1),
+                  spreadRadius: 2,
+                )
+              ]),
+              child: GestureDetector(
+                onTap: () {
+                  launchLink('https://www.github.com/esentis');
+                },
+                child: Center(
+                  child: kTitle(
+                    text: 'esentis © ${DateTime.now().year}',
+                    color: kColorMain,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
                   ),
                 ),
-                Scaffold(
-                  backgroundColor: kColorBackground,
-                  body: PortfolioPage(),
-                ),
-                Scaffold(
-                  backgroundColor: kColorBackground,
-                  body: ContactInfo(),
-                ),
-              ],
+              ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
