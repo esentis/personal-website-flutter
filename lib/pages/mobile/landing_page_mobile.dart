@@ -23,9 +23,7 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [],
-        ),
+        body: Stack(),
       ),
     );
   }

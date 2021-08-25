@@ -9,7 +9,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
-void main() async {
+Future<void> main() async {
   setPathUrlStrategy();
   // Firebase init
   WidgetsFlutterBinding.ensureInitialized();

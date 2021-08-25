@@ -8,11 +8,11 @@ class ThemeStyle extends ChangeNotifier {
   void toggleTheme() {
     if (themeStatus == kTheme.light) {
       themeStatus = kTheme.dark;
-      print('Theme is ${themeStatus.toString()}');
+      kLog.i('Theme is ${themeStatus.toString()}');
       notifyListeners();
     } else {
       themeStatus = kTheme.light;
-      print('Theme is ${themeStatus.toString()}');
+      kLog.i('Theme is ${themeStatus.toString()}');
       notifyListeners();
     }
   }
@@ -25,11 +25,11 @@ class Language extends ChangeNotifier {
   void toggleLanguage() {
     if (localeStatus == kLocale.greek) {
       localeStatus = kLocale.english;
-      print('Language is ${localeStatus.toString()}');
+      kLog.i('Language is ${localeStatus.toString()}');
       notifyListeners();
     } else {
       localeStatus = kLocale.greek;
-      print('Language is ${localeStatus.toString()}');
+      kLog.i('Language is ${localeStatus.toString()}');
       notifyListeners();
     }
   }
