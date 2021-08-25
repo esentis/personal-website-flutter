@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class PageNotFound extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var fontSize = 45.0;
+    const fontSize = 45.0;
     return CustomScrollView(
       slivers: [
         SliverAppBar(
