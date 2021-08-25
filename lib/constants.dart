@@ -9,7 +9,7 @@ enum kLocale { greek, english }
 
 enum kTheme { light, dark }
 
-void launchLink(String url) async {
+Future<void> launchLink(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {
@@ -17,11 +17,17 @@ void launchLink(String url) async {
   }
 }
 
-Color kColorMain = const Color(0xff325288);
+Color kColorMain = const Color(0xffE7D9EA);
 
-Color kColorBackground = const Color(0xffF4EEE8);
+Color kColorBackground = const Color(0xff0d47a1);
 
-Color kColorPageBackground = const Color(0xffE8F6EF);
+Color kColorHomeBackground = const Color(0xff67b6f6);
+
+Color kColorPortfolioBackground = const Color(0xff67b6f6);
+
+Color kColorContactBackground = const Color(0xffE63E6D);
+
+Color kColorPageBackground = const Color(0xff0d47a1);
 
 ButtonStyle kButtonStyleDefault = ButtonStyle(
   mouseCursor: ContactCursor(),
@@ -66,4 +72,4 @@ Text kText({
       ),
     );
 
-var kLog = Logger();
+Logger kLog = Logger();
