@@ -1,9 +1,9 @@
-# My personal website with Flutter/Dart
-
-[![Codemagic build status](https://api.codemagic.io/apps/605d1f71e4784472c8d125bc/605d1f71e4784472c8d125bb/status_badge.svg)](https://codemagic.io/apps/605d1f71e4784472c8d125bc/605d1f71e4784472c8d125bb/latest_build)
-
-![Last commit](https://img.shields.io/github/last-commit/esentis/personal-website-flutter?style=for-the-badge)
-
-[![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https://esentis.dev)](https://esentis.dev)
-
-My personal website made with Flutter/Dart (**work in progress**).
+<p align="center">
+  <a href='https://esentis.dev' target="_blank"><img src="./esentis.png" height="350" alt="Photocanvas" /><br/></a>
+    <span>My personal website made with Flutter/Dart</span>
+</p>
+<p align="center">
+<img src="https://img.shields.io/github/last-commit/esentis/personal-website-flutter?style=for-the-badge" alt="Last commit" /></br>
+ <a href='https://esentis.dev' target="_blank" ><img src='https://img.shields.io/website?down_message=Offline&style=for-the-badge&up_message=Online&url=https://esentis.dev' alt='Website'/></a>
+</br>
+</p>
