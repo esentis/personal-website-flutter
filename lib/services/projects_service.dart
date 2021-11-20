@@ -6,8 +6,12 @@ Stream<List<Project>> projectsStream() {
   return FirebaseFirestore.instance
       .collection('projects')
       .snapshots()
-      .switchMap((qs) => Stream.value(
-            List.generate(qs.docs.length,
-                (index) => Project.fromMap(qs.docs[index].data())),
-          ));
+      .switchMap(
+        (qs) => Stream.value(
+          List.generate(
+            qs.docs.length,
+            (index) => Project.fromMap(qs.docs[index].data()),
+          ),
+        ),
+      );
 }

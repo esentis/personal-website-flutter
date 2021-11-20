@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:esentispws/pages/desktop/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,8 +27,6 @@ Color kColorHomeBackground = const Color(0xff67b6f6);
 Color kColorPortfolioBackground = const Color(0xff67b6f6);
 
 Color kColorContactBackground = const Color(0xffE63E6D);
-
-Color kColorPageBackground = const Color(0xff0d47a1);
 
 ButtonStyle kButtonStyleDefault = ButtonStyle(
   mouseCursor: ContactCursor(),
@@ -73,3 +72,9 @@ Text kText({
     );
 
 Logger kLog = Logger();
+
+TextStyle kStyleDefault = GoogleFonts.commissioner(
+  color: Colors.white,
+  fontSize: 17,
+  fontWeight: FontWeight.w100,
+);

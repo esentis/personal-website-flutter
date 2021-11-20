@@ -2,9 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 import 'package:esentispws/components/esentis_icons.dart';
 import 'package:esentispws/constants.dart';
-import 'package:expandable/expandable.dart';
-import 'package:flutter/material.dart';
 import 'package:esentispws/models/project.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class PortfolioPage extends StatefulWidget {
@@ -13,202 +12,111 @@ class PortfolioPage extends StatefulWidget {
 }
 
 class _PortfolioPageState extends State<PortfolioPage> {
+  ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('projects').snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection('projects').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
-                // We map the response to a list of projects and we sort them by date.
-                final projects = snapshot.data.docs.mapProjects()
-                  ..sort((a, b) => b.createdAt.millisecondsSinceEpoch
-                      .compareTo(a.createdAt.millisecondsSinceEpoch));
-                return ListView.builder(
-                  itemCount: projects.length,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) {
-                    final icons = skillIcons(projects[index]);
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: 250,
-                        color: kColorMain,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              kTitle(
-                                text: projects[index].name,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: kColorBackground,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              kText(
-                                text: projects[index].description,
-                                fontSize: 20,
-                                color: kColorBackground,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              TextButton(
-                                style: ButtonStyle(
-                                  padding: MaterialStateProperty.resolveWith(
-                                    (states) => EdgeInsets.zero,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  launchLink(projects[index].sourceUrl);
-                                },
-                                child: kText(
-                                  text: 'Source Code',
-                                  color: kColorBackground,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                                child: kText(
-                                  text: formatDate(
-                                    DateTime.fromMillisecondsSinceEpoch(
-                                        projects[index]
-                                            .createdAt
-                                            .millisecondsSinceEpoch),
-                                    [d, '-', MM, '-', yyyy],
-                                  ),
-                                  fontSize: 15,
-                                  color: kColorBackground,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                                child: Wrap(
-                                  children: icons,
-                                ),
-                              ),
-                            ],
-                          ),
-                          // child: ExpandableNotifier(
-                          //   child: ScrollOnExpand(
-                          //     child: ExpandablePanel(
-                          //       theme: const ExpandableThemeData(
-                          //         tapBodyToExpand: true,
-                          //         tapBodyToCollapse: true,
-                          //       ),
-                          // header: kTitle(
-                          //   text: projects[index].name,
-                          //   fontSize: 25,
-                          //   fontWeight: FontWeight.bold,
-                          //   color: kColorBackground,
-                          // ),
-                          //       collapsed: Column(
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
-                          //         children: [
-                          //           TextButton(
-                          //             style: ButtonStyle(
-                          //               padding:
-                          //                   MaterialStateProperty.resolveWith(
-                          //                 (states) => EdgeInsets.zero,
-                          //               ),
-                          //             ),
-                          //             onPressed: () {
-                          //               launchLink(projects[index].sourceUrl);
-                          //             },
-                          //             child: kText(
-                          //               text: 'Source Code',
-                          //               color: kColorBackground,
-                          //               fontSize: 20,
-                          //             ),
-                          //           ),
-                          //           Padding(
-                          //             padding:
-                          //                 const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                          //             child: kText(
-                          //               text: formatDate(
-                          //                 DateTime.fromMillisecondsSinceEpoch(
-                          //                     projects[index]
-                          //                         .createdAt
-                          //                         .millisecondsSinceEpoch),
-                          //                 [d, '-', MM, '-', yyyy],
-                          //               ),
-                          //               fontSize: 15,
-                          //               color:
-                          //                   kColorBackground.withOpacity(0.6),
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //       expanded: Column(
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
-                          //         children: [
-                          //           kText(
-                          //             text: projects[index].description,
-                          //             fontSize: 20,
-                          //             color: kColorMain,
-                          //           ),
-                          //           TextButton(
-                          //             style: ButtonStyle(
-                          //               padding:
-                          //                   MaterialStateProperty.resolveWith(
-                          //                 (states) => EdgeInsets.zero,
-                          //               ),
-                          //             ),
-                          //             onPressed: () {
-                          //               launchLink(projects[index].sourceUrl);
-                          //             },
-                          //             child: kText(
-                          //                 text: 'Source Code',
-                          //                 color: kColorMain),
-                          //           ),
-                          //           Padding(
-                          //             padding:
-                          //                 const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                          //             child: kText(
-                          //               text: formatDate(
-                          //                 DateTime.fromMillisecondsSinceEpoch(
-                          //                     projects[index]
-                          //                         .createdAt
-                          //                         .millisecondsSinceEpoch),
-                          //                 [d, '-', MM, '-', yyyy],
-                          //               ),
-                          //               fontSize: 15,
-                          //               color: kColorMain.withOpacity(0.6),
-                          //             ),
-                          //           ),
-                          //           Padding(
-                          //             padding:
-                          //                 const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                          //             child: Wrap(
-                          //               children: icons,
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+        // We map the response to a list of projects and we sort them by date.
+        final projects = snapshot.data.docs.mapProjects()
+          ..sort(
+            (a, b) => b.createdAt.millisecondsSinceEpoch
+                .compareTo(a.createdAt.millisecondsSinceEpoch),
+          );
+        return RawScrollbar(
+          isAlwaysShown: true,
+          controller: _scrollController,
+          thumbColor: kColorHomeBackground,
+          radius: const Radius.circular(20),
+          thickness: 10,
+          child: ListView.builder(
+            controller: _scrollController,
+            itemCount: projects.length,
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              final icons = skillIcons(projects[index]);
+              return Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xffeeeef6),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        kTitle(
+                          text: projects[index].name,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: kColorBackground,
                         ),
-                      ),
-                    );
-                  },
-                );
-              }),
-        ),
-      ],
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        kText(
+                          text: projects[index].description,
+                          fontSize: 20,
+                          color: kColorBackground,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextButton(
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.resolveWith(
+                              (states) => EdgeInsets.zero,
+                            ),
+                          ),
+                          onPressed: () {
+                            launchLink(projects[index].sourceUrl);
+                          },
+                          child: kText(
+                            text: 'Source Code',
+                            color: kColorBackground,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
+                          child: kText(
+                            text: formatDate(
+                              DateTime.fromMillisecondsSinceEpoch(
+                                projects[index]
+                                    .createdAt
+                                    .millisecondsSinceEpoch,
+                              ),
+                              [d, '-', MM, '-', yyyy],
+                            ),
+                            fontSize: 15,
+                            color: kColorBackground,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
+                          child: Wrap(
+                            children: icons,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
