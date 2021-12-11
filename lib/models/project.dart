@@ -45,6 +45,8 @@ class Project {
 extension PortfolioExts on List<QueryDocumentSnapshot> {
   List<Project> mapProjects() {
     return List<Project>.generate(
-        length, (index) => Project.fromMap(this[index].data()));
+      length,
+      (index) => Project.fromMap(this[index].data()),
+    );
   }
 }

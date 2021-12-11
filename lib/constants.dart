@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:esentispws/pages/desktop/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,7 +29,8 @@ Color kColorContactBackground = const Color(0xffE63E6D);
 ButtonStyle kButtonStyleDefault = ButtonStyle(
   mouseCursor: ContactCursor(),
   overlayColor: MaterialStateProperty.resolveWith(
-      (states) => kColorMain.withOpacity(0.2)),
+    (states) => kColorMain.withOpacity(0.2),
+  ),
   backgroundColor: MaterialStateProperty.resolveWith(
     (states) => kColorBackground,
   ),

@@ -1,11 +1,8 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/contact.dart';
 import 'package:esentispws/pages/desktop/portfolio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 kLocale locale = kLocale.english;
 kTheme themeStyle = kTheme.light;

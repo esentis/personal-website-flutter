@@ -4,7 +4,6 @@ import 'package:esentispws/components/esentis_icons.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/models/project.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class PortfolioPage extends StatefulWidget {
   @override
@@ -12,7 +11,7 @@ class PortfolioPage extends StatefulWidget {
 }
 
 class _PortfolioPageState extends State<PortfolioPage> {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
