@@ -53,6 +53,23 @@ Text kTitle({
       ),
     );
 
+SelectableText kSelectableText({
+  String text,
+  double fontSize = 17,
+  Color color = Colors.white,
+  FontWeight fontWeight = FontWeight.w100,
+  TextAlign textAlign = TextAlign.left,
+}) =>
+    SelectableText(
+      text,
+      textAlign: textAlign,
+      style: GoogleFonts.tinos(
+        color: color,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+      ),
+    );
+
 Text kText({
   String text,
   double fontSize = 17,
