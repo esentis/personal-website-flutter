@@ -2,6 +2,13 @@ import 'package:esentispws/pages/desktop/landing_page_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+enum DeviceType {
+  mobile,
+  tablet,
+  desktop,
+  watch,
+}
+
 class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
@@ -19,16 +26,24 @@ class ResponsiveBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
       /// Mobile
-      mobile: LandingPageDesktop(),
+      mobile: const LandingPageDesktop(
+        deviceType: DeviceType.mobile,
+      ),
 
       /// Tablet
-      tablet: LandingPageDesktop(),
+      tablet: const LandingPageDesktop(
+        deviceType: DeviceType.tablet,
+      ),
 
       /// Desktop
-      desktop: LandingPageDesktop(),
+      desktop: const LandingPageDesktop(
+        deviceType: DeviceType.desktop,
+      ),
 
       /// Watch
-      watch: LandingPageDesktop(),
+      watch: const LandingPageDesktop(
+        deviceType: DeviceType.watch,
+      ),
     );
   }
 }

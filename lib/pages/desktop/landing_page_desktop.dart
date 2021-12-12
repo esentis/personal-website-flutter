@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/contact.dart';
 import 'package:esentispws/pages/desktop/portfolio.dart';
+import 'package:esentispws/pages/page_builder.dart';
 import 'package:flutter/material.dart';
 
 kLocale locale = kLocale.english;
@@ -19,6 +20,10 @@ enum screens {
 }
 
 class LandingPageDesktop extends StatefulWidget {
+  const LandingPageDesktop({@required this.deviceType});
+
+  final DeviceType deviceType;
+
   @override
   _LandingPageDesktopState createState() => _LandingPageDesktopState();
 }
@@ -136,7 +141,9 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                       ),
                       Scaffold(
                         backgroundColor: kColorBackground,
-                        body: PortfolioPage(),
+                        body: PortfolioPage(
+                          deviceType: widget.deviceType,
+                        ),
                       ),
                     ],
                   ),
