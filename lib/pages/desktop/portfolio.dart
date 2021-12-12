@@ -3,9 +3,15 @@ import 'package:date_format/date_format.dart';
 import 'package:esentispws/components/esentis_icons.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/models/project.dart';
+import 'package:esentispws/pages/page_builder.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PortfolioPage extends StatefulWidget {
+  const PortfolioPage({@required this.deviceType});
+
+  final DeviceType deviceType;
+
   @override
   _PortfolioPageState createState() => _PortfolioPageState();
 }
@@ -35,25 +41,31 @@ class _PortfolioPageState extends State<PortfolioPage> {
           thumbColor: kColorHomeBackground,
           radius: const Radius.circular(20),
           thickness: 10,
-          child: ListView.builder(
+          child: GridView.builder(
             controller: _scrollController,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: widget.deviceType == DeviceType.mobile ||
+                      widget.deviceType == DeviceType.tablet
+                  ? MediaQuery.of(context).size.width
+                  : MediaQuery.of(context).size.width / 2,
+              mainAxisExtent: 400,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+            ),
             itemCount: projects.length,
             padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
               final icons = skillIcons(projects[index]);
               return Padding(
                 padding: const EdgeInsets.all(14.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xffeeeef6),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        kTitle(
+                        kSelectableText(
                           text: projects[index].name,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
@@ -62,7 +74,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         const SizedBox(
                           height: 20,
                         ),
-                        kText(
+                        kSelectableText(
                           text: projects[index].description,
                           fontSize: 20,
                           color: kColorBackground,
@@ -73,7 +85,10 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         TextButton(
                           style: ButtonStyle(
                             padding: MaterialStateProperty.resolveWith(
-                              (states) => EdgeInsets.zero,
+                              (states) => const EdgeInsets.all(20),
+                            ),
+                            backgroundColor: MaterialStateProperty.resolveWith(
+                              (states) => kColorBackground,
                             ),
                           ),
                           onPressed: () {
@@ -81,9 +96,19 @@ class _PortfolioPageState extends State<PortfolioPage> {
                           },
                           child: kText(
                             text: 'Source Code',
-                            color: kColorBackground,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 14, 8, 8),
+                            child: Wrap(
+                              children: icons,
+                            ),
                           ),
                         ),
                         Padding(
@@ -99,12 +124,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
                             ),
                             fontSize: 15,
                             color: kColorBackground,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                          child: Wrap(
-                            children: icons,
                           ),
                         ),
                       ],
