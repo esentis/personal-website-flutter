@@ -2,6 +2,8 @@
 //
 //     final project = projectFromMap(jsonString);
 
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Project {
@@ -15,13 +17,13 @@ class Project {
     this.createdAt,
   });
 
-  String sourceUrl;
-  List<String> screenshots;
-  String liveUrl;
-  String name;
-  List<String> techStack;
-  String description;
-  Timestamp createdAt;
+  String? sourceUrl;
+  List<String>? screenshots;
+  String? liveUrl;
+  String? name;
+  List<String>? techStack;
+  String? description;
+  Timestamp? createdAt;
 
   factory Project.fromMap(Map<String, dynamic> json) => Project(
         // ignore: unnecessary_null_in_if_null_operators
@@ -45,6 +47,8 @@ class Project {
 extension PortfolioExts on List<QueryDocumentSnapshot> {
   List<Project> mapProjects() {
     return List<Project>.generate(
-        length, (index) => Project.fromMap(this[index].data()));
+      length,
+      (index) => Project.fromMap(this[index].data() as Map<String, dynamic>),
+    );
   }
 }
