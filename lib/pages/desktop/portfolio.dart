@@ -4,11 +4,10 @@ import 'package:esentispws/components/esentis_icons.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/models/project.dart';
 import 'package:esentispws/pages/page_builder.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PortfolioPage extends StatefulWidget {
-  const PortfolioPage({@required this.deviceType});
+  const PortfolioPage({required this.deviceType});
 
   final DeviceType deviceType;
 
@@ -30,10 +29,10 @@ class _PortfolioPageState extends State<PortfolioPage> {
         }
 
         // We map the response to a list of projects and we sort them by date.
-        final projects = snapshot.data.docs.mapProjects()
+        final projects = snapshot.data!.docs.mapProjects()
           ..sort(
-            (a, b) => b.createdAt.millisecondsSinceEpoch
-                .compareTo(a.createdAt.millisecondsSinceEpoch),
+            (a, b) => b.createdAt!.millisecondsSinceEpoch
+                .compareTo(a.createdAt!.millisecondsSinceEpoch),
           );
         return RawScrollbar(
           isAlwaysShown: true,
@@ -66,7 +65,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         kSelectableText(
-                          text: projects[index].name,
+                          text: projects[index].name!,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: kColorBackground,
@@ -75,7 +74,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                           height: 20,
                         ),
                         kSelectableText(
-                          text: projects[index].description,
+                          text: projects[index].description!,
                           fontSize: 20,
                           color: kColorBackground,
                         ),
@@ -92,7 +91,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                             ),
                           ),
                           onPressed: () {
-                            launchLink(projects[index].sourceUrl);
+                            launchLink(projects[index].sourceUrl!);
                           },
                           child: kText(
                             text: 'Source Code',
@@ -117,7 +116,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                             text: formatDate(
                               DateTime.fromMillisecondsSinceEpoch(
                                 projects[index]
-                                    .createdAt
+                                    .createdAt!
                                     .millisecondsSinceEpoch,
                               ),
                               [d, '-', MM, '-', yyyy],
@@ -143,7 +142,7 @@ List<Icon> skillIcons(Project project) {
   // ignore: omit_local_variable_types
   final List<Icon> skillIcons = [];
   // ignore: avoid_function_literals_in_foreach_calls
-  project.techStack.forEach(
+  project.techStack!.forEach(
     (skillName) {
       if (skillName == 'flutter') {
         skillIcons.add(

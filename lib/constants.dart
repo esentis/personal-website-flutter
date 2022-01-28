@@ -37,7 +37,7 @@ ButtonStyle kButtonStyleDefault = ButtonStyle(
 );
 
 Text kTitle({
-  String text,
+  required String text,
   double fontSize = 35,
   Color color = Colors.white,
   FontWeight fontWeight = FontWeight.w100,
@@ -54,7 +54,7 @@ Text kTitle({
     );
 
 SelectableText kSelectableText({
-  String text,
+  required String text,
   double fontSize = 17,
   Color color = Colors.white,
   FontWeight fontWeight = FontWeight.w100,
@@ -71,7 +71,7 @@ SelectableText kSelectableText({
     );
 
 Text kText({
-  String text,
+  required String text,
   double fontSize = 17,
   Color color = Colors.white,
   FontWeight fontWeight = FontWeight.w100,
