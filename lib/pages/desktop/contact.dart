@@ -1,4 +1,5 @@
 import 'package:esentispws/constants.dart';
+import 'package:esentispws/pages/desktop/landing_page_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,7 +18,7 @@ class ContactCursor extends MaterialStateMouseCursor {
 
 class ContactInfo extends StatelessWidget {
   const ContactInfo({
-    @required this.onCheckWork,
+    required this.onCheckWork,
   });
   final VoidCallback onCheckWork;
   @override
@@ -25,7 +26,10 @@ class ContactInfo extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const SizedBox(),
+        const Padding(
+          padding: EdgeInsets.only(top: 24.0),
+          child: Clock(),
+        ),
         TextButton(
           onPressed: onCheckWork,
           child: Text(
@@ -37,10 +41,6 @@ class ContactInfo extends StatelessWidget {
         ),
         Column(
           children: [
-            Text(
-              'Contact',
-              style: kStyleDefault,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
