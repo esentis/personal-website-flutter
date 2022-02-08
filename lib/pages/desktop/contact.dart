@@ -2,6 +2,7 @@ import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/landing_page_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 
 class ContactCursor extends MaterialStateMouseCursor {
   @override
@@ -30,12 +31,26 @@ class ContactInfo extends StatelessWidget {
           padding: EdgeInsets.only(top: 24.0),
           child: Clock(),
         ),
-        TextButton(
-          onPressed: onCheckWork,
-          child: Text(
-            'Check my work',
-            style: kStyleDefault.copyWith(
-              fontSize: 40,
+        MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onCheckWork,
+            child: Column(
+              children: [
+                Text(
+                  'Check my work',
+                  style: kStyleDefault.copyWith(
+                    fontSize: 40,
+                  ),
+                ),
+                SizedBox(
+                  height: 250,
+                  child: Lottie.asset(
+                    'assets/home.json',
+                  ),
+                ),
+              ],
             ),
           ),
         ),
