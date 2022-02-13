@@ -119,10 +119,16 @@ class _LandingPageDesktopState extends State<LandingPageDesktop>
                     ),
                     boxShadow: [
                       BoxShadow(
-                        blurRadius: 2,
+                        blurRadius: 1,
                         color: Colors.black.withOpacity(0.3),
                         offset: const Offset(1, 1),
-                        spreadRadius: 2,
+                        spreadRadius: 1,
+                      ),
+                      BoxShadow(
+                        blurRadius: 1,
+                        color: Colors.white.withOpacity(0.3),
+                        offset: const Offset(-1, -1),
+                        spreadRadius: 1,
                       )
                     ],
                   ),
