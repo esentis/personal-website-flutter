@@ -1,135 +1,89 @@
 import 'package:esentispws/constants.dart';
-import 'package:esentispws/pages/desktop/landing_page_desktop.dart';
+import 'package:esentispws/pages/page_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lottie/lottie.dart';
-
-class ContactCursor extends MaterialStateMouseCursor {
-  @override
-  MouseCursor resolve(Set<MaterialState> states) {
-    if (states.contains(MaterialState.disabled)) {
-      return SystemMouseCursors.forbidden;
-    }
-    return SystemMouseCursors.click;
-  }
-
-  @override
-  String get debugDescription => 'ListTileCursor()';
-}
 
 class ContactInfo extends StatelessWidget {
-  const ContactInfo({
-    required this.onCheckWork,
-  });
-  final VoidCallback onCheckWork;
+  const ContactInfo({required this.deviceType});
+  final DeviceType deviceType;
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 24.0),
-          child: Clock(),
-        ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onCheckWork,
-            child: Column(
-              children: [
-                Text(
-                  'Check my work',
-                  style: kStyleDefault.copyWith(
-                    fontSize: 40,
-                  ),
-                ),
-                SizedBox(
-                  height: 250,
-                  child: Lottie.asset(
-                    'assets/home.json',
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Column(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: kButtonStyleDefault,
+                onPressed: () {
+                  launchLink('https://www.github.com/esentis');
+                },
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: kButtonStyleDefault,
-                    onPressed: () {
-                      launchLink('https://www.github.com/esentis');
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FaIcon(
-                        FontAwesomeIcons.github,
-                        size: 50,
-                        color: kColorMain,
-                      ),
-                    ),
+                  child: FaIcon(
+                    FontAwesomeIcons.github,
+                    size: 50,
+                    color: kColorMain,
                   ),
                 ),
-                Padding(
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: kButtonStyleDefault,
+                onPressed: () {
+                  launchLink('mailto:esentakos@yahoo.gr');
+                },
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: kButtonStyleDefault,
-                    onPressed: () {
-                      launchLink('mailto:esentakos@yahoo.gr');
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FaIcon(
-                        FontAwesomeIcons.envelopeOpen,
-                        size: 50,
-                        color: kColorMain,
-                      ),
-                    ),
+                  child: FaIcon(
+                    FontAwesomeIcons.envelopeOpen,
+                    size: 50,
+                    color: kColorMain,
                   ),
                 ),
-                Padding(
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: kButtonStyleDefault,
+                onPressed: () {
+                  launchLink(
+                    'https://www.linkedin.com/in/gleonidis/',
+                  );
+                },
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: kButtonStyleDefault,
-                    onPressed: () {
-                      launchLink('https://www.linkedin.com/in/gleonidis/');
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FaIcon(
-                        FontAwesomeIcons.linkedin,
-                        size: 50,
-                        color: kColorMain,
-                      ),
-                    ),
+                  child: FaIcon(
+                    FontAwesomeIcons.linkedin,
+                    size: 50,
+                    color: kColorMain,
                   ),
                 ),
-                Padding(
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: kButtonStyleDefault,
+                onPressed: () {
+                  launchLink(
+                    'https://play.google.com/store/apps/dev?id=7040603848130357887',
+                  );
+                },
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: kButtonStyleDefault,
-                    onPressed: () {
-                      launchLink(
-                        'https://play.google.com/store/apps/dev?id=7040603848130357887',
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FaIcon(
-                        FontAwesomeIcons.googlePlay,
-                        size: 50,
-                        color: kColorMain,
-                      ),
-                    ),
+                  child: FaIcon(
+                    FontAwesomeIcons.googlePlay,
+                    size: 50,
+                    color: kColorMain,
                   ),
                 ),
-              ],
+              ),
             ),
           ],
         ),

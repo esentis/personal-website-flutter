@@ -1,4 +1,3 @@
-import 'package:esentispws/pages/desktop/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
@@ -7,6 +6,19 @@ import 'package:url_launcher/url_launcher.dart';
 enum kLocale { greek, english }
 
 enum kTheme { light, dark }
+
+class ContactCursor extends MaterialStateMouseCursor {
+  @override
+  MouseCursor resolve(Set<MaterialState> states) {
+    if (states.contains(MaterialState.disabled)) {
+      return SystemMouseCursors.forbidden;
+    }
+    return SystemMouseCursors.click;
+  }
+
+  @override
+  String get debugDescription => 'ListTileCursor()';
+}
 
 Future<void> launchLink(String url) async {
   if (await canLaunch(url)) {
@@ -18,7 +30,7 @@ Future<void> launchLink(String url) async {
 
 Color kColorMain = const Color(0xffE7D9EA);
 
-Color kColorBackground = const Color(0xff0d47a1);
+Color kColorBackground = Color.fromARGB(255, 33, 33, 72);
 
 Color kColorHomeBackground = const Color(0xff67b6f6);
 

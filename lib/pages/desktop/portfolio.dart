@@ -37,7 +37,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
         return RawScrollbar(
           isAlwaysShown: true,
           controller: _scrollController,
-          thumbColor: kColorHomeBackground,
+          thumbColor: Colors.white,
           radius: const Radius.circular(20),
           thickness: 10,
           child: GridView.builder(
