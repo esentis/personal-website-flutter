@@ -26,22 +26,22 @@ class ResponsiveBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
       /// Mobile
-      mobile: const LandingPageDesktop(
+      mobile: const LandingPage(
         deviceType: DeviceType.mobile,
       ),
 
       /// Tablet
-      tablet: const LandingPageDesktop(
+      tablet: const LandingPage(
         deviceType: DeviceType.tablet,
       ),
 
       /// Desktop
-      desktop: const LandingPageDesktop(
+      desktop: const LandingPage(
         deviceType: DeviceType.desktop,
       ),
 
       /// Watch
-      watch: const LandingPageDesktop(
+      watch: const LandingPage(
         deviceType: DeviceType.watch,
       ),
     );
