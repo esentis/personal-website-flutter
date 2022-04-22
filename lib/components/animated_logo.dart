@@ -1,11 +1,13 @@
 import 'package:esentispws/constants.dart';
+import 'package:esentispws/pages/page_builder.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedLogo extends StatefulWidget {
   const AnimatedLogo({
+    required this.deviceType,
     Key? key,
   }) : super(key: key);
-
+  final DeviceType deviceType;
   @override
   State<AnimatedLogo> createState() => _AnimatedLogoState();
 }
@@ -24,7 +26,7 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
           });
         },
         child: AnimatedContainer(
-          height: 200,
+          height: widget.deviceType == DeviceType.mobile ? 100 : 200,
           width: 230,
           padding: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(

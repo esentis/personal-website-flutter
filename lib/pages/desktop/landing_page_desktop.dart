@@ -56,13 +56,16 @@ class _LandingPageState extends State<LandingPage>
       backgroundColor: kColorBackground,
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: AnimatedLogo(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: AnimatedLogo(
+              deviceType: widget.deviceType,
+            ),
           ),
           SizedBox(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height - 266,
+            height: MediaQuery.of(context).size.height -
+                (widget.deviceType == DeviceType.mobile ? 170 : 266),
             child: Scaffold(
               backgroundColor: kColorBackground,
               body: Column(

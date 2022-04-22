@@ -83,23 +83,27 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   ),
                   child: Column(
                     children: [
-                      Wrap(
-                        children: icons
-                            .map(
-                              (e) => Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: e,
-                              ),
-                            )
-                            .toList(),
+                      Flexible(
+                        child: Wrap(
+                          children: icons
+                              .map(
+                                (e) => Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: e,
+                                ),
+                              )
+                              .toList(),
+                        ),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        projects[index].description!,
-                        style: kStyleDefault,
-                        textAlign: TextAlign.center,
+                      Flexible(
+                        child: Text(
+                          projects[index].description!,
+                          style: kStyleDefault,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                       const SizedBox(
                         height: 20,
