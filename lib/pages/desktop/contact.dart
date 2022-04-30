@@ -6,6 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ContactInfo extends StatelessWidget {
   const ContactInfo({required this.deviceType});
   final DeviceType deviceType;
+
+  double get iconSize => 35;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +28,7 @@ class ContactInfo extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: FaIcon(
                       FontAwesomeIcons.github,
-                      size: 50,
+                      size: iconSize,
                       color: kColorMain,
                     ),
                   ),
@@ -44,7 +47,7 @@ class ContactInfo extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: FaIcon(
                       FontAwesomeIcons.envelopeOpen,
-                      size: 50,
+                      size: iconSize,
                       color: kColorMain,
                     ),
                   ),
@@ -65,7 +68,7 @@ class ContactInfo extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: FaIcon(
                       FontAwesomeIcons.linkedin,
-                      size: 50,
+                      size: iconSize,
                       color: kColorMain,
                     ),
                   ),
@@ -86,7 +89,7 @@ class ContactInfo extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: FaIcon(
                       FontAwesomeIcons.googlePlay,
-                      size: 50,
+                      size: iconSize,
                       color: kColorMain,
                     ),
                   ),
