@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-enum kLocale { greek, english }
+enum Locale { greek, english }
 
-enum kTheme { light, dark }
+enum Style { light, dark }
 
 class ContactCursor extends MaterialStateMouseCursor {
   @override
