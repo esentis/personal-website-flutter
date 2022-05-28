@@ -26,21 +26,21 @@ dependencies:
   cloud_firestore: ^3.1.0
   date_format: ^2.0.2
   expandable: ^5.0.1
-  firebase_core: ^1.0.0
-  get: ^4.1.4
-  google_fonts: ^2.3.1
-  logger: ^1.0.0
-  lottie: ^1.0.1
-  lint: ^1.6.0
+  firebase_core: ^1.17.0
+  get: ^4.6.3
+  google_fonts: ^2.3.2
+  logger: ^1.1.0
+  lottie: ^1.3.0
+  lint: ^1.8.2
   provider: ^6.0.0
   responsive_builder: ^0.4.1
-  url_launcher: ^6.0.2
+  url_launcher: ^6.1.2
   url_strategy: ^0.2.0
   rxdart: ^0.27.3
   font_awesome: ^5.10.1
   font_awesome_flutter: ^10.0.0
   intl: ^0.17.0
-  string_extensions: ^0.4.0
+  string_extensions: ^0.6.0
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final project = projectFromMap(jsonString);
-
 // ignore_for_file: avoid_dynamic_calls, cast_nullable_to_non_nullable
 
 import 'package:cloud_firestore/cloud_firestore.dart';

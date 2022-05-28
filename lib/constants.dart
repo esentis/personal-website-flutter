@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-enum kLocale { greek, english }
+enum Locale { greek, english }
 
-enum kTheme { light, dark }
+enum Style { light, dark }
 
 class ContactCursor extends MaterialStateMouseCursor {
   @override
@@ -21,8 +21,8 @@ class ContactCursor extends MaterialStateMouseCursor {
 }
 
 Future<void> launchLink(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
+  if (await canLaunchUrl(Uri.parse(url))) {
+    await launchUrl(Uri.parse(url));
   } else {
     throw 'Could not launch $url';
   }
@@ -30,7 +30,7 @@ Future<void> launchLink(String url) async {
 
 Color kColorMain = const Color(0xffE7D9EA);
 
-Color kColorBackground = Color.fromARGB(255, 33, 33, 72);
+Color kColorBackground = const Color.fromARGB(255, 33, 33, 72);
 
 Color kColorHomeBackground = const Color(0xff67b6f6);
 

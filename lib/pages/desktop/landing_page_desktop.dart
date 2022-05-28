@@ -7,11 +7,6 @@ import 'package:esentispws/pages/desktop/portfolio.dart';
 import 'package:esentispws/pages/page_builder.dart';
 import 'package:flutter/material.dart';
 
-kLocale locale = kLocale.english;
-kTheme themeStyle = kTheme.light;
-PageController mainPageController = PageController();
-int currentIndex = 0;
-
 class LandingPage extends StatefulWidget {
   const LandingPage({required this.deviceType});
 
