@@ -59,7 +59,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
                 ),
                 child: Container(
                   width: 350,
-                  height: 400,
                   decoration: BoxDecoration(
                     color: kColorBackground,
                     borderRadius: BorderRadius.circular(12),
@@ -81,6 +80,44 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   ),
                   child: Column(
                     children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 1,
+                              color: Colors.white.withOpacity(0.3),
+                              offset: const Offset(-1, -1),
+                              spreadRadius: 1,
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            projects[index].name!,
+                            style: kStyleDefault.copyWith(
+                              fontSize: 20,
+                              color: kColorBackground,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Flexible(
+                        child: Text(
+                          projects[index].description!,
+                          style: kStyleDefault,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                       Flexible(
                         child: Wrap(
                           children: icons
@@ -91,16 +128,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                 ),
                               )
                               .toList(),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Flexible(
-                        child: Text(
-                          projects[index].description!,
-                          style: kStyleDefault,
-                          textAlign: TextAlign.center,
                         ),
                       ),
                       const SizedBox(
