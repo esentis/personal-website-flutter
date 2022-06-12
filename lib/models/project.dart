@@ -11,11 +11,13 @@ class Project {
     this.techStack,
     this.description,
     this.createdAt,
+    this.libraryUrl,
   });
 
   String? sourceUrl;
   List<String>? screenshots;
   String? liveUrl;
+  String? libraryUrl;
   String? name;
   List<String>? techStack;
   String? description;
@@ -23,20 +25,21 @@ class Project {
 
   factory Project.fromMap(Map<String, dynamic> json) => Project(
         // ignore: unnecessary_null_in_if_null_operators
-        sourceUrl: json['sourceUrl'] ?? null,
+        sourceUrl: json['sourceUrl'],
         createdAt: json['createdAt'],
         screenshots: json['screenshots'] == null
             ? null
             : List<String>.from(json['screenshots'].map((x) => x)),
         // ignore: unnecessary_null_in_if_null_operators
-        liveUrl: json['liveUrl'] ?? null,
+        liveUrl: json['liveUrl'],
         // ignore: unnecessary_null_in_if_null_operators
-        name: json['name'] ?? null,
+        name: json['name'],
         techStack: json['techStack'] == null
             ? null
             : List<String>.from(json['techStack'].map((x) => x)),
         // ignore: unnecessary_null_in_if_null_operators
-        description: json['description'] ?? null,
+        description: json['description'],
+        libraryUrl: json['libraryUrl'],
       );
 }
 
