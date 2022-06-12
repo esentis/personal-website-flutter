@@ -37,7 +37,6 @@ dependencies:
   url_launcher: ^6.1.2
   url_strategy: ^0.2.0
   rxdart: ^0.27.3
-  font_awesome: ^5.10.1
   font_awesome_flutter: ^10.0.0
   intl: ^0.17.0
   string_extensions: ^0.6.0
