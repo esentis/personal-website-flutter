@@ -84,27 +84,35 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(6),
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 1,
-                                color: Colors.white.withOpacity(0.3),
-                                offset: const Offset(-1, -1),
-                                spreadRadius: 1,
-                              )
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'LIBRARY',
-                              style: kStyleDefault.copyWith(
-                                fontSize: 13,
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () {
+                              launchLink(projects[index].libraryUrl!);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    color: Colors.white.withOpacity(0.3),
+                                    offset: const Offset(-1, -1),
+                                    spreadRadius: 1,
+                                  )
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'LIBRARY',
+                                  style: kStyleDefault.copyWith(
+                                    fontSize: 13,
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
