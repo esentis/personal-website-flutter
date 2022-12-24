@@ -3,8 +3,6 @@ workflows:
     name: Personal Website Flow
     max_build_duration: 60
     environment:
-      vars:
-        FIREBASE_TOKEN: Encrypted(Z0FBQUFBQmdYbDJTRzJfUUx5WmpranItS0tBUmJGOVplbTNRMm9vUDVabVBMTUR0b0FjTEFFQ2FXR2E4bVVVdURfN0FmalRaYTVsTjg3Z2ktMExlc0l0RHlEMUR3c2dUOVpyQmdHNXFNRE81TzlaZWx1SGZ3Y0F6Nlg3bVFMX1oydnNjMUZ2Wmc1Sld3ZV9zUmtzX0d0NkZMbC10WXFKTFVrMkVxMDhMNDBhWUMzalh4YmhoajJGMU9TUjJ5M3FTMUx4VVhVdnc2WlBfQUNqb2w4dmhYSlBMa0NDaEtqYzZ1dz09)
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -29,6 +27,8 @@ workflows:
       - build/web.zip
       - flutter_drive.log
     publishing:
+      firebase:
+        firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
       email:
         recipients:
           - esentakos@yahoo.gr
