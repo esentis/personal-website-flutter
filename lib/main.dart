@@ -1,3 +1,4 @@
+import 'package:esentispws/firebase_options.dart';
 import 'package:esentispws/pages/not_found.dart';
 import 'package:esentispws/pages/page_builder.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,7 +11,9 @@ Future<void> main() async {
   setPathUrlStrategy();
   // Firebase init
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 

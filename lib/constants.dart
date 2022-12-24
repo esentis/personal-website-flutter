@@ -28,11 +28,7 @@ Future<void> launchLink(String url) async {
   }
 }
 
-Color kColorMain = const Color(0xffE7D9EA);
-
-Color kColorBackground = const Color.fromARGB(255, 33, 33, 72);
-
-Color kColorHomeBackground = const Color(0xff67b6f6);
+Color kColorBackground = const Color(0xff2D033B);
 
 Color kColorPortfolioBackground = const Color(0xff67b6f6);
 
@@ -41,7 +37,7 @@ Color kColorContactBackground = const Color(0xffE63E6D);
 ButtonStyle kButtonStyleDefault = ButtonStyle(
   mouseCursor: ContactCursor(),
   overlayColor: MaterialStateProperty.resolveWith(
-    (states) => kColorMain.withOpacity(0.2),
+    (states) => kColorBackground.withOpacity(0.2),
   ),
   backgroundColor: MaterialStateProperty.resolveWith(
     (states) => kColorBackground,
