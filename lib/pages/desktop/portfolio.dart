@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:date_format/date_format.dart';
 import 'package:esentispws/components/esentis_icons.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/models/project.dart';
-import 'package:esentispws/pages/page_builder.dart';
+import 'package:esentispws/state/device_info.dart';
 import 'package:flutter/material.dart';
 
 class PortfolioPage extends StatefulWidget {
-  const PortfolioPage({required this.deviceType});
-
-  final DeviceType deviceType;
+  const PortfolioPage();
 
   @override
   _PortfolioPageState createState() => _PortfolioPageState();
@@ -22,8 +19,10 @@ class _PortfolioPageState extends State<PortfolioPage> {
     super.initState();
   }
 
+  ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
+    final type = DeviceInfo.of(context).type;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('projects').snapshots(),
       builder: (context, snapshot) {
@@ -39,175 +38,59 @@ class _PortfolioPageState extends State<PortfolioPage> {
             (a, b) => b.createdAt!.millisecondsSinceEpoch
                 .compareTo(a.createdAt!.millisecondsSinceEpoch),
           );
-        return ListView.builder(
-          itemCount: projects.length,
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
-          itemBuilder: (context, index) {
-            final icons = skillIcons(projects[index]);
 
-            return Center(
-              child: Padding(
-                padding: EdgeInsets.all(
-                  widget.deviceType == DeviceType.mobile
-                      ? 18
-                      : widget.deviceType == DeviceType.tablet
-                          ? 25
-                          : 30,
-                ),
-                child: Container(
-                  width: 350,
-                  decoration: BoxDecoration(
-                    color: kColorBackground,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.transparent),
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 1,
-                        color: Colors.black.withOpacity(0.3),
-                        offset: const Offset(1, 1),
-                        spreadRadius: 1,
-                      ),
-                      BoxShadow(
-                        blurRadius: 1,
-                        color: Colors.white.withOpacity(0.3),
-                        offset: const Offset(-1, -1),
-                        spreadRadius: 1,
-                      )
-                    ],
+        return Container(
+          clipBehavior: Clip.antiAlias,
+          width: MediaQuery.of(context).size.width * .8,
+          decoration: BoxDecoration(
+            //  color: const Color(0xff810CA8),
+            border: Border.all(
+              color: Colors.white,
+            ),
+          ),
+          child: RawScrollbar(
+            controller: _scrollController,
+            thumbColor: Colors.white,
+            radius: const Radius.circular(12),
+            thumbVisibility: true,
+            child: ListView.builder(
+              clipBehavior: Clip.antiAlias,
+              controller: _scrollController,
+              itemCount: projects.length,
+              itemBuilder: (context, index) {
+                final icons = skillIcons(projects[index]);
+                return Card(
+                  color: kColorBackground,
+                  child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      // side: BorderSide(color: Colors.red, width: 3),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    contentPadding: const EdgeInsets.all(20),
+                    hoverColor: const Color(0xffE5B8F4),
+                    onTap: () {
+                      launchLink(projects[index].sourceUrl!);
+                    },
+                    title: Text(
+                      '[${projects[index].name}]:\n${projects[index].description}',
+                      style: kStyleDefault,
+                    ),
+                    subtitle: Wrap(
+                      children: icons
+                          .map(
+                            (e) => Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 10, top: 10),
+                              child: e,
+                            ),
+                          )
+                          .toList(),
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      if (projects[index].libraryUrl != null) ...[
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: GestureDetector(
-                            onTap: () {
-                              launchLink(projects[index].libraryUrl!);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 1,
-                                    color: Colors.white.withOpacity(0.3),
-                                    offset: const Offset(-1, -1),
-                                    spreadRadius: 1,
-                                  )
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'LIBRARY',
-                                  style: kStyleDefault.copyWith(
-                                    fontSize: 13,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 1,
-                              color: Colors.white.withOpacity(0.3),
-                              offset: const Offset(-1, -1),
-                              spreadRadius: 1,
-                            )
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            projects[index].name!,
-                            style: kStyleDefault.copyWith(
-                              fontSize: 20,
-                              color: kColorBackground,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Flexible(
-                        child: Text(
-                          projects[index].description!,
-                          style: kStyleDefault,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Flexible(
-                        child: Wrap(
-                          children: icons
-                              .map(
-                                (e) => Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: e,
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            'Release date',
-                            style: kStyleDefault,
-                          ),
-                          Text(
-                            formatDate(
-                              DateTime.fromMillisecondsSinceEpoch(
-                                projects[index]
-                                    .createdAt!
-                                    .millisecondsSinceEpoch,
-                              ),
-                              [d, '-', MM, '-', yyyy],
-                            ),
-                            style: kStyleDefault,
-                          ),
-                        ],
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          launchLink(projects[index].sourceUrl!);
-                        },
-                        child: Text(
-                          'Source code',
-                          style: kStyleDefault.copyWith(
-                            fontSize: 20,
-                            color: kColorHomeBackground,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         );
       },
     );
@@ -215,7 +98,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
 }
 
 List<Icon> skillIcons(Project project) {
-  const double iconSize = 45;
+  const double iconSize = 25;
 
   // ignore: omit_local_variable_types
   final List<Icon> skillIcons = [];

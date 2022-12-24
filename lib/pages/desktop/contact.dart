@@ -1,11 +1,9 @@
 import 'package:esentispws/constants.dart';
-import 'package:esentispws/pages/page_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ContactInfo extends StatelessWidget {
-  const ContactInfo({required this.deviceType});
-  final DeviceType deviceType;
+  const ContactInfo();
 
   double get iconSize => 35;
 
@@ -29,7 +27,7 @@ class ContactInfo extends StatelessWidget {
                     child: FaIcon(
                       FontAwesomeIcons.github,
                       size: iconSize,
-                      color: kColorMain,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -48,7 +46,7 @@ class ContactInfo extends StatelessWidget {
                     child: FaIcon(
                       FontAwesomeIcons.envelopeOpen,
                       size: iconSize,
-                      color: kColorMain,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -69,7 +67,7 @@ class ContactInfo extends StatelessWidget {
                     child: FaIcon(
                       FontAwesomeIcons.linkedin,
                       size: iconSize,
-                      color: kColorMain,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -90,7 +88,7 @@ class ContactInfo extends StatelessWidget {
                     child: FaIcon(
                       FontAwesomeIcons.googlePlay,
                       size: iconSize,
-                      color: kColorMain,
+                      color: Colors.white,
                     ),
                   ),
                 ),
