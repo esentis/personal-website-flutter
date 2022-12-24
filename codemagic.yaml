@@ -22,12 +22,13 @@ workflows:
         flutter build web --web-renderer canvaskit --release
         cd build/web
         7z a -r ../web.zip ./*
+      - firebase deploy --token "$FIREBASE_TOKEN"
     artifacts:
       - build/web.zip
       - flutter_drive.log
     publishing:
       firebase:
-        firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
+        firebase_token: $FIREBASE_TOKEN
       email:
         recipients:
           - esentakos@yahoo.gr
