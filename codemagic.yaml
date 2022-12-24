@@ -1,10 +1,13 @@
+# Automatically generated on 2022-12-24 UTC from https://codemagic.io/app/605d1f71e4784472c8d125bc/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
 workflows:
   default-workflow:
-    name: Personal Website Flow
+    name: Default Workflow
     max_build_duration: 60
     environment:
       vars:
-        FIREBASE_TOKEN: $FIREBASE_TOKEN
+        FIREBASE_TOKEN: Encrypted(Z0FBQUFBQmpwMUZqbjN0dG0xcEQ0T2ExVVhTQWhOMnpvRmN2MGVmUW9SQmJrQUZBS3lKWjUtSFZtc1ZwV1RLREU4VjdMaFJKcW4zMHBDUkx1ZEhjcVRGazBJX2FNa0hPVjFKejlpaG1LbWFmamkxcmU5d3E1X2F2SnhPWk5FZzh3TDA1UndfS0FDd1lPVGVWbl8xS182ZmctSDZOSEdrbk02YWUydnphazZmQ2U2b1BaMDZKOWU4NjN4elAyRFphdlB6c0dTcE9SRHJHNy02OFBPbmt6RG11anoyX0tkZTU2UT09)
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -15,20 +18,22 @@ workflows:
         - pattern: master
           include: true
           source: true
+      tag_patterns:
+        - pattern: '*'
+          include: true
     scripts:
-      - cd . && flutter packages pub get
-      - cd . && flutter config --enable-web
+      - flutter packages pub get
+      - flutter config --enable-web
       - |
         # build web
-        cd .
-        flutter build web --web-renderer canvaskit --release
+        flutter build web --release
         cd build/web
         7z a -r ../web.zip ./*
-      - name: Publish to Firebase Hosting
-        script: |
-          firebase deploy --token "$FIREBASE_TOKEN"
+      - firebase deploy --token "$FIREBASE_TOKEN"
     artifacts:
       - build/web.zip
+      - '*.snap'
+      - build/windows/**/*.msix
       - flutter_drive.log
     publishing:
       email:
