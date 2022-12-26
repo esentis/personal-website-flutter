@@ -43,7 +43,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
           clipBehavior: Clip.antiAlias,
           width: MediaQuery.of(context).size.width * .8,
           decoration: BoxDecoration(
-            //  color: const Color(0xff810CA8),
+            borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: Colors.white,
             ),
@@ -53,42 +53,50 @@ class _PortfolioPageState extends State<PortfolioPage> {
             thumbColor: Colors.white,
             radius: const Radius.circular(12),
             thumbVisibility: true,
-            child: ListView.builder(
-              clipBehavior: Clip.antiAlias,
-              controller: _scrollController,
-              itemCount: projects.length,
-              itemBuilder: (context, index) {
-                final icons = skillIcons(projects[index]);
-                return Card(
-                  color: kColorBackground,
-                  child: ListTile(
-                    shape: RoundedRectangleBorder(
-                      // side: BorderSide(color: Colors.red, width: 3),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    contentPadding: const EdgeInsets.all(20),
-                    hoverColor: const Color(0xffE5B8F4),
-                    onTap: () {
-                      launchLink(projects[index].sourceUrl!);
-                    },
-                    title: Text(
-                      '[${projects[index].name}]:\n${projects[index].description}',
-                      style: kStyleDefault,
-                    ),
-                    subtitle: Wrap(
-                      children: icons
-                          .map(
-                            (e) => Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 10, top: 10),
-                              child: e,
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ),
-                );
-              },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ScrollConfiguration(
+                behavior:
+                    ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                child: ListView.builder(
+                  clipBehavior: Clip.antiAlias,
+                  controller: _scrollController,
+                  itemCount: projects.length,
+                  itemBuilder: (context, index) {
+                    final icons = skillIcons(projects[index]);
+                    return Card(
+                      clipBehavior: Clip.antiAlias,
+                      color: kColorBackground,
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          // side: BorderSide(color: Colors.red, width: 3),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        contentPadding: const EdgeInsets.all(20),
+                        hoverColor: const Color(0xffEB455F),
+                        onTap: () {
+                          launchLink(projects[index].sourceUrl!);
+                        },
+                        title: Text(
+                          '[${projects[index].name}]:\n${projects[index].description}',
+                          style: kStyleDefault,
+                        ),
+                        subtitle: Wrap(
+                          children: icons
+                              .map(
+                                (e) => Padding(
+                                  padding:
+                                      const EdgeInsets.only(right: 10, top: 10),
+                                  child: e,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         );
