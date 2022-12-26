@@ -25,15 +25,15 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
         },
         child: AnimatedContainer(
           height: 100,
-          width: 230,
+          width: 130,
           padding: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
             color: kColorBackground,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(clicked ? 0 : 80),
-              bottomRight: Radius.circular(clicked ? 0 : 80),
-              topRight: Radius.circular(clicked ? 80 : 0),
-              bottomLeft: Radius.circular(clicked ? 80 : 0),
+              topLeft: Radius.circular(clicked ? 0 : 12),
+              bottomRight: Radius.circular(clicked ? 0 : 12),
+              topRight: Radius.circular(clicked ? 12 : 0),
+              bottomLeft: Radius.circular(clicked ? 12 : 0),
             ),
             boxShadow: [
               BoxShadow(
