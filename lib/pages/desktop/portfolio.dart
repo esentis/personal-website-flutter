@@ -73,7 +73,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         contentPadding: const EdgeInsets.all(20),
-                        hoverColor: const Color(0xffEB455F),
+                        hoverColor: const Color(0xff2B3A55),
                         onTap: () {
                           launchLink(projects[index].sourceUrl!);
                         },
