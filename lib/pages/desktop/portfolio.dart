@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esentispws/components/esentis_icons.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/models/project.dart';
-import 'package:esentispws/state/device_info.dart';
 import 'package:flutter/material.dart';
 
 class PortfolioPage extends StatefulWidget {
@@ -22,7 +21,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
   ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    final type = DeviceInfo.of(context).type;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('projects').snapshots(),
       builder: (context, snapshot) {

@@ -37,11 +37,6 @@ class _LandingPageState extends State<LandingPage>
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kColorBackground,
