@@ -18,7 +18,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
     super.initState();
   }
 
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
