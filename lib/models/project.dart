@@ -25,21 +25,25 @@ class Project {
 
   factory Project.fromMap(Map<String, dynamic> json) => Project(
         // ignore: unnecessary_null_in_if_null_operators
-        sourceUrl: json['sourceUrl'],
-        createdAt: json['createdAt'],
+        sourceUrl: json['sourceUrl'] as String?,
+        createdAt: json['createdAt'] as Timestamp?,
         screenshots: json['screenshots'] == null
             ? null
-            : List<String>.from(json['screenshots'].map((x) => x)),
+            : List<String>.from(
+                (json['screenshots'] as List<dynamic>).map((x) => x as String),
+              ),
         // ignore: unnecessary_null_in_if_null_operators
-        liveUrl: json['liveUrl'],
+        liveUrl: json['liveUrl'] as String?,
         // ignore: unnecessary_null_in_if_null_operators
-        name: json['name'],
+        name: json['name'] as String?,
         techStack: json['techStack'] == null
             ? null
-            : List<String>.from(json['techStack'].map((x) => x)),
+            : List<String>.from(
+                (json['techStack'] as List<dynamic>).map((x) => x as String),
+              ),
         // ignore: unnecessary_null_in_if_null_operators
-        description: json['description'],
-        libraryUrl: json['libraryUrl'],
+        description: json['description'] as String?,
+        libraryUrl: json['libraryUrl'] as String?,
       );
 }
 

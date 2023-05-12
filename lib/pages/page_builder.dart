@@ -25,20 +25,20 @@ class _MainPageState extends State<MainPage> {
 class ResponsiveBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      mobile: const DeviceInfo(
+    return ScreenTypeLayout.builder(
+      mobile: (context) => const DeviceInfo(
         type: DeviceType.mobile,
         child: LandingPage(),
       ),
-      tablet: const DeviceInfo(
+      tablet: (context) => const DeviceInfo(
         type: DeviceType.tablet,
         child: LandingPage(),
       ),
-      desktop: const DeviceInfo(
+      desktop: (context) => const DeviceInfo(
         type: DeviceType.desktop,
         child: LandingPage(),
       ),
-      watch: const DeviceInfo(
+      watch: (context) => const DeviceInfo(
         type: DeviceType.watch,
         child: LandingPage(),
       ),
