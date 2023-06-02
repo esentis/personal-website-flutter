@@ -27,11 +27,11 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.0.0
   get: ^4.6.3
-  google_fonts: ^4.0.3
+  google_fonts: ^5.0.0
   intl: ^0.18.0
   lint: ^2.0.1
   logger: ^1.1.0
-  responsive_builder: ^0.6.0
+  responsive_builder: ^0.7.0
   rxdart: ^0.27.3
   url_launcher: ^6.1.2
   url_strategy: ^0.2.0
