@@ -51,7 +51,7 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     : Colors.white.withOpacity(0.3),
                 offset: const Offset(-1, -1),
                 spreadRadius: 1,
-              )
+              ),
             ],
           ),
           duration: const Duration(milliseconds: 450),
