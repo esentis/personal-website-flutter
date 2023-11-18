@@ -54,18 +54,17 @@ class _LandingPageState extends State<LandingPage>
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 24.0,
-                      bottom: 15,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: Center(child: Text('hello'))),
+                          Expanded(child: PortfolioPage()),
+                        ],
+                      ),
                     ),
-                    child: Text(
-                      'Check out my projects',
-                      style: kStyleDefault,
-                    ),
-                  ),
-                  const Flexible(
-                    child: PortfolioPage(),
                   ),
                   const ContactInfo(),
                 ],

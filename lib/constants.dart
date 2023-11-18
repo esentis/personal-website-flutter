@@ -28,11 +28,13 @@ Future<void> launchLink(String url) async {
   }
 }
 
-Color kColorBackground = const Color(0xff2D033B);
+Color kColorBackground = Colors.white;
 
 Color kColorPortfolioBackground = const Color(0xff67b6f6);
 
 Color kColorContactBackground = const Color(0xffE63E6D);
+
+Color kColorPrimary = const Color(0xff50a8e8);
 
 ButtonStyle kButtonStyleDefault = ButtonStyle(
   mouseCursor: ContactCursor(),
@@ -47,7 +49,7 @@ ButtonStyle kButtonStyleDefault = ButtonStyle(
 Text kTitle({
   required String text,
   double fontSize = 35,
-  Color color = Colors.white,
+  Color color = Colors.black,
   FontWeight fontWeight = FontWeight.w100,
   TextAlign textAlign = TextAlign.left,
 }) =>
@@ -64,7 +66,7 @@ Text kTitle({
 SelectableText kSelectableText({
   required String text,
   double fontSize = 17,
-  Color color = Colors.white,
+  Color color = Colors.black,
   FontWeight fontWeight = FontWeight.w100,
   TextAlign textAlign = TextAlign.left,
 }) =>
@@ -81,7 +83,7 @@ SelectableText kSelectableText({
 Text kText({
   required String text,
   double fontSize = 17,
-  Color color = Colors.white,
+  Color color = Colors.black,
   FontWeight fontWeight = FontWeight.w100,
   TextAlign textAlign = TextAlign.left,
 }) =>
@@ -98,7 +100,7 @@ Text kText({
 Logger kLog = Logger();
 
 TextStyle kStyleDefault = GoogleFonts.commissioner(
-  color: Colors.white,
+  color: Colors.black,
   fontSize: 17,
   fontWeight: FontWeight.w100,
 );
