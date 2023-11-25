@@ -51,12 +51,12 @@ class _LandingPageState extends State<LandingPage>
             height: MediaQuery.of(context).size.height - 166,
             child: Scaffold(
               backgroundColor: kColorBackground,
-              body: Column(
+              body: const Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -66,7 +66,7 @@ class _LandingPageState extends State<LandingPage>
                       ),
                     ),
                   ),
-                  const ContactInfo(),
+                  ContactInfo(),
                 ],
               ),
             ),
