@@ -44,6 +44,11 @@ ButtonStyle kButtonStyleDefault = ButtonStyle(
   backgroundColor: MaterialStateProperty.resolveWith(
     (states) => kColorBackground,
   ),
+  shape: MaterialStateProperty.resolveWith(
+    (states) => RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(400),
+    ),
+  ),
 );
 
 Text kTitle({

@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:esentispws/components/animated_logo.dart';
+import 'dart:async';
+
+import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:esentispws/constants.dart';
-import 'package:esentispws/pages/desktop/contact.dart';
-import 'package:esentispws/pages/desktop/portfolio.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage();
@@ -14,72 +14,154 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage>
     with TickerProviderStateMixin {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  bool isTyping = true;
 
-  double currentPage = 0;
+  List<Widget> messagesWidgets = [
+    BubbleSpecialThree(
+      text: 'Hello there !',
+      color: Color(0xFFE8E8EE),
+      tail: false,
+      isSender: false,
+    ),
+    BubbleSpecialThree(
+      text: "I'm George, welcome to my website",
+      color: Color(0xFFE8E8EE),
+      tail: false,
+      isSender: false,
+    ),
+    BubbleSpecialThree(
+      text: 'Are you looking for a mobile developer ?',
+      color: Color(0xFFE8E8EE),
+      tail: false,
+      isSender: false,
+    ),
+    BubbleSpecialThree(
+      text: 'I can definetely help you with that, please contact me.',
+      color: Color(0xFFE8E8EE),
+      tail: false,
+      isSender: false,
+    ),
+    BubbleSpecialThree(
+      text: 'LinkedIn',
+      color: Color(0xFFE8E8EE),
+      textStyle: TextStyle(color: Colors.blue),
+      tail: true,
+      isSender: false,
+    ),
+    BubbleSpecialThree(
+      text: 'GitHub',
+      color: Color(0xFFE8E8EE),
+      textStyle: TextStyle(color: Colors.blue),
+      tail: true,
+      isSender: false,
+    ),
+    BubbleSpecialThree(
+      text: 'e-mail',
+      color: Color(0xFFE8E8EE),
+      textStyle: TextStyle(color: Colors.blue),
+      tail: true,
+      isSender: false,
+    ),
+  ];
 
-  Animation<double>? size;
+  List<String> messagesTexts = [
+    'Hello there !',
+    "I'm George, welcome to my website",
+    'Are you looking for a mobile developer ?',
+    'I can definetely help you with that, please contact me.',
+  ];
 
-  bool isDrawerOpen = false;
-  bool globalTapToDismiss = false;
-  bool isLoading = true;
+  List<Widget> shownMessages = [];
 
-  double fontSize = 45;
-  double copyRightFontSize = 20;
+  // Method to add a message to the list in periodic intervals
 
-  double nameAngle = 0;
-  double titleAngle = 0;
+  Future<void> addMessage() async {
+    // await Future.delayed(
+    //   Duration(
+    //     milliseconds: messagesTexts.first.length * 180,
+    //   ),
+    // );
+    if (messagesWidgets.isNotEmpty) {
+      shownMessages.add(messagesWidgets.removeAt(0));
+      setState(() {
+        if (messagesWidgets.isEmpty) {
+          isTyping = false;
+        }
+      });
 
-  double scale = 1;
+      Timer(const Duration(seconds: 2), () {
+        addMessage();
+      });
+    } else {
+      setState(() {
+        isTyping = false;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    addMessage();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kColorBackground,
+      backgroundColor: Colors.black,
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: AnimatedLogo(),
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height - 166,
-            child: Scaffold(
-              backgroundColor: kColorBackground,
-              body: const Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ...shownMessages,
+                  if (isTyping)
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Stack(
                         children: [
-                          Expanded(child: Center(child: Text('hello'))),
-                          Expanded(child: PortfolioPage()),
+                          const BubbleSpecialThree(
+                            text: '        ',
+                            color: Color(0xFFE8E8EE),
+                            isSender: false,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 19.0,
+                              top: 2,
+                            ),
+                            child: Lottie.network(
+                              'https://lottie.host/482d6f33-5a86-4678-8ed5-9430d3967450/7qHvLX5Nam.json',
+                              height: 40,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                  ContactInfo(),
                 ],
               ),
             ),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            color: kColorBackground,
-            child: Center(
-              child: Text(
-                'esentis ©',
-                style: kStyleDefault.copyWith(
-                  fontSize: 20,
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: GestureDetector(
+                onTap: () {
+                  launchLink('https://www.github.com/esentis');
+                },
+                child: Center(
+                  child: Text(
+                    'esentis ©',
+                    style: kStyleDefault.copyWith(
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -73,27 +73,6 @@ class ContactInfo extends StatelessWidget {
                 ),
               ),
             ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: kButtonStyleDefault,
-                  onPressed: () {
-                    launchLink(
-                      'https://play.google.com/store/apps/dev?id=7040603848130357887',
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: FaIcon(
-                      FontAwesomeIcons.googlePlay,
-                      size: iconSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ],
