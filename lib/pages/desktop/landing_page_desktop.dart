@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:esentispws/constants.dart';
@@ -15,51 +16,80 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage>
     with TickerProviderStateMixin {
   bool isTyping = true;
-
-  List<Widget> messagesWidgets = [
+  Color imessageColor = const Color(0xFF1F8AFF);
+  TextStyle chatStyle = const TextStyle(
+    fontFamily: 'SanFrancisco',
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
+  late List<Widget> messagesWidgets = [
     BubbleSpecialThree(
-      text: 'Hello there !',
-      color: Color(0xFFE8E8EE),
+      text: "Hello there, I'm George.",
+      color: const Color(0xFFE8E8EE),
       tail: false,
       isSender: false,
+      textStyle: chatStyle,
     ),
     BubbleSpecialThree(
-      text: "I'm George, welcome to my website",
-      color: Color(0xFFE8E8EE),
+      text: 'Are you looking for a mobile developer ? I can help you out !',
+      color: const Color(0xFFE8E8EE),
       tail: false,
       isSender: false,
+      textStyle: chatStyle,
+    ),
+    MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          launchLink('https://www.github.com/esentis');
+        },
+        child: BubbleSpecialThree(
+          text: "Take a peak of my work.",
+          color: const Color(0xFFE8E8EE),
+          textStyle: chatStyle.copyWith(
+            color: const Color(0xFF1F8AFF),
+            decoration: TextDecoration.underline,
+          ),
+          isSender: false,
+          tail: false,
+        ),
+      ),
+    ),
+    MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: BubbleSpecialThree(
+        text: 'You can also, reach me on LinkedIn.',
+        color: const Color(0xFFE8E8EE),
+        textStyle: chatStyle.copyWith(
+          color: const Color(0xFF1F8AFF),
+          decoration: TextDecoration.underline,
+        ),
+        isSender: false,
+        tail: false,
+      ),
+    ),
+    MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          launchLink('mailto:esentakos@yahoo.gr');
+        },
+        child: BubbleSpecialThree(
+          text: 'Or alternatively, send me an email.',
+          color: const Color(0xFFE8E8EE),
+          textStyle: chatStyle.copyWith(
+            color: const Color(0xFF1F8AFF),
+            decoration: TextDecoration.underline,
+          ),
+          isSender: false,
+          tail: false,
+        ),
+      ),
     ),
     BubbleSpecialThree(
-      text: 'Are you looking for a mobile developer ?',
-      color: Color(0xFFE8E8EE),
-      tail: false,
-      isSender: false,
-    ),
-    BubbleSpecialThree(
-      text: 'I can definetely help you with that, please contact me.',
-      color: Color(0xFFE8E8EE),
-      tail: false,
-      isSender: false,
-    ),
-    BubbleSpecialThree(
-      text: 'LinkedIn',
-      color: Color(0xFFE8E8EE),
-      textStyle: TextStyle(color: Colors.blue),
-      tail: true,
-      isSender: false,
-    ),
-    BubbleSpecialThree(
-      text: 'GitHub',
-      color: Color(0xFFE8E8EE),
-      textStyle: TextStyle(color: Colors.blue),
-      tail: true,
-      isSender: false,
-    ),
-    BubbleSpecialThree(
-      text: 'e-mail',
-      color: Color(0xFFE8E8EE),
-      textStyle: TextStyle(color: Colors.blue),
-      tail: true,
+      text: 'I am looking forward to hearing from you, have a nice day !',
+      color: const Color(0xFFE8E8EE),
+      textStyle: chatStyle,
       isSender: false,
     ),
   ];
@@ -76,11 +106,11 @@ class _LandingPageState extends State<LandingPage>
   // Method to add a message to the list in periodic intervals
 
   Future<void> addMessage() async {
-    // await Future.delayed(
-    //   Duration(
-    //     milliseconds: messagesTexts.first.length * 180,
-    //   ),
-    // );
+    await Future.delayed(
+      Duration(
+        milliseconds: messagesTexts.first.length * 180,
+      ),
+    );
     if (messagesWidgets.isNotEmpty) {
       shownMessages.add(messagesWidgets.removeAt(0));
       setState(() {
@@ -109,64 +139,93 @@ class _LandingPageState extends State<LandingPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
+      appBar: AppBar(
+        toolbarHeight: 130,
+        backgroundColor: Colors.grey.withOpacity(
+          0.1,
+        ), // Set the background color to transparent
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            blendMode: BlendMode.src,
+            filter: ImageFilter.blur(
+              sigmaX: 25,
+              sigmaY: 25,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(
+                  0.1,
+                ), // Set the desired background color with opacity
+                // Apply the blur effect
+              ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  ...shownMessages,
-                  if (isTyping)
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Stack(
-                        children: [
-                          const BubbleSpecialThree(
-                            text: '        ',
-                            color: Color(0xFFE8E8EE),
-                            isSender: false,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 19.0,
-                              top: 2,
-                            ),
-                            child: Lottie.network(
-                              'https://lottie.host/482d6f33-5a86-4678-8ed5-9430d3967450/7qHvLX5Nam.json',
-                              height: 40,
-                            ),
-                          ),
-                        ],
-                      ),
+                  Container(
+                    height: 80,
+                    width: 80,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey,
                     ),
+                    child: Center(
+                      child: Text(
+                        'G',
+                        style: chatStyle.copyWith(
+                          color: Colors.white,
+                          fontSize: 38,
+                        ),
+                      ),
+                    ), // Set the desired background color with opacity
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'George Leonidis',
+                    style: chatStyle.copyWith(
+                      color: Colors.white,
+                      fontSize: 17,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: GestureDetector(
-                onTap: () {
-                  launchLink('https://www.github.com/esentis');
-                },
-                child: Center(
-                  child: Text(
-                    'esentis ©',
-                    style: kStyleDefault.copyWith(
-                      fontSize: 14,
-                      color: Colors.white,
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            ...shownMessages,
+            if (isTyping)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Stack(
+                  children: [
+                    const BubbleSpecialThree(
+                      text: '        ',
+                      color: Color(0xFFE8E8EE),
+                      isSender: false,
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 19.0,
+                        top: 2,
+                      ),
+                      child: Lottie.network(
+                        'https://lottie.host/482d6f33-5a86-4678-8ed5-9430d3967450/7qHvLX5Nam.json',
+                        height: 40,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
