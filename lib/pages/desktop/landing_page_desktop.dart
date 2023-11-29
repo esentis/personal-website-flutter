@@ -153,9 +153,7 @@ class _LandingPageState extends State<LandingPage>
           backgroundColor: Colors.black,
           body: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics(
-                decelerationRate: ScrollDecelerationRate.fast,
-              ),
+              parent: BouncingScrollPhysics(),
             ),
             child: ConstrainedBox(
               constraints: BoxConstraints(
