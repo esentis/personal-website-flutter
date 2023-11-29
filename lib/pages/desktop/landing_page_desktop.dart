@@ -47,8 +47,9 @@ class _LandingPageState extends State<LandingPage>
           text: "Take a peak of my work.",
           color: const Color(0xFFE8E8EE),
           textStyle: chatStyle.copyWith(
-            color: const Color(0xFF1F8AFF),
+            color: imessageColor,
             decoration: TextDecoration.underline,
+            decorationColor: imessageColor,
           ),
           isSender: false,
           tail: false,
@@ -58,11 +59,12 @@ class _LandingPageState extends State<LandingPage>
     MouseRegion(
       cursor: SystemMouseCursors.click,
       child: BubbleSpecialThree(
-        text: 'You can also, reach me on LinkedIn.',
+        text: 'You can also reach me on LinkedIn.',
         color: const Color(0xFFE8E8EE),
         textStyle: chatStyle.copyWith(
-          color: const Color(0xFF1F8AFF),
+          color: imessageColor,
           decoration: TextDecoration.underline,
+          decorationColor: imessageColor,
         ),
         isSender: false,
         tail: false,
@@ -78,8 +80,9 @@ class _LandingPageState extends State<LandingPage>
           text: 'Or alternatively, send me an email.',
           color: const Color(0xFFE8E8EE),
           textStyle: chatStyle.copyWith(
-            color: const Color(0xFF1F8AFF),
+            color: imessageColor,
             decoration: TextDecoration.underline,
+            decorationColor: imessageColor,
           ),
           isSender: false,
           tail: false,
@@ -170,7 +173,7 @@ class _LandingPageState extends State<LandingPage>
                     ),
                     child: Center(
                       child: Text(
-                        'G',
+                        'GL',
                         style: chatStyle.copyWith(
                           color: Colors.white,
                           fontSize: 38,
