@@ -56,8 +56,12 @@ class _LandingPageState extends State<LandingPage>
         ),
       ),
     ),
-    MouseRegion(
-      cursor: SystemMouseCursors.click,
+    GestureDetector(
+      onTap: () {
+        launchLink(
+          'https://www.linkedin.com/in/gleonidis/',
+        );
+      },
       child: BubbleSpecialThree(
         text: 'You can also reach me on LinkedIn.',
         color: const Color(0xFFE8E8EE),
@@ -70,23 +74,20 @@ class _LandingPageState extends State<LandingPage>
         tail: false,
       ),
     ),
-    MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {
-          launchLink('mailto:esentakos@yahoo.gr');
-        },
-        child: BubbleSpecialThree(
-          text: 'Or alternatively, send me an email.',
-          color: const Color(0xFFE8E8EE),
-          textStyle: chatStyle.copyWith(
-            color: imessageColor,
-            decoration: TextDecoration.underline,
-            decorationColor: imessageColor,
-          ),
-          isSender: false,
-          tail: false,
+    GestureDetector(
+      onTap: () {
+        launchLink('mailto:esentakos@yahoo.gr');
+      },
+      child: BubbleSpecialThree(
+        text: 'Or alternatively, send me an email.',
+        color: const Color(0xFFE8E8EE),
+        textStyle: chatStyle.copyWith(
+          color: imessageColor,
+          decoration: TextDecoration.underline,
+          decorationColor: imessageColor,
         ),
+        isSender: false,
+        tail: false,
       ),
     ),
     BubbleSpecialThree(

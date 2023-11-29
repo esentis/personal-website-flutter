@@ -1,7 +1,5 @@
-import 'package:esentispws/firebase_options.dart';
 import 'package:esentispws/pages/not_found.dart';
 import 'package:esentispws/pages/page_builder.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,9 +9,7 @@ Future<void> main() async {
   setPathUrlStrategy();
   // Firebase init
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
   runApp(MyApp());
 }
 
