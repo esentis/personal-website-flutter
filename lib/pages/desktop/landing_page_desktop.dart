@@ -37,23 +37,20 @@ class _LandingPageState extends State<LandingPage>
       isSender: false,
       textStyle: chatStyle,
     ),
-    MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {
-          launchLink('https://www.github.com/esentis');
-        },
-        child: BubbleSpecialThree(
-          text: "Take a peak of my work.",
-          color: const Color(0xFFE8E8EE),
-          textStyle: chatStyle.copyWith(
-            color: imessageColor,
-            decoration: TextDecoration.underline,
-            decorationColor: imessageColor,
-          ),
-          isSender: false,
-          tail: false,
+    GestureDetector(
+      onTap: () {
+        launchLink('https://www.github.com/esentis');
+      },
+      child: BubbleSpecialThree(
+        text: "Take a peak of my work.",
+        color: const Color(0xFFE8E8EE),
+        textStyle: chatStyle.copyWith(
+          color: imessageColor,
+          decoration: TextDecoration.underline,
+          decorationColor: imessageColor,
         ),
+        isSender: false,
+        tail: false,
       ),
     ),
     GestureDetector(
