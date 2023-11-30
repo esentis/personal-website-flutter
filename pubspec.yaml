@@ -22,14 +22,15 @@ environment:
 
 dependencies:
   chat_bubbles: ^1.5.0
+  cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
-  get: ^4.6.3
   google_fonts: ^6.0.0
   intl: ^0.18.1
   lint: ^2.0.1
   logger: ^2.0.1
   lottie: ^2.7.0
+  modal_bottom_sheet: ^3.0.0-pre
   responsive_builder: ^0.7.0
   url_launcher: ^6.1.2
   url_strategy: ^0.2.0
@@ -61,9 +62,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Esentis
+    - family: SFProDisplay
       fonts:
-        - asset: fonts/Esentis.ttf
-    - family: SanFrancisco
-      fonts:
-        - asset: fonts/SFUIDisplay-Light.ttf
+        - asset: fonts/SF-Pro-Display-Regular.otf
+        - asset: fonts/SF-Pro-Display-Bold.otf
+          weight: 700
+        - asset: fonts/SF-Pro-Display-Thin.otf
+          weight: 100
