@@ -1,6 +1,7 @@
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/landing_page_desktop.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ProfileDetails extends StatelessWidget {
   const ProfileDetails({
@@ -12,7 +13,7 @@ class ProfileDetails extends StatelessWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 17.0,
+          horizontal: 12.0,
         ),
         child: Column(
           children: [
@@ -44,7 +45,7 @@ class ProfileDetails extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 DetailsIcon(
@@ -73,7 +74,49 @@ class ProfileDetails extends StatelessWidget {
                   text: 'info',
                 ),
               ],
-            )
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DetailsIcon extends StatelessWidget {
+  const DetailsIcon({
+    super.key,
+    required this.icon,
+    required this.text,
+    this.isActive = false,
+  });
+  final IconData icon;
+  final String text;
+  final bool isActive;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.sizeOf(context).width * .2,
+      decoration: BoxDecoration(
+        color: imessageColor2,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 7,
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              color: isActive ? imessageColor : Colors.white.withOpacity(0.1),
+            ),
+            Text(
+              text,
+              style: chatStyle.copyWith(
+                color: isActive ? imessageColor : Colors.white.withOpacity(0.1),
+                fontSize: 14,
+              ),
+            ),
           ],
         ),
       ),
