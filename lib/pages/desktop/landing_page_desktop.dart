@@ -263,51 +263,6 @@ class _LandingPageState extends State<LandingPage>
   }
 }
 
-class DetailsIcon extends StatelessWidget {
-  const DetailsIcon({
-    super.key,
-    required this.icon,
-    required this.text,
-    this.isActive = false,
-  });
-  final IconData icon;
-  final String text;
-  final bool isActive;
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: imessageColor2,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 7,
-            horizontal: 35,
-          ),
-          child: Column(
-            children: [
-              Icon(
-                icon,
-                color: isActive ? imessageColor : Colors.white.withOpacity(0.1),
-              ),
-              Text(
-                text,
-                style: chatStyle.copyWith(
-                  color:
-                      isActive ? imessageColor : Colors.white.withOpacity(0.1),
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class NameAvatar extends StatelessWidget {
   const NameAvatar({
     this.atProfileDetails = false,
