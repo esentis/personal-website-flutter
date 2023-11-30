@@ -3,9 +3,12 @@ import 'dart:ui';
 
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:esentispws/constants.dart';
+import 'package:esentispws/pages/desktop/profile_details.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage();
@@ -17,14 +20,7 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage>
     with TickerProviderStateMixin {
   bool isTyping = true;
-  Color imessageColor = const Color(0xFF1F8AFF);
-  Color imessageColor2 = const Color(0xFF26252a);
-  TextStyle chatStyle = const TextStyle(
-    fontFamily: 'SanFrancisco',
-    fontWeight: FontWeight.bold,
-    fontSize: 18,
-    color: Colors.white,
-  );
+
   late List<Widget> messagesWidgets = [
     BubbleSpecialThree(
       text: "Hello there, I'm George.",
@@ -112,11 +108,11 @@ class _LandingPageState extends State<LandingPage>
   // Method to add a message to the list in periodic intervals
 
   Future<void> addMessage() async {
-    final messageDelay = messagesTexts.first.length * 40;
+    const messageDelay = 125;
     kLog.f(
         'Delaying message for $messageDelay milliseconds and left ${messagesWidgets.length}');
     await Future.delayed(
-      Duration(
+      const Duration(
         milliseconds: messageDelay,
       ),
     );
@@ -142,137 +138,230 @@ class _LandingPageState extends State<LandingPage>
   @override
   void initState() {
     super.initState();
-    addMessage();
+    Future.delayed(
+      const Duration(
+        milliseconds: 1500,
+      ),
+      () {
+        addMessage();
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          backgroundColor: Colors.black,
-          body: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics(),
-            ),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height,
-              ),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 150,
+    return CupertinoScaffold(
+      body: Builder(
+        builder: (cupertinoContext) {
+          return Stack(
+            children: [
+              SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(
+                  parent: BouncingScrollPhysics(),
+                ),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height,
                   ),
-                  if (shownMessages.isNotEmpty)
-                    Column(
-                      children: [
-                        Center(
-                          child: Text(
-                            'Text message',
-                            style: chatStyle.copyWith(
-                              color: Colors.grey[500],
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            'Today ${DateFormat('jm').format(DateTime.now())}',
-                            style: chatStyle.copyWith(
-                              color: Colors.grey[500],
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                      ],
-                    ),
-                  ...shownMessages,
-                  if (isTyping)
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Stack(
-                        children: [
-                          BubbleSpecialThree(
-                            text: '        ',
-                            color: imessageColor2,
-                            isSender: false,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 19.0,
-                              top: 2,
-                            ),
-                            child: Lottie.network(
-                              'https://lottie.host/482d6f33-5a86-4678-8ed5-9430d3967450/7qHvLX5Nam.json',
-                              height: 40,
-                            ),
-                          ),
-                        ],
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 150,
                       ),
-                    ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 25,
-              sigmaY: 25,
-            ),
-            child: Container(
-              width: MediaQuery.sizeOf(context).width,
-              height: 130,
-              decoration: BoxDecoration(
-                color: imessageColor2.withOpacity(
-                  0.65,
-                ), // Set the desired background color with opacity
-                // Apply the blur effect
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 80,
-                      width: 80,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'GL',
-                          style: chatStyle.copyWith(
-                            color: Colors.white,
-                            fontSize: 38,
+                      if (shownMessages.isNotEmpty)
+                        Column(
+                          children: [
+                            Center(
+                              child: Text(
+                                'Text message',
+                                style: chatStyle.copyWith(
+                                  color: Colors.grey[500],
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                'Today ${DateFormat('jm').format(DateTime.now())}',
+                                style: chatStyle.copyWith(
+                                  color: Colors.grey[500],
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                      ...shownMessages,
+                      if (isTyping)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Stack(
+                            children: [
+                              BubbleSpecialThree(
+                                text: '        ',
+                                color: imessageColor2,
+                                isSender: false,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 19.0,
+                                  top: 2,
+                                ),
+                                child: Lottie.network(
+                                  'https://lottie.host/482d6f33-5a86-4678-8ed5-9430d3967450/7qHvLX5Nam.json',
+                                  height: 40,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ), // Set the desired background color with opacity
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'George Leonidis',
-                      style: chatStyle.copyWith(
-                        color: Colors.white,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
+              ClipRRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 25,
+                    sigmaY: 25,
+                  ),
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: 130,
+                    decoration: BoxDecoration(
+                      color: imessageColor2.withOpacity(
+                        0.65,
+                      ), // Set the desired background color with opacity
+                      // Apply the blur effect
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        CupertinoScaffold.showCupertinoModalBottomSheet(
+                          context: cupertinoContext,
+                          builder: (context) => Container(
+                            color: imessageProfileDetailsBackgroundColor,
+                            height: MediaQuery.of(context).size.height * 0.98,
+                            child: const ProfileDetails(),
+                          ),
+                        );
+                      },
+                      child: const NameAvatar(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class DetailsIcon extends StatelessWidget {
+  const DetailsIcon({
+    super.key,
+    required this.icon,
+    required this.text,
+    this.isActive = false,
+  });
+  final IconData icon;
+  final String text;
+  final bool isActive;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          color: imessageColor2,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 7,
+            horizontal: 35,
           ),
+          child: Column(
+            children: [
+              Icon(
+                icon,
+                color: isActive ? imessageColor : Colors.white.withOpacity(0.1),
+              ),
+              Text(
+                text,
+                style: chatStyle.copyWith(
+                  color:
+                      isActive ? imessageColor : Colors.white.withOpacity(0.1),
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NameAvatar extends StatelessWidget {
+  const NameAvatar({
+    this.atProfileDetails = false,
+    super.key,
+  });
+  final bool atProfileDetails;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 80,
+          width: 80,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.grey,
+          ),
+          child: Center(
+            child: Text(
+              'GL',
+              style: chatStyle.copyWith(
+                color: Colors.white,
+                fontSize: 38,
+              ),
+            ),
+          ), // Set the desired background color with opacity
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'George Leonidis',
+              style: chatStyle.copyWith(
+                color: Colors.white.withOpacity(0.8),
+                fontSize: atProfileDetails ? 23 : 17,
+                fontWeight:
+                    atProfileDetails ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+            if (!atProfileDetails) ...[
+              const SizedBox(
+                width: 5,
+              ),
+              const Icon(
+                CupertinoIcons.chevron_right,
+                color: Colors.grey,
+                size: 10,
+              ),
+            ],
+          ],
         ),
       ],
     );
