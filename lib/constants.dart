@@ -1,24 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-enum Locale { greek, english }
-
-enum Style { light, dark }
-
-class ContactCursor extends MaterialStateMouseCursor {
-  @override
-  MouseCursor resolve(Set<MaterialState> states) {
-    if (states.contains(MaterialState.disabled)) {
-      return SystemMouseCursors.forbidden;
-    }
-    return SystemMouseCursors.click;
-  }
-
-  @override
-  String get debugDescription => 'ListTileCursor()';
-}
+Logger kLog = Logger();
 
 Future<void> launchLink(String url) async {
   if (await canLaunchUrl(Uri.parse(url))) {
@@ -28,84 +12,11 @@ Future<void> launchLink(String url) async {
   }
 }
 
-Color kColorBackground = Colors.white;
-
-Color kColorPortfolioBackground = const Color(0xff67b6f6);
-
-Color kColorContactBackground = const Color(0xffE63E6D);
-
-Color kColorPrimary = const Color(0xff50a8e8);
-
-ButtonStyle kButtonStyleDefault = ButtonStyle(
-  mouseCursor: ContactCursor(),
-  overlayColor: MaterialStateProperty.resolveWith(
-    (states) => kColorBackground.withOpacity(0.2),
-  ),
-  backgroundColor: MaterialStateProperty.resolveWith(
-    (states) => kColorBackground,
-  ),
-  shape: MaterialStateProperty.resolveWith(
-    (states) => RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(400),
-    ),
-  ),
-);
-
-Text kTitle({
-  required String text,
-  double fontSize = 35,
-  Color color = Colors.black,
-  FontWeight fontWeight = FontWeight.w100,
-  TextAlign textAlign = TextAlign.left,
-}) =>
-    Text(
-      text,
-      textAlign: textAlign,
-      style: GoogleFonts.commissioner(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-      ),
-    );
-
-SelectableText kSelectableText({
-  required String text,
-  double fontSize = 17,
-  Color color = Colors.black,
-  FontWeight fontWeight = FontWeight.w100,
-  TextAlign textAlign = TextAlign.left,
-}) =>
-    SelectableText(
-      text,
-      textAlign: textAlign,
-      style: GoogleFonts.tinos(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-      ),
-    );
-
-Text kText({
-  required String text,
-  double fontSize = 17,
-  Color color = Colors.black,
-  FontWeight fontWeight = FontWeight.w100,
-  TextAlign textAlign = TextAlign.left,
-}) =>
-    Text(
-      text,
-      textAlign: textAlign,
-      style: GoogleFonts.tinos(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-      ),
-    );
-
-Logger kLog = Logger();
-
-TextStyle kStyleDefault = GoogleFonts.commissioner(
-  color: Colors.black,
-  fontSize: 17,
-  fontWeight: FontWeight.w100,
+Color imessageColor = const Color(0xFF1F8AFF);
+Color imessageColor2 = const Color(0xFF26252a);
+Color imessageProfileDetailsBackgroundColor = const Color(0xFF1c1c1e);
+TextStyle chatStyle = const TextStyle(
+  fontFamily: 'SFProDisplay',
+  fontSize: 18,
+  color: Colors.white,
 );
