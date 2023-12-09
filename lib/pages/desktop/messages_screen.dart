@@ -1,40 +1,36 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/profile_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class LandingPage extends StatefulWidget {
-  const LandingPage();
+class MessagesScreen extends StatefulWidget {
+  const MessagesScreen();
 
   @override
-  _LandingPageState createState() => _LandingPageState();
+  _MessagesScreenState createState() => _MessagesScreenState();
 }
 
-class _LandingPageState extends State<LandingPage>
+class _MessagesScreenState extends State<MessagesScreen>
     with TickerProviderStateMixin {
   bool isTyping = true;
+  final player = AudioPlayer();
 
   late List<Widget> messagesWidgets = [
-    BubbleSpecialThree(
-      text: "Hello there, I'm George.",
-      color: imessageColor2,
-      tail: false,
-      isSender: false,
-      textStyle: chatStyle,
-    ),
     BubbleSpecialThree(
       text: 'Are you looking for a mobile developer ?\nI can help you out !',
       color: imessageColor2,
       tail: false,
       isSender: false,
-      textStyle: chatStyle,
+      textStyle: cupertinoStyle,
     ),
     GestureDetector(
       onTap: () {
@@ -43,7 +39,7 @@ class _LandingPageState extends State<LandingPage>
       child: BubbleSpecialThree(
         text: "Take a peak of my work.",
         color: imessageColor2,
-        textStyle: chatStyle.copyWith(
+        textStyle: cupertinoStyle.copyWith(
           color: imessageColor,
           decoration: TextDecoration.underline,
           decorationColor: imessageColor,
@@ -61,7 +57,7 @@ class _LandingPageState extends State<LandingPage>
       child: BubbleSpecialThree(
         text: 'You can also reach me on LinkedIn.',
         color: imessageColor2,
-        textStyle: chatStyle.copyWith(
+        textStyle: cupertinoStyle.copyWith(
           color: imessageColor,
           decoration: TextDecoration.underline,
           decorationColor: imessageColor,
@@ -77,7 +73,7 @@ class _LandingPageState extends State<LandingPage>
       child: BubbleSpecialThree(
         text: 'Or alternatively, send me an email.',
         color: imessageColor2,
-        textStyle: chatStyle.copyWith(
+        textStyle: cupertinoStyle.copyWith(
           color: imessageColor,
           decoration: TextDecoration.underline,
           decorationColor: imessageColor,
@@ -89,7 +85,7 @@ class _LandingPageState extends State<LandingPage>
     BubbleSpecialThree(
       text: 'I am looking forward to hearing from you, have a nice day !',
       color: imessageColor2,
-      textStyle: chatStyle,
+      textStyle: cupertinoStyle,
       isSender: false,
     ),
   ];
@@ -103,35 +99,53 @@ class _LandingPageState extends State<LandingPage>
     'I am looking forward to hearing from you, have a nice day !',
   ];
 
-  List<Widget> shownMessages = [];
+  List<Widget> shownMessages = [
+    BubbleSpecialThree(
+      text: "Hello there, I'm George.",
+      color: imessageColor2,
+      tail: false,
+      isSender: false,
+      textStyle: cupertinoStyle,
+    ),
+  ];
 
   // Method to add a message to the list in periodic intervals
 
   Future<void> addMessage() async {
     const messageDelay = 125;
     kLog.f(
-        'Delaying message for $messageDelay milliseconds and left ${messagesWidgets.length}');
+      'Delaying message for $messageDelay milliseconds and left ${messagesWidgets.length}',
+    );
+    // await player.setSource(AssetSource('income.wav'));
+// will immediately start playing
     await Future.delayed(
       const Duration(
         milliseconds: messageDelay,
       ),
     );
     if (messagesWidgets.isNotEmpty) {
+      await player.play(
+        DeviceFileSource('assets/income.wav'),
+      );
       shownMessages.add(messagesWidgets.removeAt(0));
       messagesTexts.removeAt(0);
-      setState(() {
-        if (messagesWidgets.isEmpty) {
-          isTyping = false;
-        }
-      });
+      if (mounted) {
+        setState(() {
+          if (messagesWidgets.isEmpty) {
+            isTyping = false;
+          }
+        });
+      }
 
       Timer(const Duration(seconds: 2), () {
         addMessage();
       });
     } else {
-      setState(() {
-        isTyping = false;
-      });
+      if (mounted) {
+        setState(() {
+          isTyping = false;
+        });
+      }
     }
   }
 
@@ -140,7 +154,7 @@ class _LandingPageState extends State<LandingPage>
     super.initState();
     Future.delayed(
       const Duration(
-        milliseconds: 1500,
+        milliseconds: 2500,
       ),
       () {
         addMessage();
@@ -174,7 +188,7 @@ class _LandingPageState extends State<LandingPage>
                             Center(
                               child: Text(
                                 'Text message',
-                                style: chatStyle.copyWith(
+                                style: cupertinoStyle.copyWith(
                                   color: Colors.grey[500],
                                   fontSize: 13,
                                   fontWeight: FontWeight.bold,
@@ -184,7 +198,7 @@ class _LandingPageState extends State<LandingPage>
                             Center(
                               child: Text(
                                 'Today ${DateFormat('jm').format(DateTime.now())}',
-                                style: chatStyle.copyWith(
+                                style: cupertinoStyle.copyWith(
                                   color: Colors.grey[500],
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -266,58 +280,76 @@ class _LandingPageState extends State<LandingPage>
 class NameAvatar extends StatelessWidget {
   const NameAvatar({
     this.atProfileDetails = false,
+    this.showName = true,
     super.key,
   });
   final bool atProfileDetails;
+  final bool showName;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
+      clipBehavior: Clip.none,
       children: [
-        Container(
-          height: 80,
-          width: 80,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.grey,
-          ),
-          child: Center(
-            child: Text(
-              'GL',
-              style: chatStyle.copyWith(
-                color: Colors.white,
-                fontSize: 38,
-              ),
-            ),
-          ), // Set the desired background color with opacity
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'George Leonidis',
-              style: chatStyle.copyWith(
-                color: Colors.white.withOpacity(0.8),
-                fontSize: atProfileDetails ? 23 : 17,
-                fontWeight:
-                    atProfileDetails ? FontWeight.bold : FontWeight.normal,
-              ),
-            ),
-            if (!atProfileDetails) ...[
-              const SizedBox(
-                width: 5,
-              ),
-              const Icon(
-                CupertinoIcons.chevron_right,
+            Container(
+              height: showName ? 80 : 50,
+              width: showName ? 80 : 50,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
                 color: Colors.grey,
-                size: 10,
               ),
-            ],
+              child: Center(
+                child: Text(
+                  'GL',
+                  style: cupertinoStyle.copyWith(
+                    color: Colors.white,
+                    fontSize: showName ? 38 : 18,
+                  ),
+                ),
+              ), // Set the desired background color with opacity
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            if (showName)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'George Leonidis',
+                    style: cupertinoStyle.copyWith(
+                      color: Colors.white.withOpacity(0.8),
+                      fontSize: atProfileDetails ? 23 : 17,
+                      fontWeight: atProfileDetails
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
+                  ),
+                  if (!atProfileDetails) ...[
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    const Icon(
+                      CupertinoIcons.chevron_right,
+                      color: Colors.grey,
+                      size: 10,
+                    ),
+                  ],
+                ],
+              ),
           ],
         ),
+        if (!showName)
+          Positioned(
+            bottom: 0,
+            right: -5,
+            child: SvgPicture.asset(
+              'assets/message.svg',
+              height: 25,
+            ),
+          ),
       ],
     );
   }
