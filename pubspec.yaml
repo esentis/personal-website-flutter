@@ -21,10 +21,12 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
+  audioplayers: ^5.2.1
   chat_bubbles: ^1.5.0
   cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.9
   google_fonts: ^6.0.0
   intl: ^0.18.1
   lint: ^2.0.1
