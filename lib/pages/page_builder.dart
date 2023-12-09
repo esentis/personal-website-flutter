@@ -1,4 +1,4 @@
-import 'package:esentispws/pages/desktop/landing_page_desktop.dart';
+import 'package:esentispws/pages/desktop/lock_screen.dart';
 import 'package:esentispws/state/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -28,19 +28,19 @@ class ResponsiveBuilder extends StatelessWidget {
     return ScreenTypeLayout.builder(
       mobile: (context) => const DeviceInfo(
         type: DeviceType.mobile,
-        child: LandingPage(),
+        child: LockScreen(),
       ),
       tablet: (context) => const DeviceInfo(
         type: DeviceType.tablet,
-        child: LandingPage(),
+        child: LockScreen(),
       ),
       desktop: (context) => const DeviceInfo(
         type: DeviceType.desktop,
-        child: LandingPage(),
+        child: LockScreen(),
       ),
       watch: (context) => const DeviceInfo(
         type: DeviceType.watch,
-        child: LandingPage(),
+        child: LockScreen(),
       ),
     );
   }

@@ -15,7 +15,7 @@ Future<void> launchLink(String url) async {
 Color imessageColor = const Color(0xFF1F8AFF);
 Color imessageColor2 = const Color(0xFF26252a);
 Color imessageProfileDetailsBackgroundColor = const Color(0xFF1c1c1e);
-TextStyle chatStyle = const TextStyle(
+TextStyle cupertinoStyle = const TextStyle(
   fontFamily: 'SFProDisplay',
   fontSize: 18,
   color: Colors.white,
