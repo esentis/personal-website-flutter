@@ -124,7 +124,7 @@ class _LockScreenState extends State<LockScreen> {
                                         style: cupertinoStyle.copyWith(
                                           fontWeight: FontWeight.bold,
                                           color: CupertinoColors.black,
-                                          fontSize: 21,
+                                          fontSize: 20,
                                         ),
                                       ),
                                       const SizedBox(
@@ -134,7 +134,7 @@ class _LockScreenState extends State<LockScreen> {
                                         "Hello there, I'm George.",
                                         style: cupertinoStyle.copyWith(
                                           color: CupertinoColors.black,
-                                          fontSize: 21,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.normal,
                                         ),
                                       ),
