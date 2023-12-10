@@ -125,7 +125,7 @@ class _MessagesScreenState extends State<MessagesScreen>
     );
     if (messagesWidgets.isNotEmpty) {
       await player.play(
-        AssetSource('income.wav'),
+        AssetSource('income.mp3'),
       );
       shownMessages.add(messagesWidgets.removeAt(0));
       messagesTexts.removeAt(0);
