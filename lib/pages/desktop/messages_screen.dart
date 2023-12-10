@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/profile_details.dart';
@@ -22,7 +21,6 @@ class MessagesScreen extends StatefulWidget {
 class _MessagesScreenState extends State<MessagesScreen>
     with TickerProviderStateMixin {
   bool isTyping = true;
-  final player = AudioPlayer();
 
   late List<Widget> messagesWidgets = [
     BubbleSpecialThree(
@@ -124,9 +122,6 @@ class _MessagesScreenState extends State<MessagesScreen>
       ),
     );
     if (messagesWidgets.isNotEmpty) {
-      await player.play(
-        AssetSource('income.mp3'),
-      );
       shownMessages.add(messagesWidgets.removeAt(0));
       messagesTexts.removeAt(0);
       if (mounted) {
