@@ -1,10 +1,28 @@
+import 'dart:async';
+
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/messages_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-class LockScreen extends StatelessWidget {
+class LockScreen extends StatefulWidget {
   const LockScreen({super.key});
+
+  @override
+  State<LockScreen> createState() => _LockScreenState();
+}
+
+class _LockScreenState extends State<LockScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        setState(() {});
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
