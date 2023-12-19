@@ -4,10 +4,4 @@
 #
 # Google internally enforced rules. See README.md for more information,
 # including a list of lints that are intentionally _not_ enforced.
-include: package:lint/analysis_options.yaml
-analyzer:
-  language:
-    strict-raw-types: true
-linter:
-  rules:
-    dangling_library_doc_comments: false
+include: package:lint/strict.yaml

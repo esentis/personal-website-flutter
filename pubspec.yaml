@@ -28,7 +28,7 @@ dependencies:
   flutter_svg: ^2.0.9
   google_fonts: ^6.0.0
   intl: ^0.18.1
-  lint: ^2.0.1
+  lint: ^2.2.0
   logger: ^2.0.1
   lottie: ^2.7.0
   modal_bottom_sheet: ^3.0.0-pre
