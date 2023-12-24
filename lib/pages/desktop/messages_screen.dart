@@ -108,16 +108,12 @@ class _MessagesScreenState extends State<MessagesScreen>
   ];
 
   // Method to add a message to the list in periodic intervals
-
-  Future<void> addMessage() async {
-    const messageDelay = 125;
+  Future<void> addMessage({int messageDelay = 250}) async {
     kLog.f(
       'Delaying message for $messageDelay milliseconds and left ${messagesWidgets.length}',
     );
-    // await player.setSource(AssetSource('income.wav'));
-// will immediately start playing
     await Future.delayed(
-      const Duration(
+      Duration(
         milliseconds: messageDelay,
       ),
     );
@@ -159,114 +155,122 @@ class _MessagesScreenState extends State<MessagesScreen>
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoScaffold(
-      body: Builder(
-        builder: (cupertinoContext) {
-          return Stack(
-            children: [
-              SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(
-                  parent: BouncingScrollPhysics(),
-                ),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: MediaQuery.of(context).size.height,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        if (messagesWidgets.isNotEmpty) {
+          addMessage(messageDelay: 0);
+        }
+      },
+      child: CupertinoScaffold(
+        body: Builder(
+          builder: (cupertinoContext) {
+            return Stack(
+              children: [
+                SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(
+                    parent: BouncingScrollPhysics(),
                   ),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 150,
-                      ),
-                      if (shownMessages.isNotEmpty)
-                        Column(
-                          children: [
-                            Center(
-                              child: Text(
-                                'Text message',
-                                style: cupertinoStyle.copyWith(
-                                  color: Colors.grey[500],
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Text(
-                                'Today ${DateFormat('jm').format(DateTime.now())}',
-                                style: cupertinoStyle.copyWith(
-                                  color: Colors.grey[500],
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ],
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: MediaQuery.of(context).size.height,
+                    ),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 150,
                         ),
-                      ...shownMessages,
-                      if (isTyping)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Stack(
+                        if (shownMessages.isNotEmpty)
+                          Column(
                             children: [
-                              BubbleSpecialThree(
-                                text: '        ',
-                                color: imessageColor2,
-                                isSender: false,
+                              Center(
+                                child: Text(
+                                  'Text message',
+                                  style: cupertinoStyle.copyWith(
+                                    color: Colors.grey[500],
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 19.0,
-                                  top: 2,
+                              Center(
+                                child: Text(
+                                  'Today ${DateFormat('jm').format(DateTime.now())}',
+                                  style: cupertinoStyle.copyWith(
+                                    color: Colors.grey[500],
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                                child: Lottie.network(
-                                  'https://lottie.host/482d6f33-5a86-4678-8ed5-9430d3967450/7qHvLX5Nam.json',
-                                  height: 40,
-                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
                               ),
                             ],
                           ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-              ClipRRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 25,
-                    sigmaY: 25,
-                  ),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: 130,
-                    decoration: BoxDecoration(
-                      color: imessageColor2.withOpacity(
-                        0.65,
-                      ), // Set the desired background color with opacity
-                      // Apply the blur effect
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        CupertinoScaffold.showCupertinoModalBottomSheet(
-                          context: cupertinoContext,
-                          builder: (context) => Container(
-                            color: imessageProfileDetailsBackgroundColor,
-                            height: MediaQuery.of(context).size.height * 0.98,
-                            child: const ProfileDetails(),
+                        ...shownMessages,
+                        if (isTyping)
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Stack(
+                              children: [
+                                BubbleSpecialThree(
+                                  text: '        ',
+                                  color: imessageColor2,
+                                  isSender: false,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 19.0,
+                                    top: 2,
+                                  ),
+                                  child: Lottie.network(
+                                    'https://lottie.host/482d6f33-5a86-4678-8ed5-9430d3967450/7qHvLX5Nam.json',
+                                    height: 40,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        );
-                      },
-                      child: const NameAvatar(),
+                      ],
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+                ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 25,
+                      sigmaY: 25,
+                    ),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 130,
+                      decoration: BoxDecoration(
+                        color: imessageColor2.withOpacity(
+                          0.65,
+                        ), // Set the desired background color with opacity
+                        // Apply the blur effect
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          CupertinoScaffold.showCupertinoModalBottomSheet(
+                            context: cupertinoContext,
+                            builder: (context) => Container(
+                              color: imessageProfileDetailsBackgroundColor,
+                              height: MediaQuery.of(context).size.height * 0.98,
+                              child: const ProfileDetails(),
+                            ),
+                          );
+                        },
+                        child: const NameAvatar(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
