@@ -127,10 +127,11 @@ class _MessagesScreenState extends State<MessagesScreen>
           }
         });
       }
-
-      Timer(const Duration(seconds: 2), () {
-        addMessage();
-      });
+      if (messageDelay == 250) {
+        Timer(const Duration(seconds: 2), () {
+          addMessage();
+        });
+      }
     } else {
       if (mounted) {
         setState(() {
