@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/messages_screen.dart';
+import 'package:esentispws/pages/desktop/widgets/name_avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
