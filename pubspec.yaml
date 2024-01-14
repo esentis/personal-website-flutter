@@ -29,7 +29,7 @@ dependencies:
   intl: ^0.18.1
   lint: ^2.2.0
   logger: ^2.0.1
-  lottie: ^2.7.0
+  lottie: ^3.0.0
   modal_bottom_sheet: ^3.0.0-pre
   responsive_builder: ^0.7.0
   url_launcher: ^6.1.2
