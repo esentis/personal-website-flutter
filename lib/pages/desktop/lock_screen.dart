@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:math';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/messages_screen.dart';
 import 'package:esentispws/pages/desktop/widgets/name_avatar.dart';
@@ -25,6 +27,24 @@ class _LockScreenState extends State<LockScreen> {
     });
   }
 
+  List<String> assets = [
+    'assets/1.webp',
+    'assets/2.webp',
+    'assets/3.webp',
+    'assets/4.webp',
+    'assets/5.webp',
+    'assets/6.webp',
+    'assets/7.webp',
+    'assets/8.webp',
+    'assets/9.webp',
+    'assets/10.webp',
+    'assets/11.webp',
+    'assets/12.webp',
+    'assets/13.webp',
+  ];
+  final random = Random();
+
+  late final randomImageIndex = random.nextInt(13);
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -35,7 +55,7 @@ class _LockScreenState extends State<LockScreen> {
             height: MediaQuery.sizeOf(context).height,
             width: MediaQuery.sizeOf(context).width,
             child: Image.asset(
-              'assets/bg.webp',
+              assets[randomImageIndex],
               fit: BoxFit.cover,
             ),
           ),
@@ -77,82 +97,88 @@ class _LockScreenState extends State<LockScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 12,
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => const MessagesScreen(),
+              FadeInDown(
+                delay: const Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.fastEaseInToSlowEaseOut,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 12,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const MessagesScreen(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: CupertinoColors.white.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(22),
                       ),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: CupertinoColors.white.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(22),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 18.0,
-                        horizontal: 18.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  const NameAvatar(
-                                    showName: false,
-                                  ),
-                                  const SizedBox(
-                                    width: 14,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'George',
-                                        style: cupertinoStyle.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: CupertinoColors.black,
-                                          fontSize: 20,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 18.0,
+                          horizontal: 18.0,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    const NameAvatar(
+                                      showName: false,
+                                    ),
+                                    const SizedBox(
+                                      width: 14,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'George',
+                                          style: cupertinoStyle.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: CupertinoColors.black,
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        "Hello there, I'm George.",
-                                        style: cupertinoStyle.copyWith(
-                                          color: CupertinoColors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.normal,
+                                        const SizedBox(
+                                          height: 5,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                'now',
-                                style: cupertinoStyle.copyWith(
-                                  color: CupertinoColors.black.withOpacity(0.5),
-                                  fontSize: 15,
+                                        Text(
+                                          "Hello there, I'm George.",
+                                          style: cupertinoStyle.copyWith(
+                                            color: CupertinoColors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                                Text(
+                                  'now',
+                                  style: cupertinoStyle.copyWith(
+                                    color:
+                                        CupertinoColors.black.withOpacity(0.5),
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
