@@ -41,10 +41,21 @@ class _LockScreenState extends State<LockScreen> {
     'assets/11.webp',
     'assets/12.webp',
     'assets/13.webp',
+    'assets/14.webp',
+    'assets/15.webp',
+    'assets/16.webp',
+    'assets/17.webp',
+    'assets/18.webp',
+    'assets/19.webp',
+    'assets/20.webp',
+    'assets/21.webp',
+    'assets/22.webp',
+    'assets/23.webp',
+    'assets/24.webp',
   ];
   final random = Random();
 
-  late final randomImageIndex = random.nextInt(13);
+  late final randomImageIndex = random.nextInt(24);
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -98,7 +109,7 @@ class _LockScreenState extends State<LockScreen> {
                 height: 20,
               ),
               FadeInDown(
-                delay: const Duration(milliseconds: 500),
+                delay: const Duration(milliseconds: 600),
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.fastEaseInToSlowEaseOut,
                 child: Padding(
