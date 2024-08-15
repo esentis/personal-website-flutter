@@ -34,7 +34,7 @@ dependencies:
   modal_bottom_sheet: ^3.0.0
   responsive_builder: ^0.7.1
   url_launcher: ^6.3.0
-  url_strategy: ^0.2.0
+  url_strategy: ^0.3.0
 
 dev_dependencies:
   flutter_test:
