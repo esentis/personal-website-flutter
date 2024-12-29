@@ -128,7 +128,7 @@ class _LockScreenState extends State<LockScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: CupertinoColors.white.withOpacity(0.5),
+                        color: CupertinoColors.white.withValues(alpha: 0.5),
                         borderRadius: BorderRadius.circular(22),
                       ),
                       child: Padding(
@@ -181,8 +181,8 @@ class _LockScreenState extends State<LockScreen> {
                                 Text(
                                   'now',
                                   style: cupertinoStyle.copyWith(
-                                    color:
-                                        CupertinoColors.black.withOpacity(0.5),
+                                    color: CupertinoColors.black
+                                        .withValues(alpha: 0.5),
                                     fontSize: 15,
                                   ),
                                 ),

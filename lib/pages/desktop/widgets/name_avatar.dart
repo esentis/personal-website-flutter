@@ -46,7 +46,7 @@ class NameAvatar extends StatelessWidget {
                   Text(
                     'George Leonidis',
                     style: cupertinoStyle.copyWith(
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                       fontSize: atProfileDetails ? 23 : 17,
                       fontWeight: atProfileDetails
                           ? FontWeight.bold

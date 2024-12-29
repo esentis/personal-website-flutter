@@ -246,8 +246,8 @@ class _MessagesScreenState extends State<MessagesScreen>
                       width: MediaQuery.sizeOf(context).width,
                       height: 130,
                       decoration: BoxDecoration(
-                        color: imessageColor2.withOpacity(
-                          0.65,
+                        color: imessageColor2.withValues(
+                          alpha: 0.65,
                         ), // Set the desired background color with opacity
                         // Apply the blur effect
                       ),

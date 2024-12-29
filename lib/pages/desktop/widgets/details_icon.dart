@@ -31,13 +31,16 @@ class DetailsIcon extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: isActive ? imessageColor : Colors.white.withOpacity(0.1),
+                color: isActive
+                    ? imessageColor
+                    : Colors.white.withValues(alpha: 0.1),
               ),
               Text(
                 text,
                 style: cupertinoStyle.copyWith(
-                  color:
-                      isActive ? imessageColor : Colors.white.withOpacity(0.1),
+                  color: isActive
+                      ? imessageColor
+                      : Colors.white.withValues(alpha: 0.1),
                   fontSize: 14,
                 ),
               ),
