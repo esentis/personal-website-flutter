@@ -57,100 +57,103 @@ class ProfileDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12.0,
-        ),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 15.0,
-                    right: 15.0,
-                  ),
-                  child: Text(
-                    'Done',
-                    style: cupertinoStyle.copyWith(
-                      color: imessageColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+    return ColoredBox(
+      color: imessageProfileDetailsBackgroundColor,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12.0,
+          ),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 15.0,
+                      right: 15.0,
+                    ),
+                    child: Text(
+                      'Done',
+                      style: cupertinoStyle.copyWith(
+                        color: imessageColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const NameAvatar(
-              atProfileDetails: true,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                DetailsIcon(
-                  icon: CupertinoIcons.phone_fill,
-                  text: 'call',
-                  onTap: () {
-                    _showAlertDialog(
-                      context,
-                      title: 'Call',
-                      content:
-                          'This action is not supported yet.\nTry reaching through mentioned links.',
-                    );
-                  },
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                DetailsIcon(
-                  icon: CupertinoIcons.videocam_fill,
-                  text: 'video',
-                  onTap: () {
-                    _showAlertDialog(
-                      context,
-                      title: 'Video call',
-                      content:
-                          'This action is not supported yet.\nTry reaching through mentioned links.',
-                    );
-                  },
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                DetailsIcon(
-                  icon: CupertinoIcons.mail_solid,
-                  text: 'mail',
-                  isActive: true,
-                  onTap: () {
-                    launchLink('mailto:esentakos@yahoo.gr');
-                  },
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                DetailsIcon(
-                  icon: CupertinoIcons.info_circle_fill,
-                  text: 'info',
-                  onTap: () {
-                    _showAlertDialog(
-                      context,
-                      title: 'Info',
-                      content:
-                          'This action is not supported yet.\nTry reaching through mentioned links.',
-                    );
-                  },
-                ),
-              ],
-            ),
-          ],
+              const NameAvatar(
+                atProfileDetails: true,
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  DetailsIcon(
+                    icon: CupertinoIcons.phone_fill,
+                    text: 'call',
+                    onTap: () {
+                      _showAlertDialog(
+                        context,
+                        title: 'Call',
+                        content:
+                            'This action is not supported yet.\nTry reaching through mentioned links.',
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  DetailsIcon(
+                    icon: CupertinoIcons.videocam_fill,
+                    text: 'video',
+                    onTap: () {
+                      _showAlertDialog(
+                        context,
+                        title: 'Video call',
+                        content:
+                            'This action is not supported yet.\nTry reaching through mentioned links.',
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  DetailsIcon(
+                    icon: CupertinoIcons.mail_solid,
+                    text: 'mail',
+                    isActive: true,
+                    onTap: () {
+                      launchLink('mailto:esentakos@yahoo.gr');
+                    },
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  DetailsIcon(
+                    icon: CupertinoIcons.info_circle_fill,
+                    text: 'info',
+                    onTap: () {
+                      _showAlertDialog(
+                        context,
+                        title: 'Info',
+                        content:
+                            'This action is not supported yet.\nTry reaching through mentioned links.',
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

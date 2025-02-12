@@ -5,6 +5,7 @@ import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:esentispws/constants.dart';
 import 'package:esentispws/pages/desktop/profile_details.dart';
 import 'package:esentispws/pages/desktop/widgets/name_avatar.dart';
+import 'package:flutter/cupertino.dart' show CupertinoSheetRoute;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -253,12 +254,18 @@ class _MessagesScreenState extends State<MessagesScreen>
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          CupertinoScaffold.showCupertinoModalBottomSheet(
-                            context: cupertinoContext,
-                            builder: (context) => Container(
-                              color: imessageProfileDetailsBackgroundColor,
-                              height: MediaQuery.of(context).size.height * 0.98,
-                              child: const ProfileDetails(),
+                          // CupertinoScaffold.showCupertinoModalBottomSheet(
+                          //   context: cupertinoContext,
+                          //   builder: (context) => Container(
+                          //     color: imessageProfileDetailsBackgroundColor,
+                          //     height: MediaQuery.of(context).size.height * 0.98,
+                          //     child: const ProfileDetails(),
+                          //   ),
+                          // );
+                          Navigator.of(context).push(
+                            CupertinoSheetRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const ProfileDetails(),
                             ),
                           );
                         },
