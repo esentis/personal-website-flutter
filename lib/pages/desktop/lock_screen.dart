@@ -18,7 +18,6 @@ class LockScreen extends StatefulWidget {
 class _LockScreenState extends State<LockScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Timer.periodic(const Duration(seconds: 1), (timer) {
