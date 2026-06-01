@@ -21,7 +21,7 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  animate_do: ^4.2.0
+  animate_do: ^5.1.0
   chat_bubbles: ^1.6.0
   cupertino_icons: ^1.0.8
   flutter:
